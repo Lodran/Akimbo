@@ -6,8 +6,32 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		05BF88AD15D8CA08005EA20C /* Akimbo */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 05BF88AE15D8CA08005EA20C /* Build configuration list for PBXAggregateTarget "Akimbo" */;
+			buildPhases = (
+				05BF88B115D8CA16005EA20C /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Akimbo;
+			productName = Akimbo;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXFileReference section */
 		05BF88AC15D8C192005EA20C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		05BF88B215D8CA3B005EA20C /* build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
+		05BF88BC15D8E2F0005EA20C /* Parts.files */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Parts.files; sourceTree = "<group>"; };
+		05BF88BD15D8E42E005EA20C /* Plates.files */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Plates.files; sourceTree = "<group>"; };
+		05BF88C015D8E773005EA20C /* bottom_vertex_mirrored@_2.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "bottom_vertex_mirrored@_2.stl"; sourceTree = "<group>"; };
+		05BF88C115D8E773005EA20C /* top_vertex_@_2.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "top_vertex_@_2.stl"; sourceTree = "<group>"; };
+		05BF88C215D8E773005EA20C /* z_clamp@_1.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "z_clamp@_1.stl"; sourceTree = "<group>"; };
+		05BF88C315D8E773005EA20C /* z_clamp_mirrored@_1.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "z_clamp_mirrored@_1.stl"; sourceTree = "<group>"; };
+		05BF88C515D8E77C005EA20C /* frame_plate_1.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = frame_plate_1.stl; sourceTree = "<group>"; };
+		05BF88C615D8E7C3005EA20C /* bottom_vertex@_2.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "bottom_vertex@_2.stl"; sourceTree = "<group>"; };
+		05BF88C915D8E819005EA20C /* frame_plate_2.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = frame_plate_2.stl; sourceTree = "<group>"; };
 		05E9D3FD15D8B5CD00A8B259 /* assembly.scad */ = {isa = PBXFileReference; lastKnownFileType = text; path = assembly.scad; sourceTree = "<group>"; };
 		05E9D3FE15D8B5CD00A8B259 /* barbell.scad */ = {isa = PBXFileReference; lastKnownFileType = text; path = barbell.scad; sourceTree = "<group>"; };
 		05E9D3FF15D8B5CD00A8B259 /* bottom_vertex.scad */ = {isa = PBXFileReference; lastKnownFileType = text; path = bottom_vertex.scad; sourceTree = "<group>"; };
@@ -26,11 +50,37 @@
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		05BF88BE15D8E773005EA20C /* Parts */ = {
+			isa = PBXGroup;
+			children = (
+				05BF88C615D8E7C3005EA20C /* bottom_vertex@_2.stl */,
+				05BF88C015D8E773005EA20C /* bottom_vertex_mirrored@_2.stl */,
+				05BF88C115D8E773005EA20C /* top_vertex_@_2.stl */,
+				05BF88C215D8E773005EA20C /* z_clamp@_1.stl */,
+				05BF88C315D8E773005EA20C /* z_clamp_mirrored@_1.stl */,
+			);
+			path = Parts;
+			sourceTree = "<group>";
+		};
+		05BF88C415D8E77C005EA20C /* Plates */ = {
+			isa = PBXGroup;
+			children = (
+				05BF88C515D8E77C005EA20C /* frame_plate_1.stl */,
+				05BF88C915D8E819005EA20C /* frame_plate_2.stl */,
+			);
+			path = Plates;
+			sourceTree = "<group>";
+		};
 		05E9D3F015D8B57300A8B259 = {
 			isa = PBXGroup;
 			children = (
-				05BF88AC15D8C192005EA20C /* README.md */,
 				05E9D3FC15D8B5CD00A8B259 /* Source */,
+				05BF88C415D8E77C005EA20C /* Plates */,
+				05BF88BE15D8E773005EA20C /* Parts */,
+				05BF88BD15D8E42E005EA20C /* Plates.files */,
+				05BF88BC15D8E2F0005EA20C /* Parts.files */,
+				05BF88B215D8CA3B005EA20C /* build.sh */,
+				05BF88AC15D8C192005EA20C /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -76,11 +126,42 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				05BF88AD15D8CA08005EA20C /* Akimbo */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		05BF88B115D8CA16005EA20C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "chmod +x build.sh\n./build.sh\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin XCBuildConfiguration section */
+		05BF88AF15D8CA08005EA20C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		05BF88B015D8CA08005EA20C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		05E9D3F715D8B57300A8B259 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -96,6 +177,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		05BF88AE15D8CA08005EA20C /* Build configuration list for PBXAggregateTarget "Akimbo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05BF88AF15D8CA08005EA20C /* Debug */,
+				05BF88B015D8CA08005EA20C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		05E9D3F515D8B57300A8B259 /* Build configuration list for PBXProject "Akimbo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

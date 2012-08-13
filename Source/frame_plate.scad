@@ -15,7 +15,13 @@ use <bottom_vertex.scad>
 use <top_vertex.scad>
 use <z_clamp.scad>
 
-z_plate();
+plate=1;
+
+if (plate==1)
+  bottom_plate();
+  
+if (plate==2)
+  z_plate();
 
 module bottom_plate()
 {

@@ -23,6 +23,9 @@ use <barbell.scad>
 use <teardrops.scad>
 use <motor.scad>
 
+print_orientation = true;
+mirrored = false;
+
 $fa=1;
 $fs=2;
 
@@ -34,11 +37,14 @@ z_clamp_size = sizeof(z_clamp_min, z_clamp_max);
 
 *%frame_annotations();
 
-z_clamp();
+z_clamp(print_orientation=print_orientation, mirrored=mirrored);
 
-module z_clamp(print_orientation=true)
+module z_clamp(print_orientation=true, mirrored=false)
 {
 	p1=(print_orientation==true) ? 1 : 0;
+  s1=(mirrored==true) ? -1 : 1;
+  
+  scale([s1, 1, 1])
 	rotate(p1*[0, 90, 0])
 	translate(p1*[-z_clamp_max[x], -z_clamp_center[y], -z_clamp_center[z]])
 

@@ -27,6 +27,9 @@ use <functions.scad>
 use <barbell.scad>
 use <teardrops.scad>
 
+print_orientation = true;
+mirrored = false;
+
 $fa=1;
 $fs=2;
 
@@ -35,13 +38,15 @@ vertex_hub_radius = 22;
 foot_height = 35;
 foot_width = vertex_width;
 
-%frame_annotations();
-bottom_vertex(print_orientation=false);
+*%frame_annotations();
+bottom_vertex(print_orientation=print_orientation, mirrored=mirrored);
 
-module bottom_vertex(print_orientation=true)
+module bottom_vertex(print_orientation=true, mirrored=false)
 {
 	p1=(print_orientation==true) ? 1 : 0;
+	s1=(mirrored==true) ? -1 : 1;
 
+	scale([s1, 1, 1])
 	translate(p1*[0, 0, vertex_width/2])
 	rotate(p1*[0, 0, -30])
 	rotate(p1*[0, 90, 0])

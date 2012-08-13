@@ -29,7 +29,7 @@ assembly();
 
 module assembly()
 {
-	%render() frame_annotations();
+	color([.75, .75, .75]) render() frame_annotations();
 
 	for(i=[-1, 1]) scale([i, 1, 1])
 	{

@@ -26,6 +26,8 @@ use <motor.scad>
 $fa=1;
 $fs=2;
 
+print_orientation = false;
+
 *frame_annotations();
 
 *translate(z_motor_center)
@@ -56,7 +58,7 @@ motor_bolt_hole_spacing = 1.2*25.4;
 motor_frame_width = 43-motor_bolt_hole_spacing;
 motor_hole_radius = sqrt((motor_bolt_hole_spacing/2*motor_bolt_hole_spacing/2)+(motor_bolt_hole_spacing/2*motor_bolt_hole_spacing/2)) - motor_frame_width/2;
 
-module top_vertex(print_orientation=false)
+module top_vertex(print_orientation=print_orientation)
 {
 	p1=(print_orientation==true) ? 1 : 0;
 	rotate(p1*[0, 90, 0])
