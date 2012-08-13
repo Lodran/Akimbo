@@ -35,11 +35,11 @@ cd ..
 # Create a .zip containing the individual parts.
 
 rm -f Parts.zip
-mkbom mkbom -s -i Parts.files Parts.bom
+mkbom -s -i Parts.files Parts.bom
 ditto -c -k --keepParent --norsrc --noextattr --noacl -bom Parts.bom Parts Parts.zip
 rm -f Parts.bom
 
 rm -f Plates.zip
-mkbom mkbom -s -i Plates.files Plates.bom
+mkbom -s -i Plates.files Plates.bom
 ditto -c -k --keepParent --norsrc --noextattr --noacl -bom Plates.bom Plates Plates.zip
 rm -f Plates.bom
