@@ -1,3 +1,18 @@
+//
+// RepRap Mendel Akimbo
+//
+// A Mendel variant, which improves the frame's clearance and stability
+//  by increasing it's triangulation.
+//
+// Copyright 2012 by Ron Aldrich.
+//
+// Licensed under GNU GPL v2
+//
+// teardrops.scad
+//
+// Generates 2d and 3d teardrop profiles.
+//
+
 module hexircle(r, $fn)
 {
 	intersection()

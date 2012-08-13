@@ -1,3 +1,25 @@
+//
+// RepRap Mendel Akimbo
+//
+// A Mendel variant, which improves the frame's clearance and stability
+//  by increasing it's triangulation.
+//
+// Copyright 2012 by Ron Aldrich.
+//
+// Licensed under GNU GPL v2
+//
+// bottom_vertex.scad
+//
+// Bottom frame vertices, with feet and bumper mounts.
+//
+//  Print two with normal orientation, and two with mirrored orientation.
+//
+//  Bumper mounts are intended to fit SAE (#8-32) Sorbothane bumpers.
+//  http://www.isolateit.com/mounts-vibration-isolators/vibration-isolating-stud-mounts-and-bumpers/sorbothane-vibration-isolating-stud-bumpers.html
+//
+//  Note: I chose the SAE bumpers over the metric ones, because of both size and cost.
+//
+
 include <more_configuration.scad>
 include <frame_computations.scad>
 

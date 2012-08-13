@@ -1,3 +1,20 @@
+//
+// RepRap Mendel Akimbo
+//
+// A Mendel variant, which improves the frame's clearance and stability
+//  by increasing it's triangulation.
+//
+// Copyright 2012 by Ron Aldrich.
+//
+// Licensed under GNU GPL v2
+//
+// z_clamp.scad
+//
+// Clamps the lower end of the Z axis linear rod to the frame.
+//
+// Print one with normal orientation, and one with mirrored orientation.
+//
+
 include <more_configuration.scad>
 include <frame_computations.scad>
 

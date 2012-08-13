@@ -1,3 +1,18 @@
+//
+// RepRap Mendel Akimbo
+//
+// A Mendel variant, which improves the frame's clearance and stability
+//  by increasing it's triangulation.
+//
+// Copyright 2012 by Ron Aldrich.
+//
+// Licensed under GNU GPL v2
+//
+// drive_wheels.scad
+//
+// Size and shape definitions for various extruder drive wheels, for direct drive extruders.
+//
+
 drive_wheel_length = 0;
 drive_wheel_radius = 1;
 drive_wheel_hob_radius = 2;

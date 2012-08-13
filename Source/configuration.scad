@@ -1,4 +1,13 @@
 //
+// RepRap Mendel Akimbo
+//
+// A Mendel variant, which improves the frame's clearance and stability
+//  by increasing it's triangulation.
+//
+// Copyright 2012 by Ron Aldrich.
+//
+// Licensed under GNU GPL v2
+//
 //	configuration.scad
 //
 //	General configuration settings.
@@ -7,7 +16,8 @@
 //		configuration.scad from prusajr's github repository, there is 
 //		more configuration in "moreConfiguration.scad".
 //
-// Edit variant to match the types of nuts and bolts you want to use in your part.
+//  Only the metric variant is tested. Other variants are not supported, and will most likely
+//    create unworkable parts.
 //
 //	Edit layer_height to be greater than the height of one printed layer, 
 //		but less than the height of two printed layers.

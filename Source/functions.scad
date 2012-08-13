@@ -1,3 +1,18 @@
+//
+// RepRap Mendel Akimbo
+//
+// A Mendel variant, which improves the frame's clearance and stability
+//  by increasing it's triangulation.
+//
+// Copyright 2012 by Ron Aldrich.
+//
+// Licensed under GNU GPL v2
+//
+// functions.scad
+//
+// Functions commonly used within Akimbo's sources.
+//
+
 x=0;
 y=1;
 z=2;

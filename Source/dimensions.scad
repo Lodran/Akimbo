@@ -1,3 +1,17 @@
+//
+// RepRap Mendel Akimbo
+//
+// A Mendel variant, which improves the frame's clearance and stability
+//  by increasing it's triangulation.
+//
+// Copyright 2012 by Ron Aldrich.
+//
+// Licensed under GNU GPL v2
+//
+// dimensions.scad
+//
+// Frame dimensions.
+//
 // Threaded rods (frame)
 
 triangle_rod_length = 370;		// edges of the frame triangles.

@@ -1,3 +1,18 @@
+//
+// RepRap Mendel Akimbo
+//
+// A Mendel variant, which improves the frame's clearance and stability
+//  by increasing it's triangulation.
+//
+// Copyright 2012 by Ron Aldrich.
+//
+// Licensed under GNU GPL v2
+//
+// motor.scad
+//
+// Generates a rough drawing of a NEMA 17 motor, for annotation purposes.
+//
+
 include <more_configuration.scad>
 
 motor_size = [40, 40, 47];

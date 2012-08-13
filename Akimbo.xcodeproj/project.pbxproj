@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		05BF88AC15D8C192005EA20C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		05E9D3FD15D8B5CD00A8B259 /* assembly.scad */ = {isa = PBXFileReference; lastKnownFileType = text; path = assembly.scad; sourceTree = "<group>"; };
 		05E9D3FE15D8B5CD00A8B259 /* barbell.scad */ = {isa = PBXFileReference; lastKnownFileType = text; path = barbell.scad; sourceTree = "<group>"; };
 		05E9D3FF15D8B5CD00A8B259 /* bottom_vertex.scad */ = {isa = PBXFileReference; lastKnownFileType = text; path = bottom_vertex.scad; sourceTree = "<group>"; };
@@ -28,6 +29,7 @@
 		05E9D3F015D8B57300A8B259 = {
 			isa = PBXGroup;
 			children = (
+				05BF88AC15D8C192005EA20C /* README.md */,
 				05E9D3FC15D8B5CD00A8B259 /* Source */,
 			);
 			sourceTree = "<group>";

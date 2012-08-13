@@ -1,3 +1,19 @@
+//
+// RepRap Mendel Akimbo
+//
+// A Mendel variant, which improves the frame's clearance and stability
+//  by increasing it's triangulation.
+//
+// Copyright 2012 by Ron Aldrich.
+//
+// Licensed under GNU GPL v2
+//
+// barbell.scad
+//
+// Barbell function extracted from "Greg's Hinged Accessible Extruder"
+//  http://www.thingiverse.com/thing:8252
+//
+
 function triangulate (point1, point2, length1, length2) = 
 point1 + 
 length1*rotated(

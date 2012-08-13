@@ -1,3 +1,18 @@
+//
+// RepRap Mendel Akimbo
+//
+// A Mendel variant, which improves the frame's clearance and stability
+//  by increasing it's triangulation.
+//
+// Copyright 2012 by Ron Aldrich.
+//
+// Licensed under GNU GPL v2
+//
+// pill.scad
+//
+// Generates pill shaped holes, with or without a teardrop profile.
+//
+
 use <teardrops.scad>
 
 module pill(length, h, r, $fn, center)

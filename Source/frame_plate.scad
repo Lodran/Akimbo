@@ -1,3 +1,16 @@
+//
+// RepRap Mendel Akimbo
+//
+// A Mendel variant, which improves the frame's clearance and stability
+//  by increasing it's triangulation.
+//
+// Copyright 2012 by Ron Aldrich.
+//
+// Licensed under GNU GPL v2
+//
+// frame_plate.scad
+//
+
 use <bottom_vertex.scad>
 use <top_vertex.scad>
 use <z_clamp.scad>
