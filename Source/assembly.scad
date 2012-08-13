@@ -1,3 +1,16 @@
+//
+// RepRap Mendel Akimbo
+//
+// A Mendel variant, which improves the frame's clearance and stability
+//  by increasing it's triangulation.
+//
+// Copyright 2012 by Ron Aldrich.
+//
+// Licensed under GNU GPL v2
+//
+// Frame Assembly
+//
+
 include <more_configuration.scad>
 include <frame_computations.scad>
 
