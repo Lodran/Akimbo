@@ -1,0 +1,109 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		05E9D3FD15D8B5CD00A8B259 /* assembly.scad */ = {isa = PBXFileReference; lastKnownFileType = text; path = assembly.scad; sourceTree = "<group>"; };
+		05E9D3FE15D8B5CD00A8B259 /* barbell.scad */ = {isa = PBXFileReference; lastKnownFileType = text; path = barbell.scad; sourceTree = "<group>"; };
+		05E9D3FF15D8B5CD00A8B259 /* bottom_vertex.scad */ = {isa = PBXFileReference; lastKnownFileType = text; path = bottom_vertex.scad; sourceTree = "<group>"; };
+		05E9D40015D8B5CD00A8B259 /* configuration.scad */ = {isa = PBXFileReference; lastKnownFileType = text; path = configuration.scad; sourceTree = "<group>"; };
+		05E9D40115D8B5CD00A8B259 /* dimensions.scad */ = {isa = PBXFileReference; lastKnownFileType = text; path = dimensions.scad; sourceTree = "<group>"; };
+		05E9D40215D8B5CD00A8B259 /* drive_wheels.scad */ = {isa = PBXFileReference; lastKnownFileType = text; path = drive_wheels.scad; sourceTree = "<group>"; };
+		05E9D40315D8B5CD00A8B259 /* frame_computations.scad */ = {isa = PBXFileReference; lastKnownFileType = text; path = frame_computations.scad; sourceTree = "<group>"; };
+		05E9D40415D8B5CD00A8B259 /* frame_plate.scad */ = {isa = PBXFileReference; lastKnownFileType = text; path = frame_plate.scad; sourceTree = "<group>"; };
+		05E9D40515D8B5CD00A8B259 /* functions.scad */ = {isa = PBXFileReference; lastKnownFileType = text; path = functions.scad; sourceTree = "<group>"; };
+		05E9D40615D8B5CD00A8B259 /* more_configuration.scad */ = {isa = PBXFileReference; lastKnownFileType = text; path = more_configuration.scad; sourceTree = "<group>"; };
+		05E9D40715D8B5CD00A8B259 /* motor.scad */ = {isa = PBXFileReference; lastKnownFileType = text; path = motor.scad; sourceTree = "<group>"; };
+		05E9D40815D8B5CD00A8B259 /* pill.scad */ = {isa = PBXFileReference; lastKnownFileType = text; path = pill.scad; sourceTree = "<group>"; };
+		05E9D40915D8B5CD00A8B259 /* teardrops.scad */ = {isa = PBXFileReference; lastKnownFileType = text; path = teardrops.scad; sourceTree = "<group>"; };
+		05E9D40A15D8B5CD00A8B259 /* top_vertex.scad */ = {isa = PBXFileReference; lastKnownFileType = text; path = top_vertex.scad; sourceTree = "<group>"; };
+		05E9D40B15D8B5CD00A8B259 /* z_clamp.scad */ = {isa = PBXFileReference; lastKnownFileType = text; path = z_clamp.scad; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		05E9D3F015D8B57300A8B259 = {
+			isa = PBXGroup;
+			children = (
+				05E9D3FC15D8B5CD00A8B259 /* Source */,
+			);
+			sourceTree = "<group>";
+		};
+		05E9D3FC15D8B5CD00A8B259 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				05E9D3FD15D8B5CD00A8B259 /* assembly.scad */,
+				05E9D3FE15D8B5CD00A8B259 /* barbell.scad */,
+				05E9D3FF15D8B5CD00A8B259 /* bottom_vertex.scad */,
+				05E9D40015D8B5CD00A8B259 /* configuration.scad */,
+				05E9D40115D8B5CD00A8B259 /* dimensions.scad */,
+				05E9D40215D8B5CD00A8B259 /* drive_wheels.scad */,
+				05E9D40315D8B5CD00A8B259 /* frame_computations.scad */,
+				05E9D40415D8B5CD00A8B259 /* frame_plate.scad */,
+				05E9D40515D8B5CD00A8B259 /* functions.scad */,
+				05E9D40615D8B5CD00A8B259 /* more_configuration.scad */,
+				05E9D40715D8B5CD00A8B259 /* motor.scad */,
+				05E9D40815D8B5CD00A8B259 /* pill.scad */,
+				05E9D40915D8B5CD00A8B259 /* teardrops.scad */,
+				05E9D40A15D8B5CD00A8B259 /* top_vertex.scad */,
+				05E9D40B15D8B5CD00A8B259 /* z_clamp.scad */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		05E9D3F215D8B57300A8B259 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = "Software Architects, Inc.";
+			};
+			buildConfigurationList = 05E9D3F515D8B57300A8B259 /* Build configuration list for PBXProject "Akimbo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 05E9D3F015D8B57300A8B259;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		05E9D3F715D8B57300A8B259 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		05E9D3F815D8B57300A8B259 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		05E9D3F515D8B57300A8B259 /* Build configuration list for PBXProject "Akimbo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05E9D3F715D8B57300A8B259 /* Debug */,
+				05E9D3F815D8B57300A8B259 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 05E9D3F215D8B57300A8B259 /* Project object */;
+}
