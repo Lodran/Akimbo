@@ -3,5 +3,6 @@ xcuserdata
 *.xcuserstate
 *.mode1v3
 *.pbxuser
+*.gcode
 DerivedData
 build
