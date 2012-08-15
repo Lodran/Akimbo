@@ -42,7 +42,7 @@ frame_horizontal_upper_rod_separation = 80;
 frame_triangle_rod_offset = 38;		// Distance from center of vertex to frame triangle rods.
 frame_triangle_angle_offset = -8;
 
-clamp_rod_separation = 9;
+clamp_rod_separation = 9.6;
 
 z_rod_clamp_bolt_separation = 18;
 

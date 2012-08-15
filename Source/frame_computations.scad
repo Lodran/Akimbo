@@ -17,6 +17,11 @@ include <dimensions.scad>
 include <functions.scad>
 use <motor.scad>
 
+release_quality=false;
+
+$fa = 1;
+$fs = (release_quality == true) ? 1 : 2;
+
 frame_horizontal_upper_rod_separation = 100;
 
 frame_triangle_edge_length = j1 + vertex_depth + frame_triangle_rod_offset*2;
@@ -51,7 +56,7 @@ z_motor_center = [(j2+motor_clearance)/2+motor_offset, 0, upper_vertex_p2[z]];
 
 z_linear_rod_center = [z_motor_center[x]+z_linear_to_screw_separation, 0, upper_vertex_p1[z]/2];
 
-z_horizontal_rod_center = [0, clamp_rod_separation, -clamp_rod_separation];
+z_horizontal_rod_center = [0, 16, -clamp_rod_separation];
 
 *frame_annotations();
 *vertex_annotations();

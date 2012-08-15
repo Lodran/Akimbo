@@ -23,7 +23,8 @@ use <motor.scad>
 
 use <bottom_vertex.scad>
 use <top_vertex.scad>
-use <z_clamp.scad>
+use <z_bottom_frame_clamp.scad>
+use <z_linear_rod_clamp.scad>
 
 assembly();
 
@@ -39,5 +40,13 @@ module assembly()
 		render() top_vertex(print_orientation=false);
 
 		render() z_clamp(print_orientation=false);
+
+		translate([z_linear_rod_center[x], 0, 6])
+			rotate([0, 90, 0])
+			render() z_linear_clamp();
+
+		translate([z_linear_rod_center[x], 0, upper_vertex_p1[z]-4])
+			rotate([0, 90, 0])
+			render() z_linear_clamp();
 	}
 }

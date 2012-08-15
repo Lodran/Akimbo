@@ -30,13 +30,10 @@ use <teardrops.scad>
 print_orientation = true;
 mirrored = false;
 
-$fa=1;
-$fs=2;
-
-vertex_hub_radius = 22;
+vertex_hub_radius = 18;
 
 foot_height = 35;
-foot_width = vertex_width;
+foot_width = 15;
 
 *%frame_annotations();
 bottom_vertex(print_orientation=print_orientation, mirrored=mirrored);
@@ -78,18 +75,25 @@ module bottom_vertex_solid()
 				{
 					union()
 					{
-						// Lower hub.
+						// Lower hub with foot.
 
-						rotate([90, 0, 0])
-						translate([0, 0, frame_triangle_rod_offset])
-						sphere(vertex_hub_radius);
+						rotate([0, 90, 0])
+						linear_extrude(height=vertex_width+1, center=true, convexity=4)
+						{
+							barbell(p1, fp2, vertex_hub_radius, 2, 100, 14);
+
+							barbell(p1, fp3, vertex_hub_radius, 2, 14, 100);
+	
+							translate(fp1+[foot_height/2-10, 0])
+							square([foot_height, foot_width-4], center=true);
+						}
 
 						// Lower to upper hub connector
 
 						rotate([0, 90, 0])
 						linear_extrude(height=vertex_width+1, center=true)
 						{
-							barbell(p1, p2, vertex_hub_radius-4, vertex_hub_radius-4, 30, 30);
+							barbell(p1, p2, vertex_hub_radius, vertex_hub_radius-2.6, 25, 25);
 						}
 					}
 
@@ -98,7 +102,7 @@ module bottom_vertex_solid()
 					rotate([90, 0, 0])
 					{
 						translate([0, 0, frame_triangle_rod_offset])
-						cube([vertex_hub_radius*2, vertex_hub_radius*3+5, vertex_depth], center=true);
+						cube([vertex_hub_radius*2, 80, vertex_depth], center=true);
 					}
 				}
 
@@ -112,9 +116,13 @@ module bottom_vertex_solid()
 						{
 							// Upper hub.
 
-							sphere(vertex_hub_radius);
+							rotate([0, 90, 0])
+							cylinder(h=vertex_hub_radius*2, r=vertex_hub_radius, center=true);
+
+							*sphere(vertex_hub_radius);
+
 							translate([0, -vertex_hub_radius/2, -vertex_hub_radius/2])
-							cube([vertex_hub_radius*2, vertex_hub_radius/2, vertex_hub_radius/2], center=true);
+							cube([vertex_hub_radius*2, vertex_hub_radius, vertex_hub_radius], center=true);
 						}
 
 						// Upper triangle washer flats.
@@ -123,22 +131,10 @@ module bottom_vertex_solid()
 					}
 				}
 
-				// Foot
-
+				*rotate([-60, 0, 0])
+				translate([frame_horizontal_lower_rod_offset[x], frame_horizontal_lower_rod_offset[y], -frame_horizontal_lower_rod_offset[z]])
 				rotate([0, 90, 0])
-				linear_extrude(height=vertex_width+1, center=true, convexity=4)
-				{
-					barbell(fp1, fp2, vertex_depth/2-2, 2, 20, 20);
-
-					barbell(fp1, fp3, vertex_depth/2-2, 2, 20, 20);
-					translate(fp3)
-					circle(2);
-
-					translate(fp1+[foot_height/2-10, 0])
-					square([foot_height, foot_width-4], center=true);
-				}
-					
-
+				cylinder(h=vertex_width+1, r=9, center=true);
 			}
 
 			// Trim the entire piece down to 18mm in width.

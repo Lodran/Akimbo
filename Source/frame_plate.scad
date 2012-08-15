@@ -13,9 +13,10 @@
 
 use <bottom_vertex.scad>
 use <top_vertex.scad>
-use <z_clamp.scad>
+use <z_bottom_frame_clamp.scad>
+use <z_linear_rod_clamp.scad>
 
-plate=1;
+plate=2;
 
 if (plate==1)
   bottom_plate();
@@ -40,12 +41,15 @@ module z_plate()
 {
 	for(i=[-1, 1])
 	{
-		translate([i*20, 0, 0])
+		translate([i*35+3, 0, 0])
 		top_vertex(print_orientation=true);
 
-		translate([52, i*19, 0])
+		translate([9, i*-55, 0])
 		scale([1, i, 1])
 		z_clamp(print_orientation=true);
 	}
+
+	for(i=[-1, 1]) for(j=[-1, 1]) translate([i*9, j*18, 0])
+	z_linear_clamp();
 
 }
