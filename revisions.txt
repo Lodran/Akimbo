@@ -30,3 +30,6 @@ Version 0.3
   z_linear_rod_clamp.scad
     Increased the thickness of the base of the rod clamp.
     Tweaked the geometry to side-step manifold errors.
+
+  Plates.zip
+    Added frame_plate_1.stl
