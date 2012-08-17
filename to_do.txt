@@ -1,5 +1,3 @@
-Make clamps for the z axis smooth rod.
-Put the parts on a diet.
 Add Y axis parts.
 Add Z axis parts (X ends).
 Add X axis parts (Carriage and Extruders).

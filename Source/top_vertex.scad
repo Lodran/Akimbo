@@ -18,7 +18,7 @@
 include <more_configuration.scad>
 include <frame_computations.scad>
 
-m8_washer_diameter = 19;
+m8_washer_diameter = 20;
 
 use <functions.scad>
 use <barbell.scad>

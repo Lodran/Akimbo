@@ -21,7 +21,7 @@ include <frame_computations.scad>
 use <teardrops.scad>
 use <pill.scad>
 
-z_linear_clamp_thickness = 5;
+z_linear_clamp_thickness = 8;
 z_linear_clamp_width = 15;
 
 z_linear_clamp();
@@ -43,10 +43,10 @@ module z_linear_clamp_solid()
 		union()
 		{
 			translate([0, 0, z_linear_clamp_thickness/2])
-			pill(h=z_linear_clamp_thickness, r=z_linear_clamp_width/2, length=z_rod_clamp_bolt_separation, center=true);
-			translate([0, 0, z_linear_clamp_thickness])
+			pill(h=z_linear_clamp_thickness, r=z_linear_clamp_width/2+.1, length=z_rod_clamp_bolt_separation, center=true);
 			rotate([0, 90, 0])
-			cylinder(h=z_linear_clamp_width, r=z_rod_clamp_bolt_separation/2, center=true);
+			scale([1.2, 1, 1])
+			cylinder(h=z_linear_clamp_width+.1, r=10, center=true);
 		}
 
 		translate([0, 0, z_rod_clamp_bolt_separation/2])

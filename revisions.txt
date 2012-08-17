@@ -17,3 +17,16 @@ Version 0.2
   
   z_linear_rod_clamp.scad
     New with this release.
+
+Version 0.3
+
+  top_vertex.scad
+    Increased the diameter of the horizontal bracket, to make measurement easier.
+
+  z_bottom_frame_clamp.scad
+    Increased the angle of the overhang on the frame end of the bracket, to make it print nicer.
+    Increased the diameter of the ends of the bracket, to make measurement easier.
+
+  z_linear_rod_clamp.scad
+    Increased the thickness of the base of the rod clamp.
+    Tweaked the geometry to side-step manifold errors.

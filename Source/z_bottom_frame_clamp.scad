@@ -18,7 +18,7 @@
 include <more_configuration.scad>
 include <frame_computations.scad>
 
-m8_washer_diameter = 19;
+m8_washer_diameter = 20;
 
 use <functions.scad>
 use <barbell.scad>
@@ -26,7 +26,7 @@ use <teardrops.scad>
 use <motor.scad>
 use <pill.scad>
 
-print_orientation = true;
+print_orientation = false;
 mirrored = false;
 
 z_frame_rod_clamp_min = [j2/2, z_horizontal_rod_center[y]-12, -12-clamp_rod_separation/2];
@@ -67,7 +67,11 @@ z_linear_rod_bracket_length = z_rod_clamp_bolt_separation;
 z_linear_rod_bracket_size = [8, z_linear_rod_bracket_length, z_linear_rod_bracket_radius*2];
 z_linear_rod_bracket_center = [z_linear_rod_center[x]-z_linear_rod_bracket_size[x]/2, z_linear_rod_center[y], 6];
 
-*%frame_annotations();
+j1b=j1/2-z_frame_rod_clamp_max[y];
+
+echo(str("jig 1b length = ", j1b, "mm"));
+
+%frame_annotations();
 
 z_clamp(print_orientation=print_orientation, mirrored=mirrored);
 
@@ -89,28 +93,6 @@ module z_clamp(print_orientation=true, mirrored=false)
 
 module z_clamp_solid()
 {
-	/*
-	*translate(z_frame_rod_clamp_center)
-	cube(z_frame_rod_clamp_size, center=true);
-
-
-	translate([connector_center[x], connector_center[y], z_horizontal_rod_center[z]])
-	rotate([0, 90 , 0])
-	cylinder(h=connector_size[x], r=z_horizontal_rod_center[z]-connector_min[z], center=true);
-
-	cr = z_horizontal_rod_center[z]-connector_min[z];
-
-	*hull()
-	{
-		translate([z_linear_rod_clamp_min[x]+.5, connector_center[y], z_horizontal_rod_center[z]])
-		cube([1, cr*2, cr*2], center=true);
-
-		translate([z_linear_rod_clamp_min[x]-6, connector_center[y], z_horizontal_rod_center[z]])
-		rotate([0, 90 , 0])
-		cylinder(h=1, r=cr, center=true);
-	}
-	*/
-
 	hull()
 	{
 		translate(z_linear_rod_bracket_center)
@@ -132,7 +114,7 @@ module z_clamp_solid()
 		rotate([90, 0 , 0])
 		cylinder(h=frame_bottom_bracket_length, r=frame_bracket_end_radius, center=true);
 
-		translate([z_frame_rod_clamp_max[x]+12, connector_center[y], z_horizontal_rod_center[z]])
+		translate([z_frame_rod_clamp_max[x]+20, connector_center[y], z_horizontal_rod_center[z]])
 		rotate([0, 90 , 0])
 		cylinder(h=1, r=frame_bracket_center_radius/2, center=true);
 	}
