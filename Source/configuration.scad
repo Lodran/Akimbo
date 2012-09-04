@@ -74,4 +74,7 @@ m8_bolt_head_height = 6;
 m8_half_nut_height = 3.85;
 
 threaded_rod_diameter = 8.7;
-smooth_rod_diameter = 8.25;
+
+actual_smooth_rod_diameter = 8;
+smooth_rod_diameter = actual_smooth_rod_diameter+.25;
+

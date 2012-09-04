@@ -34,7 +34,7 @@ module teardrop(h, r, center=false, $fn)
 	cylinder(h=h, r=r*cos(45), center=center, $fn=4);
 }
 
-teardrop(h=1, r=10, $fn=40, center=true);
+octircle(h=1, r=10, $fn=40, center=true);
 
 module hexylinder(h, r, center=false, $fn)
 {
@@ -72,6 +72,23 @@ module hexasphere(r, $fn)
 	}
 }
 
+module octircle(r, $fn)
+{
+	a=r/(1+sqrt(2));
+	b=(r-a)/2;
+
+	intersection()
+	{
+		rotate(45/2)
+		circle(r=r/cos(45/2), $fn=8);
+		translate([0, r-b/2])
+		square([r*2, b], center=true);
+	}
+
+	rotate(180/$fn)
+	circle(r=r, $fn=$fn);
+}
+
 module octylinder(h, r, center=false, $fn)
 {
 	a=r/(1+sqrt(2));
@@ -93,7 +110,7 @@ module octylinder(h, r, center=false, $fn)
 			cube([r*2, b, h+.1], center=true);
 		}
 	}
-	rotate([0, 0, 180/$fn])
+	//rotate([0, 0, 180/$fn])
 	cylinder(h=h, r=r, $fn=$fn, center=center);
 }
 

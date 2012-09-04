@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXFileReference section */
+		05979FB715F5889600B16693 /* akimbo_x_end.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = akimbo_x_end.scad; sourceTree = "<group>"; };
 		05BF88AC15D8C192005EA20C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		05BF88B215D8CA3B005EA20C /* build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
 		05BF88BC15D8E2F0005EA20C /* Parts.files */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Parts.files; sourceTree = "<group>"; };
@@ -35,6 +36,7 @@
 		05BF88CC15D8EA79005EA20C /* assembly.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = assembly.stl; sourceTree = "<group>"; };
 		05BF88CD15D8EAF6005EA20C /* to_do.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = to_do.txt; sourceTree = "<group>"; };
 		05BF88CE15D8EB07005EA20C /* revisions.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = revisions.txt; sourceTree = "<group>"; };
+		05DA55EB15EFF8F400CE72ED /* akimbo_carriage.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = akimbo_carriage.scad; sourceTree = "<group>"; };
 		05E1A56515DB28CE0032B4DB /* z_linear_rod_clamp.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = z_linear_rod_clamp.scad; sourceTree = "<group>"; };
 		05E1A56615DB4E7E0032B4DB /* z_linear_rod_clamp@_4.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "z_linear_rod_clamp@_4.stl"; sourceTree = "<group>"; };
 		05E1A56715DB4EA60032B4DB /* z_bottom_frame_clamp_mirrored@_1.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "z_bottom_frame_clamp_mirrored@_1.stl"; sourceTree = "<group>"; };
@@ -54,6 +56,7 @@
 		05E9D40915D8B5CD00A8B259 /* teardrops.scad */ = {isa = PBXFileReference; lastKnownFileType = text; path = teardrops.scad; sourceTree = "<group>"; };
 		05E9D40A15D8B5CD00A8B259 /* top_vertex.scad */ = {isa = PBXFileReference; lastKnownFileType = text; path = top_vertex.scad; sourceTree = "<group>"; };
 		05E9D40B15D8B5CD00A8B259 /* z_bottom_frame_clamp.scad */ = {isa = PBXFileReference; lastKnownFileType = text; path = z_bottom_frame_clamp.scad; sourceTree = "<group>"; };
+		05EE288715EC631E00EF4E9B /* akimbo_extruder.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = akimbo_extruder.scad; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -100,6 +103,9 @@
 		05E9D3FC15D8B5CD00A8B259 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				05979FB715F5889600B16693 /* akimbo_x_end.scad */,
+				05DA55EB15EFF8F400CE72ED /* akimbo_carriage.scad */,
+				05EE288715EC631E00EF4E9B /* akimbo_extruder.scad */,
 				05E9D3FD15D8B5CD00A8B259 /* assembly.scad */,
 				05E9D3FE15D8B5CD00A8B259 /* barbell.scad */,
 				05E9D3FF15D8B5CD00A8B259 /* bottom_vertex.scad */,

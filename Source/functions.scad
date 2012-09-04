@@ -23,9 +23,15 @@ function average(va, vb) = [
 	(va[z]+vb[z])/2];
 
 function centerof(a, b) = [(a[x]+b[x])/2, (a[y]+b[y])/2, (a[z]+b[z])/2];
-function sizeof(a, b) = [b[x]-a[x], b[y]-a[y], b[z]-a[z]];
+function sizeof(a, b) = [abs(b[x]-a[x]), abs(b[y]-a[y]), abs(b[z]-a[z])];
 function minof(a, b) = [a[x]-b[x]/2, a[y]-b[y]/2, a[z]-b[z]/2];
 function maxof(a, b) = [a[x]+b[x]/2, a[y]+b[y]/2, a[z]+b[z]/2];
+
+function centerof_2(a, b) = [(a[x]+b[x])/2, (a[y]+b[y])/2];
+function sizeof_2(a, b) = [abs(b[x]-a[x]), abs(b[y]-a[y])];
+function minof_2(a, b) = [a[x]-b[x]/2, a[y]-b[y]/2];
+function maxof_2(a, b) = [a[x]+b[x]/2, a[y]+b[y]/2];
+function vec_length_2(a) = sqrt(a[x]*a[x]+a[y]*a[y]);
 
 function pitch_radius(number_of_teeth, modulus=1) = number_of_teeth * modulus / 2;
 

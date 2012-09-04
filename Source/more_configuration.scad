@@ -55,6 +55,14 @@ bearing_flange_diameter = 2;
 bearing_flange_width = 3;
 bearing_rod_diameter = 4;
 
+// linear_roller_bearing = [2, 6, 6, 0, 3];
+
+683_bearing = [3, 7, 7, 0, 3];
+683_bearing_clearance = [0.4, 0.4, 0.4, 0, 2];
+
+623_bearing = [4, 10, 10, 0, 6];
+623_bearing_clearance = [0.4, 0.4, 0.4, 0, 2];
+
 624_bearing = [5, 13, 13, 0, 4];
 624_bearing_clearance = [0.4, 0.4, 0.4, 0, 2];
 
