@@ -37,7 +37,7 @@ module assembly()
 	color([.75, .75, .75]) frame_annotations();
 	color([.75, .75, .75]) x_annotations();
 
-	for(i=[-1, 1]) scale([i, 1, 1])
+	*for(i=[-1, 1]) scale([i, 1, 1])
 	{
 		for(j=[-1, 1]) scale([1, j, 1])
 			bottom_vertex(print_orientation=false);
@@ -63,7 +63,7 @@ module assembly()
 		color([.75, .75, .75]) x_end_annotations(print_orientation=false);
 	}
 
-	translate([115, extruder_offset, x_axis_height])
+	*translate([115, extruder_offset, x_axis_height])
 	{
 		akimbo_carriage(print_orientation=false);
 		translate([0, 0, linear_clamp_radius+8])
@@ -75,7 +75,7 @@ module assembly()
 		}
 	}
 
-	translate([115-21, extruder_offset, x_axis_height])
+	*translate([115-21, extruder_offset, x_axis_height])
 	{
 		rotate([0, 0, 180])
 		akimbo_carriage(print_orientation=false);

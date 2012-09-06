@@ -1,3 +1,10 @@
 Add Y axis parts.
-Add Z axis parts (X ends).
-Add X axis parts (Carriage and Extruders).
+  Add classic clamps.
+  Design roller bearing clamp.
+  Alter Linear bearing clamps to match height of roller bearing clamp.
+  Alter Linear bearing clamps to allow extra Y travel. 
+  
+Add Z endstop mount to constrained X end.
+Add Z endstop flag.
+Add Z endstop hardware.
+

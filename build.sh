@@ -10,17 +10,28 @@ cd Source
 
 # Create .stl files for individual parts.
 
+/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -D constrained=true -o ../Parts/akimbo_x_end_left_@_1.stl akimbo_x_end.scad
+
+/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -D constrained=false -o ../Parts/akimbo_x_end_right_@_1.stl akimbo_x_end.scad
+
+
+/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -o ../Parts/akimbo_carriage_@_2.stl akimbo_carriage.scad
+
 /Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -o ../Parts/top_vertex_@_2.stl top_vertex.scad
 
-/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -o ../Parts/bottom_vertex@_2.stl bottom_vertex.scad
+/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -o ../Parts/bottom_vertex_@_2.stl bottom_vertex.scad
 
-/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -D mirrored=true -o ../Parts/bottom_vertex_mirrored@_2.stl bottom_vertex.scad
+/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -D mirrored=true -o ../Parts/bottom_vertex_mirrored_@_2.stl bottom_vertex.scad
 
-/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -o ../Parts/z_bottom_frame_clamp@_1.stl z_bottom_frame_clamp.scad
+/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -o ../Parts/z_bottom_frame_clamp_@_1.stl z_bottom_frame_clamp.scad
 
-/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -D mirrored=true -o ../Parts/z_bottom_frame_clamp_mirrored@_1.stl z_bottom_frame_clamp.scad
+/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -D mirrored=true -o ../Parts/z_bottom_frame_clamp_mirrored_@_1.stl z_bottom_frame_clamp.scad
 
-/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -o ../Parts/z_linear_rod_clamp@_4.stl z_linear_rod_clamp.scad
+/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -o ../Parts/z_linear_rod_clamp_@_4.stl z_linear_rod_clamp.scad
+
+/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -o ../Parts/akimbo_extruder_@_1.stl akimbo_extruder.scad
+
+/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -D mirrored=true -o ../Parts/akimbo_extruder_mirrored_@_1.stl akimbo_extruder.scad
 
 # Create .stl files for plates.
 

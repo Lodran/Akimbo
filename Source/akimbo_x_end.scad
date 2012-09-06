@@ -11,6 +11,9 @@
 // akimbo_x_end.scad
 //
 
+print_orientation = true;
+constrained = true;
+
 include <more_configuration.scad>
 include <frame_computations.scad>
 
@@ -19,6 +22,8 @@ use <barbell.scad>
 use <teardrops.scad>
 use <motor.scad>
 use <pill.scad>
+use <akimbo_z_endstop_holder.scad>
+use <optical_endstop.scad>
 
 belt_idler_bearing = 608_bearing;
 
@@ -32,7 +37,7 @@ m5_nut_thickness = 3;
 
 z_screw_nut_thickness = m5_nut_thickness;
 z_screw_nut_radius = m5_nut_diameter/2;
-z_screw_radius = m5_diameter/2;
+z_screw_radius = 5/2;
 
 /*
 z_screw_nut_thickness = m8_nut_thickness;
@@ -102,20 +107,42 @@ motor_brace_poly_2 = [motor_brace_p0,
                     motor_brace_p2b,
                     motor_brace_p3+[0, 3]];
 
-akimbo_x_end();
+x_endstop_center = [x_end_min[x]+4, -x_linear_rod_offset, x_end_max[z]];
+
+/*
+for(i=[-1, 1])
+	rotate([0, 0, i*90+90])
+	translate([33, -13, 0])
+	akimbo_x_end(print_orientation=true, constrained=(i==1), motor_bracket=true, idler_bracket=true);
+*/
+
+akimbo_x_end(print_orientation=print_orientation, constrained=constrained, motor_bracket=true, idler_bracket=true);
+*%x_end_annotations(print_orientation=print_orientation);
 
 module akimbo_x_end(print_orientation=true, constrained=false, motor_bracket=true, idler_bracket=true)
 {
-  p1=(print_orientation == true) ? 1 : 0;
-  p2=(print_orientation == false) ? 1 : 0;
+	p1=(print_orientation == true) ? 1 : 0;
+	p2=(print_orientation == false) ? 1 : 0;
   
-  translate(p2*[z_motor_center[x]+z_linear_to_screw_separation/2, 0, x_axis_height])
+	translate(p2*[z_motor_center[x]+z_linear_to_screw_separation/2, 0, x_axis_height])
+	rotate(p1*[0, 90, 0])
+	translate(p1*[-x_end_max[x], 0, 0])
 	difference()
 	{
 		akimbo_x_end_solid(constrained, motor_bracket, idler_bracket);
-		akimbo_x_end_void(constrained, motor_bracket, idler_bracket);
+		render(convexity=8) akimbo_x_end_void(constrained, motor_bracket, idler_bracket);
 	}
 }
+
+module z_extrusion(clearance_r = 0, clearance_z = 0)
+{
+	translate([0, 0, z_screw_clamp_center[z]])
+	linear_extrude(height=z_screw_clamp_length+clearance_z, center=true, convexity=4)
+	{
+		barbell([z_bearing_clamp_center[x], z_bearing_clamp_center[y]], [-z_bearing_clamp_center[x], z_bearing_clamp_center[y]], bearing_clamp_radius+clearance_r, z_screw_clamp_radius+clearance_r, 30-clearance_r, 30-clearance_r, $fn=40);
+	}
+}
+
 
 module akimbo_x_end_solid(constrained, motor_bracket, idler_bracket)
 {
@@ -139,21 +166,49 @@ module akimbo_x_end_solid(constrained, motor_bracket, idler_bracket)
 		translate(z_bearing_clamp_center)
 		rotate([0, 0, -90])
 		octylinder(h=z_bearing_clamp_length, r=bearing_clamp_radius, center=true, $fn=40);
+
+		// Z endstop flag mount.
+
+		hull()
+		{
+			translate(z_bearing_clamp_center+[0, linear_bearing_radius+6/2, -(z_bearing_clamp_length/2-5)])
+			rotate([90, 0, 0])
+			cylinder(h=6, r=5, center=true);
+
+			translate(z_bearing_clamp_center+[bearing_clamp_radius-1/2, 0, -(z_bearing_clamp_length/2-5)])
+			rotate([0, 90, 0])
+			cylinder(h=1, r=5, center=true);
+		}
 	}
+	else
+	{
+		translate([z_bearing_clamp_center[x], z_bearing_clamp_center[y], z_screw_clamp_center[z]])
+		rotate([0, 0, -90])
+		octylinder(h=z_screw_clamp_length, r=bearing_clamp_radius, center=true, $fn=40);
+	}
+
 
 	// Z screw clamp.
 
-	translate([0, 0, z_screw_clamp_center[z]])
-	linear_extrude(height=z_screw_clamp_length, center=true, convexity=4)
-	{
-		barbell([z_bearing_clamp_center[x], z_bearing_clamp_center[y]], [-z_bearing_clamp_center[x], z_bearing_clamp_center[y]], bearing_clamp_radius, z_screw_clamp_radius, 30, 30, $fn=40);
-	}
+	z_extrusion();
 
 	if (motor_bracket == true)
 		motor_bracket_solid(constrained);
 
 	if (idler_bracket == true)
 		idler_bracket_solid();
+
+	// X endstop mount
+
+	for(i=[-1, 1])
+		hull()
+		{
+			translate(x_endstop_center+[0, i*endstop_bolt_spacing()/2, -linear_clamp_radius])
+			cylinder(h=linear_clamp_radius*2, r=4, $fn=24, center=true);
+
+			translate(x_endstop_center+[endstop_bolt_spacing(), 0, -linear_clamp_radius])
+			cylinder(h=1, r=4, $fn=24, center=true);
+		}
 }
 
 module akimbo_x_end_void(constrained, motor_bracket, idler_bracket)
@@ -167,11 +222,18 @@ module akimbo_x_end_void(constrained, motor_bracket, idler_bracket)
 			rotate([0, 90, 0])
 			cylinder(h=x_end_size[x]+.1, r=smooth_rod_diameter/2, center=true);
 
-			translate([0, -i*(smooth_rod_diameter/2+4), 0])
-			cube([x_end_size[x]+.1, 16, 1.5], center=true);
+			difference()
+			{
+				translate([0, -i*(smooth_rod_diameter/2+6), 0])
+				cube([x_end_size[x]+.1, 20, 1.5], center=true);
+
+				translate(-[x_end_center[x], i*x_linear_rod_offset, 0])
+				z_extrusion(clearance_z=.2);
+			}
 
 			translate([0, -i*(smooth_rod_diameter/2+4), 0])
-			cylinder(h=25, r=m3_diameter/2, $fn=12, center=true);
+			rotate([0, 0, 90])
+			octylinder(h=25, r=m3_diameter/2, $fn=12, center=true);
 
 			translate([0, -i*(smooth_rod_diameter/2+4), -5])
 			rotate([180, 0, 0])
@@ -179,7 +241,8 @@ module akimbo_x_end_void(constrained, motor_bracket, idler_bracket)
 			cylinder(h=10, r=m3_nut_diameter/2, $fn=6, center=false);
 
 			translate([0, -i*(smooth_rod_diameter/2+4), 5])
-			cylinder(h=10, r=m3_bolt_head_diameter/2, center=false);
+			rotate([0, 0, 90])
+			octylinder(h=10, r=m3_bolt_head_diameter/2, center=false);
 		}
 	}
 
@@ -192,6 +255,15 @@ module akimbo_x_end_void(constrained, motor_bracket, idler_bracket)
 	if (constrained == true)
 	{
 		lm8uu_void();
+
+		translate(z_bearing_clamp_center+[0, linear_bearing_radius+7/2, -(z_bearing_clamp_length/2-5)])
+		rotate([90, 0, 0])
+		rotate([0, 0, 90])
+		octylinder(h=7.1, r=m3_diameter/2, $fn=12, center=true);
+
+		translate(z_bearing_clamp_center+[0, linear_bearing_radius+4/2-1, -(z_bearing_clamp_length/2-5)])
+		rotate([90, 0, 0])
+		cylinder(h=4+2, r=m3_nut_diameter/2, $fn=6, center=true);
 	}
 	else
 	{
@@ -212,7 +284,8 @@ module akimbo_x_end_void(constrained, motor_bracket, idler_bracket)
 		cylinder(h=z2-z1+.1, r=z_screw_nut_radius, $fn=6, center=true);
 
 		translate([0, 0, (z2+z3)/2])
-		cylinder(h=z3-z2+.1, r=z_screw_radius+.5, center=true);
+		rotate([0, 0, 90])
+		octylinder(h=z3-z2+.1, r=z_screw_radius+.5, center=true);
 
 		translate([0, 0, (z3+z4)/2+.05])
 		rotate([0, 0, 90])
@@ -224,6 +297,21 @@ module akimbo_x_end_void(constrained, motor_bracket, idler_bracket)
 
 	if (idler_bracket == true)
 		idler_bracket_void();
+
+	// X endstop mount
+
+	translate(x_endstop_center+[0, 0, -linear_clamp_radius])
+	{
+		for(i=[-1, 1])
+			translate([0, i*endstop_bolt_spacing()/2, 0])
+			{
+				rotate([0, 0, 90])
+				octylinder(h=linear_clamp_radius*2+.1, r=m3_diameter/2, $fn=12, center=true);
+				translate([0, 0, -(linear_clamp_radius-2)-.05])
+				rotate([0, 0, 90])
+				cylinder(h=4+.1, r=m3_nut_diameter/2, $fn=6, center=true);
+			}
+	}
 }
 
 module motor_bracket_solid(constrained)
@@ -235,13 +323,7 @@ module motor_bracket_solid(constrained)
 	{
 		intersection()
 		{
-			union()
-			{
-				barbell(motor_brace_p1, motor_brace_p2, linear_clamp_radius, motor_brace_r2, 60, 40);
-				if (constrained)
-					*barbell(motor_brace_p2b, motor_brace_p3, 5, bearing_clamp_radius, 70, 50);
-				*polygon(motor_brace_poly);
-			}
+			barbell(motor_brace_p1, motor_brace_p2, linear_clamp_radius, motor_brace_r2, 60, 40);
 	
 			translate([-35, x_end_center[z]])
 			square([70, x_end_size[z]], center=true);
@@ -339,9 +421,10 @@ module lm8uu_void()
 			rotate([0, 0, 90])
 			octylinder(h=linear_bearing_length+.1, r=linear_bearing_radius, center=true);
 
-			#translate([-(linear_bearing_radius+4), 0, 0])
+			translate([-(linear_bearing_radius+4), 0, 0])
 			rotate([90, 0, 0])
 			{
+				rotate([0, 0, 90])
 				octylinder(h=10.1, r=m3_diameter/2, $fn=12, center=true);
 
 				translate([0, 0, 4])
@@ -359,22 +442,19 @@ module lm8uu_void()
 	c1 = 1.5;
 	c2 = 0.1;
 
-	translate([0, 0, z_screw_clamp_center[z]])
-	linear_extrude(height=z_screw_clamp_length+.1, center=true, convexity=4)
+	intersection()
 	{
-		intersection()
+		difference()
 		{
-			difference()
-			{
-				barbell([z_bearing_clamp_center[x], z_bearing_clamp_center[y]], [-z_bearing_clamp_center[x], z_bearing_clamp_center[y]], bearing_clamp_radius+c1, z_screw_clamp_radius+c1, 30-c1, 30-c1, $fn=40);
-
-				barbell([z_bearing_clamp_center[x], z_bearing_clamp_center[y]], [-z_bearing_clamp_center[x], z_bearing_clamp_center[y]], bearing_clamp_radius+c2, z_screw_clamp_radius+c2, 30-c2, 30-c2, $fn=40);
-			}
-			#translate([5, 0])
-			square([30, 30], center=true);
+			z_extrusion(clearance_r=1, clearance_z=.1);
+			z_extrusion(clearance_z=.2);
 		}
+
+		translate([0, 0, z_screw_clamp_center[z]])
+		cube([30, 30, z_screw_clamp_length+.1], center=true);
 	}
 
+	// Z endstop mount.
 }
 
 module roller_void()
@@ -437,20 +517,15 @@ module roller_void()
 	c1 = 1.5;
 	c2 = 0.1;
 
-	translate([0, 0, 0])
-	linear_extrude(height=20, center=true, convexity=4)
+	intersection()
 	{
-		intersection()
+		difference()
 		{
-			difference()
-			{
-				barbell([z_bearing_clamp_center[x], z_bearing_clamp_center[y]], [-z_bearing_clamp_center[x], z_bearing_clamp_center[y]], bearing_clamp_radius+c1, z_screw_clamp_radius+c1, 30-c1, 30-c1, $fn=40);
-
-				barbell([z_bearing_clamp_center[x], z_bearing_clamp_center[y]], [-z_bearing_clamp_center[x], z_bearing_clamp_center[y]], bearing_clamp_radius+c2, z_screw_clamp_radius+c2, 30-c2, 30-c2, $fn=40);
-			}
-			translate([5, 0])
-			square([30, 30], center=true);
+			z_extrusion(clearance_r=1, clearance_z=.1);
+			z_extrusion(clearance_z=.2);
 		}
+
+		cube([30, 30, 21], center=true);
 	}
 
 }
@@ -475,4 +550,19 @@ module x_end_annotations(print_orientation)
 		translate(motor_center) motor();
 		translate(belt_idler_center+[0, 0, -belt_idler_bearing_length/2]) cylinder(h=belt_idler_bearing_length*2, r=belt_idler_bearing_radius, center=true);
 	}
+
+  translate(p2*[z_motor_center[x]+z_linear_to_screw_separation/2, 0, x_axis_height])
+	translate(x_endstop_center)
+  {
+    optical_endstop();
+  }
+  
+	render(convexity=8)
+  translate(p2*[z_motor_center[x]+z_linear_to_screw_separation, 0, x_axis_height-100])
+  {
+    akimbo_z_endstop_clamp(print_orientation);
+    akimbo_z_endstop_glide(print_orientation);
+    akimbo_z_endstop_glide_annotations(print_orientation);
+  }
+
 }

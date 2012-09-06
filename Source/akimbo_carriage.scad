@@ -22,7 +22,9 @@ use <teardrops.scad>
 use <motor.scad>
 
 use <akimbo_extruder.scad>
-use <x_end.scad>
+use <akimbo_x_end.scad>
+
+print_orientation = true;
 
 carriage_length = 60;
 
@@ -37,18 +39,16 @@ connector_size = sizeof(connector_min, connector_max);
 */
 
 //rotate([0, 90, 0])
-akimbo_carriage();
-*translate([0, extruder_offset, bearing_clamp_radius+5])
-%akimbo_extruder(print_orientation=false);
+akimbo_carriage(print_orientation=print_orientation);
+akimbo_x_endstop_flag(print_orientation=print_orientation);
 
-module akimbo_carriage()
+*translate([0, extruder_offset, bearing_clamp_radius+5])
+	akimbo_extruder(print_orientation=print_orientation);
+
+*translate([-116, 0, -x_axis_height])
 {
-  rotate([0, 0, 180])
-	difference()
-	{
-		akimbo_carriage_solid();
-		akimbo_carriage_void();
-	}
+	%akimbo_x_end(print_orientation=print_orientation);
+	%x_end_annotations(print_orientation=print_orientation);
 }
 
 carriage_min = [-(carriage_length-10), -x_linear_rod_offset-bearing_clamp_radius, -bearing_clamp_radius];
@@ -67,11 +67,24 @@ belt_clamp_max = [belt_clamp_min[x]+lm8uu[bearing_length], belt_clamp_min[y]+16,
 belt_clamp_size = sizeof(belt_clamp_min, belt_clamp_max);
 belt_clamp_center = centerof(belt_clamp_min, belt_clamp_max);
 
+module akimbo_carriage(print_orientation=true)
+{
+	p1=(print_orientation == true) ? 1 : 0;
+	p2=(print_orientation == false) ? 1 : 0;
+
+	rotate(p2*[0, 0, 180])
+	rotate(p1*[180, 0, 0])
+	translate(p1*[0, 0, -connector_max[z]])
+	difference()
+	{
+		akimbo_carriage_solid();
+		akimbo_carriage_void();
+	}
+}
+
 module akimbo_carriage_solid()
 {
-			bc_r = -(linear_bearing_radius+4)-belt_clamp_min[z];
-
-echo(bc_r);
+	bc_r = -(linear_bearing_radius+4)-belt_clamp_min[z];
 
 	// Main body
 
@@ -177,12 +190,47 @@ module akimbo_carriage_void()
 			{
 				union()
 				{
+					translate([0, 0, 10])
+					rotate([0, 0, 180])
+					octylinder(h=lb_h+1+20, r=lb_r, $fn=24, center=true);
+				}
+
+				for(j=[-1])
+					scale([1, 1, j])
+					translate([0, 0, (lb_h+1)/2])
+					cylinder(h=1, r1=2.5, r2=3.5, $fn=24, center=true);
+			}
+
+			rotate([0, 0, 180])
+			octylinder(h=24, r=m3_diameter/2, $fn=12, center=true);
+
+			if (i==1)
+			{
+				translate([0, 0, -(3+lb_h/2+m3_nut_thickness/2)])
+				rotate([0, 0, 90])
+				{
+					cylinder(h=m3_nut_thickness, r=m3_nut_diameter/2, $fn=6, center=true);
+					translate([5, 0, 0])
+					cube([10, m3_nut_diameter*cos(30), m3_nut_thickness], center=true);
+				}
+			}
+			else
+			{
+				translate([0, 0, -(3+lb_h/2+8/2)])
+				cylinder(h=8, r=m3_nut_diameter/2, $fn=6, center=true);
+			}
+
+			/*
+			difference()
+			{
+				union()
+				{
 					translate([0, 0, 0])
 					rotate([0, 0, 180])
 					octylinder(h=lb_h+1, r=lb_r, $fn=24, center=true);
 
-					translate([0, i*3, 0])
-					cube([lb_r*2, 6, lb_h+1], center=true);
+					translate([0, i*5, 0])
+					cube([lb_r*2, 10, lb_h+1], center=true);
 				}
 				for(j=[-1, 1])
 					scale([1, 1, j])
@@ -212,6 +260,8 @@ module akimbo_carriage_void()
 				translate([0, 0, -(3+lb_h/2+8/2)])
 				cylinder(h=8, r=m3_nut_diameter/2, $fn=6, center=true);
 			}
+
+			*/
 
 		}
 	}
@@ -253,8 +303,58 @@ module akimbo_carriage_void()
 		{
 			cylinder(h=6.1, r=m3_diameter/2, $fn=12, center=true);
 			rotate([180, 0, 0])
-			#cylinder(h=8, r=m3_nut_diameter/2, $fn=6, center=false);
+			cylinder(h=8, r=m3_nut_diameter/2, $fn=6, center=false);
 		}
 
+	// Endstop mount.
+
+	translate([-40, x_linear_rod_offset, connector_max[z]-3])
+	{
+		cylinder(h=6.1, r=m3_diameter/2, $fn=12, center=true);
+		rotate([180, 0, 0])
+		cylinder(h=8, r=m3_nut_diameter/2, $fn=6, center=false);
+	}
 	
+}
+
+module akimbo_x_endstop_flag(print_orientation)
+{
+	p1=(print_orientation == true) ? 1 : 0;
+	p2=(print_orientation == false) ? 1 : 0;
+
+	rotate([0, 0, 180])
+	translate(p1*[0, 0, 10.5])
+	rotate(p1*[180, 0, 0])
+	translate(p2*[-40, x_linear_rod_offset, connector_max[z]])
+	difference()
+	{
+		akimbo_x_endstop_flag_solid();
+		akimbo_x_endstop_flag_void();
+	}
+}
+
+module akimbo_x_endstop_flag_solid()
+{
+	flag_min = [-15, -1.5/2, 1];
+	flag_max = [0, 1.5/2, 10.5];
+	flag_center = centerof(flag_min, flag_max);
+	flag_size = sizeof(flag_min, flag_max);
+
+	translate([0, 0, flag_max[z]/2])
+	cylinder(h=flag_max[z], r=5, center=true);
+
+	translate(flag_center)
+	cube(flag_size, center=true);
+
+	translate([flag_center[x], flag_center[y], flag_max[z]-1.5/2])
+	cube([flag_size[x], 10, 1.5], center=true);
+}
+
+module akimbo_x_endstop_flag_void()
+{
+	translate([0, 0, 2-layer_height])
+	cylinder(h=4, r=m3_diameter/2, $fn=12, center=true);
+
+	translate([0, 0, 5])
+	cylinder(h=10, r=m3_bolt_head_diameter/2, $fn=12, center=false);
 }

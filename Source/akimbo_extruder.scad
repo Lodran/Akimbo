@@ -15,8 +15,10 @@ include <more_configuration.scad>
 include <functions.scad>
 include <drive_wheels.scad>
 use <teardrops.scad>
+use <extruder_fan_shroud.scad>
 
-print_orientation = false;
+print_orientation = true;
+mirrored = true;
 
 use <barbell.scad>
 
@@ -122,17 +124,18 @@ nozzle_length = 5;
 nozzle_radius = 16.25/2;
 nozzle_center = [filament_center[x], filament_center[y], carriage_bracket_min[z]+nozzle_length/2];
 
-akimbo_extruder(print_orientation=print_orientation);
+akimbo_extruder(print_orientation=print_orientation, mirrored=mirrored);
 
-akimbo_extruder_idler(print_orientation=print_orientation);
+akimbo_extruder_idler(print_orientation=print_orientation, mirrored=mirrored);
 
-akimbo_extruder_annotations(print_orientation=print_orientation);
+%akimbo_extruder_annotations(print_orientation=print_orientation, mirrored=mirrored);
 
-module akimbo_extruder(print_orientation=true)
+module akimbo_extruder(print_orientation=true, mirrored=false)
 {
 	t1=(print_orientation==true) ? 1 : 0;
 	t2=(print_orientation==false) ? 1 : 0;
 
+	scale(mirrored ? [-1, 1, 1] : [1, 1, 1])
 	rotate([0, 0, 90])
 	translate(t1*[0, 0, -carriage_bracket_min[z]])
 	translate(t2*[-filament_center[x], -filament_center[y], -carriage_bracket_min[z]])
@@ -154,6 +157,7 @@ module akimbo_extruder_annotations(print_orientation=true)
 	t2=(print_orientation==false) ? 1 : 0;
 
 	color([.75, .75, .75])
+	scale(mirrored ? [-1, 1, 1] : [1, 1, 1])
 	rotate([0, 0, 90])
 	translate(t1*[0, 0, -carriage_bracket_min[z]])
 	translate(t2*[-filament_center[x], -filament_center[y], -carriage_bracket_min[z]])
@@ -168,8 +172,15 @@ module akimbo_extruder_annotations(print_orientation=true)
 
     translate(motor_center)
     rotate([-90, 0, 0])
-    rotate([0, 0, -motor_angle])
-    minebea_motor();
+    rotate([0, 0, -motor_angle+180])
+	{
+    		minebea_motor();
+	}
+
+    translate(motor_center)
+    rotate([-90, 0, 0])
+	rotate([0, 0, -90])
+	extruder_fan_shroud();
   }
 }
 
@@ -339,7 +350,7 @@ module drive_bracket_void()
 		translate([i*25, 0, 0])
 		cylinder(h=carriage_bracket_size[z]+.1, r=m3_diameter/2, $fn=12, center=true);
 
-	translate([nozzle_center[x], nozzle_center[y], carriage_bracket_max[z]-2+.05])
+	*translate([nozzle_center[x], nozzle_center[y], carriage_bracket_max[z]-2+.05])
 	for(i=[-1, 1])
 		translate([i*25, 0, 0])
 		cylinder(h=4+.1, r=m3_nut_diameter/2, $fn=6, center=true);
@@ -355,9 +366,10 @@ module akimbo_extruder_idler(print_orientation=true)
 	t1=(print_orientation == true) ? 1 : 0;
 	t2=(print_orientation == false) ? 1 : 0;
 
-	display_angle = 0;
+	display_angle = 10;
 
-  rotate([0, 0, 90])
+	scale(mirrored ? [-1, 1, 1] : [1, 1, 1])
+	rotate(t2*[0, 0, 90])
 	translate(t2*[-filament_center[x], -filament_center[y], -carriage_bracket_min[z]])
 	translate(t2*idler_hinge_center)
 	rotate(t2*[0, display_angle, 0])
@@ -497,6 +509,29 @@ module idler_bracket_void()
 		drive_bracket_profile(clearance=1);
 	}
 
+	translate([0, drive_bearing_min_y+2, 0])
+	{
+		rotate([90, 0, 0])
+		linear_extrude(height=5, center=true, convexity=4)
+			difference()
+			{
+				drive_bracket_profile(clearance=1);
+				
+				*rotate(45)
+				translate([10, 0])
+				square([20, drive_wheel_clearance_radius*2], center=true);
+
+				translate(idler_void_center)
+				square([idler_void_size[x], idler_void_size[y]], center=true);
+
+				translate(idler_void_2_center)
+				square([idler_void_2_size[x]-2, idler_void_2_size[y]], center=true);
+
+				translate([idler_hinge_center[x], idler_hinge_center[z]])
+				circle(idler_hinge_radius+1);
+			}
+	}
+
 	translate(idler_hinge_center)
 	rotate([90, 0, 0])
 	rotate([0, 0, idler_clamp_angle+90])
@@ -595,6 +630,9 @@ module minebea_motor(clearance=0)
 					translate([-8, 0, 0])
 					cube([16, (3.65+clearance)*2, mount_thickness+clearance], center=true);
 				}
+        rotate([0, 0, -120])
+        translate([35/2, 0, -35])
+        cube([10, 18, 15], center=true);
 		}
 
 		*union()
