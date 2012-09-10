@@ -10,12 +10,20 @@
 //
 // akimbo_x_end.scad
 //
+// Installation order:
+//    Nuts into nut traps.
+//    Roller Bearing and bolts.
+//    Idler bearings, bolt, washer and nut.
+//    Endstop, loosely.
+//    Motor, bolts and washers.
+
 
 print_orientation = true;
 constrained = true;
 
 include <more_configuration.scad>
 include <frame_computations.scad>
+include <vitamin.scad>
 
 use <functions.scad>
 use <barbell.scad>
@@ -24,6 +32,9 @@ use <motor.scad>
 use <pill.scad>
 use <akimbo_z_endstop_holder.scad>
 use <optical_endstop.scad>
+
+part_name = (constrained) ? "akimbo_x_end_left" : "akimbo_x_end_right";
+part_count = 1;
 
 belt_idler_bearing = 608_bearing;
 
@@ -93,7 +104,7 @@ motor_brace_p0 = [0, 0];
 motor_brace_p1 = [-x_linear_rod_offset, 0];
 motor_brace_p2 = [motor_bracket_p3[y]-motor_bracket_r1+motor_brace_r2, motor_center[z]+motor_brace_r2];
 motor_brace_p2b = motor_brace_p2+[0, -motor_brace_thickness];
-motor_brace_p3 = [0, x_end_min[z]+bearing_clamp_radius];
+motor_brace_p3 = [0, x_end_min[z]+z_bearing_clamp_radius];
 
 motor_brace_poly_1 = [motor_brace_p0,
                     motor_brace_p1,
@@ -129,18 +140,47 @@ module akimbo_x_end(print_orientation=true, constrained=false, motor_bracket=tru
 	translate(p1*[-x_end_max[x], 0, 0])
 	difference()
 	{
-		akimbo_x_end_solid(constrained, motor_bracket, idler_bracket);
-		render(convexity=8) akimbo_x_end_void(constrained, motor_bracket, idler_bracket);
+		render(convexity=8) akimbo_x_end_solid(constrained, motor_bracket, idler_bracket);
+		akimbo_x_end_void(constrained, motor_bracket, idler_bracket);
 	}
+}
+
+module z_extrusion_profile(clearance_r = 0)
+{
+	p1=[z_bearing_clamp_center[x], z_bearing_clamp_center[y]];
+	p2=[-z_bearing_clamp_center[x], z_bearing_clamp_center[y]];
+
+	r1=z_bearing_clamp_radius+clearance_r;
+	r2=z_screw_clamp_radius+clearance_r;
+
+	barbell(p1, p2, r1, r2, 30-clearance_r, 30-clearance_r, $fn=40);
+	translate(p1)
+	rotate(-90)
+	octircle(r=r1, $fn=40);
 }
 
 module z_extrusion(clearance_r = 0, clearance_z = 0)
 {
 	translate([0, 0, z_screw_clamp_center[z]])
 	linear_extrude(height=z_screw_clamp_length+clearance_z, center=true, convexity=4)
-	{
-		barbell([z_bearing_clamp_center[x], z_bearing_clamp_center[y]], [-z_bearing_clamp_center[x], z_bearing_clamp_center[y]], bearing_clamp_radius+clearance_r, z_screw_clamp_radius+clearance_r, 30-clearance_r, 30-clearance_r, $fn=40);
-	}
+  	z_extrusion_profile(clearance_r);
+}
+
+module z_extrusion_profile_plus(clearance_r = 0, clearance_z = 0)
+{
+	p1=[z_bearing_clamp_center[x], z_bearing_clamp_center[y]];
+	p2=[-z_bearing_clamp_center[x], z_bearing_clamp_center[y]];
+	p3=[z_bearing_clamp_center[x]-(linear_bearing_radius+4), -7];
+
+	r1=z_bearing_clamp_radius+clearance_r;
+	r2=z_screw_clamp_radius+clearance_r;
+	r3=5+clearance_r;
+
+	r4=7-clearance_r;
+
+	barbell(p1, p2, r1, r2, 30-clearance_r, 30-clearance_r, $fn=40);
+	barbell(p2, p3, r2, r3, r4, r4, $fn=40);
+	barbell(p3, p1, r3, r1, r4, r4, $fn=40);
 }
 
 
@@ -159,32 +199,70 @@ module akimbo_x_end_solid(constrained, motor_bracket, idler_bracket)
 		cube(x_end_size, center=true);
 	}
 
+
+	for(i=[-1, 1])
+	{
+		translate([x_end_center[x], i*x_linear_rod_offset, 0])
+		{
+			translate([0, -i*(smooth_rod_diameter/2+4), 5/2])
+			rotate([0, 0, 90])
+			cylinder(h=5, r1=m3_washer_diameter/2+5, r2=m3_washer_diameter/2, center=true);
+
+			translate([0, -i*(smooth_rod_diameter/2+4), -8/2])
+			rotate([0, 0, 90])
+			cylinder(h=8, r1=m3_nut_diameter/2+1.5, r2=m3_nut_diameter/2+1.5+8, center=true);
+		}
+	}
+
 	// Z bearing clamp.
+
+	lb_h = linear_roller_bearing[bearing_length];
+	lb_r = (linear_roller_bearing[bearing_body_diameter]+1)/2;
+
+	lb_x1 = lb_h/2+1;
+	lb_x2 = x_end_max[x]-z_bearing_clamp_center[x];
 
 	if (constrained == true)
 	{
 		translate(z_bearing_clamp_center)
 		rotate([0, 0, -90])
-		octylinder(h=z_bearing_clamp_length, r=bearing_clamp_radius, center=true, $fn=40);
+		octylinder(h=z_bearing_clamp_length, r=z_bearing_clamp_radius, center=true, $fn=40);
 
 		// Z endstop flag mount.
 
 		hull()
 		{
-			translate(z_bearing_clamp_center+[0, linear_bearing_radius+6/2, -(z_bearing_clamp_length/2-5)])
+			translate(z_bearing_clamp_center+[0, linear_bearing_radius+7/2, -(z_bearing_clamp_length/2-5)])
 			rotate([90, 0, 0])
-			cylinder(h=6, r=5, center=true);
+			cylinder(h=7, r=5, center=true);
 
-			translate(z_bearing_clamp_center+[bearing_clamp_radius-1/2, 0, -(z_bearing_clamp_length/2-5)])
-			rotate([0, 90, 0])
-			cylinder(h=1, r=5, center=true);
+			intersection()
+			{
+				translate(z_bearing_clamp_center+[z_bearing_clamp_radius-1/2, 0, -(z_bearing_clamp_length/2-5)])
+				rotate([0, 90, 0])
+				cylinder(h=1, r=7, center=true);
+
+				translate(z_bearing_clamp_center+[z_bearing_clamp_radius-1/2, 6, -(z_bearing_clamp_length/2-6)])
+				cube([1, 12, 12], center=true);
+			}
 		}
 	}
 	else
 	{
 		translate([z_bearing_clamp_center[x], z_bearing_clamp_center[y], z_screw_clamp_center[z]])
 		rotate([0, 0, -90])
-		octylinder(h=z_screw_clamp_length, r=bearing_clamp_radius, center=true, $fn=40);
+		octylinder(h=z_screw_clamp_length, r=z_bearing_clamp_radius, center=true, $fn=40);
+
+		// Roller bearing nut trap.
+
+		hull()
+		for(i=[-1, 1]) scale([1, i, 1])
+		translate([z_bearing_clamp_center[x], z_bearing_clamp_center[y]+ (actual_smooth_rod_diameter/2+lb_r), z_screw_clamp_center[z]])
+		{
+			translate([(lb_x1+lb_x2)/2, 0, 0])
+			rotate([0, 90, 0])
+			cylinder(h=lb_x2-lb_x1, r=m3_nut_diameter/2+2, center=true);
+		}
 	}
 
 
@@ -198,38 +276,34 @@ module akimbo_x_end_solid(constrained, motor_bracket, idler_bracket)
 	if (idler_bracket == true)
 		idler_bracket_solid();
 
-	// X endstop mount
+	// X endstop mount (s)
 
+	for(j=[-1, 1]) scale([1, j, 1])
 	for(i=[-1, 1])
 		hull()
 		{
 			translate(x_endstop_center+[0, i*endstop_bolt_spacing()/2, -linear_clamp_radius])
 			cylinder(h=linear_clamp_radius*2, r=4, $fn=24, center=true);
 
-			translate(x_endstop_center+[endstop_bolt_spacing(), 0, -linear_clamp_radius])
+			translate(x_endstop_center+[endstop_bolt_spacing()/2, 0, -linear_clamp_radius])
 			cylinder(h=1, r=4, $fn=24, center=true);
 		}
+
+	translate(x_endstop_center+[0, 0, -linear_clamp_radius])
+	cube([8, endstop_bolt_spacing(), (linear_clamp_radius-1.5)*2], center=true);
 }
 
 module akimbo_x_end_void(constrained, motor_bracket, idler_bracket)
 {
 	// X Linear rod.
 
+	render(convexity = 8)
 	for(i=[-1, 1])
 	{
 		translate([x_end_center[x], i*x_linear_rod_offset, 0])
 		{
 			rotate([0, 90, 0])
 			cylinder(h=x_end_size[x]+.1, r=smooth_rod_diameter/2, center=true);
-
-			difference()
-			{
-				translate([0, -i*(smooth_rod_diameter/2+6), 0])
-				cube([x_end_size[x]+.1, 20, 1.5], center=true);
-
-				translate(-[x_end_center[x], i*x_linear_rod_offset, 0])
-				z_extrusion(clearance_z=.2);
-			}
 
 			translate([0, -i*(smooth_rod_diameter/2+4), 0])
 			rotate([0, 0, 90])
@@ -242,15 +316,33 @@ module akimbo_x_end_void(constrained, motor_bracket, idler_bracket)
 
 			translate([0, -i*(smooth_rod_diameter/2+4), 5])
 			rotate([0, 0, 90])
-			octylinder(h=10, r=m3_bolt_head_diameter/2, center=false);
+			octylinder(h=10, r=m3_washer_diameter/2, center=false);
 		}
 	}
 
-	translate(z_bearing_clamp_center)
+	// X linear rod clamp relief cuts.
+
+	difference()
 	{
-		rotate([0, 0, 90])
-		octylinder(h=z_bearing_clamp_length+.1, r=smooth_rod_diameter/2+1, center=true);
+		translate([x_end_center[x], 0, 0])
+		cube([x_end_size[x]+.1, x_linear_rod_offset*2, 1.5], center=true);
+
+		linear_extrude(height=1.51, convexity=8, center=true)
+		z_extrusion_profile(clearance_r=0);
 	}
+
+	translate([0, 0, 5])
+	linear_extrude(height=10, convexity=8, center=true)
+	{
+		difference()
+		{
+			z_extrusion_profile(clearance_r=1, clearance_z=.1);
+			z_extrusion_profile(clearance_r=.01, clearance_z=.2);
+		}
+	}
+
+	vitamin(part_name, part_count, 2, M3x16, M3x20, "X Linear rod clamps");
+	vitamin(part_name, part_count, 2, M3_nylock, M3_nut, "X Linear rod clamps");
 
 	if (constrained == true)
 	{
@@ -261,13 +353,22 @@ module akimbo_x_end_void(constrained, motor_bracket, idler_bracket)
 		rotate([0, 0, 90])
 		octylinder(h=7.1, r=m3_diameter/2, $fn=12, center=true);
 
-		translate(z_bearing_clamp_center+[0, linear_bearing_radius+4/2-1, -(z_bearing_clamp_length/2-5)])
+		translate(z_bearing_clamp_center+[0, linear_bearing_radius+4.5/2-1, -(z_bearing_clamp_length/2-5)])
 		rotate([90, 0, 0])
-		cylinder(h=4+2, r=m3_nut_diameter/2, $fn=6, center=true);
+		cylinder(h=4.5+2, r=m3_nut_diameter/2, $fn=6, center=true);
+    
+		vitamin(part_name, part_count, 2, "Linear Bushing", "LM8UU", "Linear Bushings");
+		vitamin(part_name, part_count, 2, M3x16, M3x20, "Linear bushing clamps");
+		vitamin(part_name, part_count, 2, M3_nylock, M3_nut, "Linear bushing clamps");
+		vitamin(part_name, part_count, 1, M3x20, comment="Z endstop flag mount");
 	}
 	else
 	{
 		roller_void();
+
+		vitamin(part_name, part_count, 2, "683zz Bearing", comment="Linear Roller Bearings");
+		vitamin(part_name, part_count, 2, M3x12, M3x20, comment="Linear Roller Bearing mounts");
+		vitamin(part_name, part_count, 2, M3_nylock, M3_nut, comment="Linear Roller Bearing mounts");
 	}
 
 	// Z screw.
@@ -292,14 +393,19 @@ module akimbo_x_end_void(constrained, motor_bracket, idler_bracket)
 		cylinder(h=z4-z3+.1, r=z_screw_nut_radius, $fn=6, center=true);
 	}
 
+	vitamin(part_name, part_count, 1, M5_nut, comment="Z Axis drive nut (bottom)");
+	vitamin(part_name, part_count, 1, M5_nut, "Optional", comment="Z Axis anti-backlash nut (top)");
+	vitamin(part_name, part_count, 1, "Spring", "Optional", comment="Z Axis anti-backlash spring");
+
 	if (motor_bracket == true)
 		motor_bracket_void();
 
 	if (idler_bracket == true)
 		idler_bracket_void();
 
-	// X endstop mount
+	// X endstop mount (s)
 
+	for(i=[-1, 1]) scale([1, i, 1])
 	translate(x_endstop_center+[0, 0, -linear_clamp_radius])
 	{
 		for(i=[-1, 1])
@@ -307,11 +413,16 @@ module akimbo_x_end_void(constrained, motor_bracket, idler_bracket)
 			{
 				rotate([0, 0, 90])
 				octylinder(h=linear_clamp_radius*2+.1, r=m3_diameter/2, $fn=12, center=true);
-				translate([0, 0, -(linear_clamp_radius-2)-.05])
+
+				translate([0, 0, -(linear_clamp_radius-4)])
+				rotate([180, 0, 0])
 				rotate([0, 0, 90])
-				cylinder(h=4+.1, r=m3_nut_diameter/2, $fn=6, center=true);
+				cylinder(h=10, r=m3_nut_diameter/2, $fn=6, center=false);
 			}
 	}
+  
+	vitamin(part_name, part_count, 2, M3x25, comment="X Endstop Mount");
+  vitamin(part_name, part_count, 2, M3_nylock, M3_nut, comment="X Endstop Mount");
 }
 
 module motor_bracket_solid(constrained)
@@ -347,6 +458,7 @@ module motor_bracket_solid(constrained)
 
 module motor_bracket_void()
 {
+	render(convexity = 8)
 	for(i=[-1:1])
 	{
 		translate(motor_center+[0, 0, motor_brace_thickness/2])
@@ -355,6 +467,9 @@ module motor_bracket_void()
 		rotate([0, 0, -i*90])
 		hexypill(length=5, h=motor_brace_thickness+.1, r=m3_diameter/2, $fn=12, center=true);
 	}
+
+	vitamin(part_name, part_count, 1, "Nema 17", comment="X Axis Motor");
+	vitamin(part_name, part_count, 3, M3x12, comment="X Axis Motor mount");
 }
 
 module idler_bracket_solid()
@@ -366,34 +481,21 @@ module idler_bracket_solid()
 		translate(belt_idler_center+[0, 0, (belt_idler_bearing_length+motor_brace_thickness)/2+1])
 		cylinder(h=motor_brace_thickness, r=belt_idler_bearing_radius, center=true);
 
-		intersection()
-		{
-			union()
-			{
-				translate([x_end_min[x]+motor_brace_thickness/2, x_axis_offset+x_linear_rod_offset, 0])
-				rotate([0, 90, 0])
-				cylinder(h=motor_brace_thickness, r=linear_clamp_radius, center=true);
-
-				translate([x_end_max[x]-motor_brace_thickness/2, x_axis_offset+x_linear_rod_offset, 0])
-				rotate([0, 90, 0])
-				cylinder(h=motor_brace_thickness, r=linear_clamp_radius, center=true);
-			}
-
-			translate(x_end_center)
-			cube(x_end_size, center=true);
-		}
+		translate([x_end_center[x], x_axis_offset+x_linear_rod_offset, 0])
+		rotate([0, 90, 0])
+		cylinder(h=x_end_size[x], r=linear_clamp_radius, center=true);
 	}
 
 	translate(belt_idler_center+[0, 0, belt_idler_bearing_length/2])
 	cylinder(h=1, r1=belt_idler_bearing_radius-3, r2=belt_idler_bearing_radius-2, center=false);
-
-	
 }
 
 module idler_bracket_void()
 {
 	// Idler Mount
 
+	render(convexity = 8)
+	{
 	translate(belt_idler_center+[0, 0, (belt_idler_bearing_length-1)/2])
 	rotate([0, 0, 90])
 	octylinder(h=14, r=threaded_rod_diameter/2, center=false);
@@ -401,6 +503,12 @@ module idler_bracket_void()
 	translate(belt_idler_center+[0, 0, (belt_idler_bearing_length+1)/2+5])
 	rotate([0, 0, 90])
 	cylinder(h=20, r=m8_nut_diameter/2, $fn=6, center=false);
+	}
+  
+  vitamin(part_name, part_count, 2, "608zz Bearing", comment="X Axis belt idler");
+	vitamin(part_name, part_count, 1, M8x30, "M8x38 threaded rod + 1 M8 Nut", comment="X Axis belt idler");
+	vitamin(part_name, part_count, 1, M8_nut, comment="X Axis belt idler");
+
 }
 
 module lm8uu_void()
@@ -409,126 +517,189 @@ module lm8uu_void()
 
 	translate(z_bearing_clamp_center)
 	{
-		rotate([0, 0, 90])
-		octylinder(h=z_bearing_clamp_length, r=smooth_rod_diameter/2+1, center=true);
+		difference()
+		{
+			rotate([0, 0, 90])
+			octylinder(h=z_bearing_clamp_length+.1, r=linear_bearing_radius, center=true);
 
-		translate([-10, 0, 0])
-		cube([20, 1.5, z_bearing_clamp_length+.1], center=true);
+			translate([linear_bearing_radius, 0, 0])
+			cube([4, linear_bearing_radius*2, z_bearing_clamp_length-(linear_bearing_length*2)], center=true);
+		}
 
 		for(i=[-1, 1])
 		{
-			translate([0, 0, i*(z_bearing_clamp_length-linear_bearing_length+.1)/2])
+			*translate([0, 0, i*(z_bearing_clamp_length-linear_bearing_length+.1)/2])
 			rotate([0, 0, 90])
 			octylinder(h=linear_bearing_length+.1, r=linear_bearing_radius, center=true);
 
-			translate([-(linear_bearing_radius+4), 0, 0])
+			translate([-(linear_bearing_radius+4), 0, i*10])
 			rotate([90, 0, 0])
 			{
 				rotate([0, 0, 90])
 				octylinder(h=10.1, r=m3_diameter/2, $fn=12, center=true);
 
-				translate([0, 0, 4])
-				cylinder(h=10, r=m3_bolt_head_diameter/2, center=false);
-
 				translate([0, 0, -4])
 				rotate([180, 0, 0])
-				cylinder(h=10, r=m3_nut_diameter/2, $fn=6, center=false);
+				cylinder(h=10, r=m3_washer_diameter/2, center=false);
+
+				translate([0, 0, 4])
+				cylinder(h=8, r=m3_nut_diameter/2, $fn=6, center=false);
 			}
 		}
 	}
 
+	x1=-12;
+	x2=z_bearing_clamp_center[x]-linear_bearing_radius-layer_height;
+
+	translate([0, 0, z_bearing_clamp_center[z]])
+	linear_extrude(height=z_bearing_clamp_length+.1, convexity=4, center=true)
+	{
+		difference()
+		{
+			intersection()
+			{
+				difference()
+				{
+					z_extrusion_profile(clearance_r=1);
+					difference()
+					{
+						z_extrusion_profile(clearance_r=.01);
+
+						translate([(x1+x2)/2, 0])
+						square([x2-x1, 1.5], center=true);
+
+						translate([-5, -(5-1.5/2)])
+						square([1, 10], center=true);
+					}
+				}
+
+				translate([7.5, -7])
+				square([26, 16], center=true);
+			}
+
+			difference()
+			{
+				z_extrusion_profile(clearance_r=.01);
+				z_extrusion_profile(clearance_r=-layer_height);
+			}
+			
+		}
+
+	}
+
 	// Z screw clamp.
 
-	c1 = 1.5;
-	c2 = 0.1;
-
+	translate([0, 0, motor_center[z]])
+	linear_extrude(height=10, convexity=4, center=true)
 	intersection()
 	{
 		difference()
 		{
-			z_extrusion(clearance_r=1, clearance_z=.1);
-			z_extrusion(clearance_z=.2);
+			z_extrusion_profile_plus(clearance_r=1);
+			z_extrusion_profile(clearance_r=.01);
 		}
 
-		translate([0, 0, z_screw_clamp_center[z]])
-		cube([30, 30, z_screw_clamp_length+.1], center=true);
+		translate([7.5, -7])
+		square([26, 16], center=true);
 	}
-
-	// Z endstop mount.
 }
 
 module roller_void()
 {
+	translate(z_bearing_clamp_center)
+	rotate([0, 0, 90])
+	octylinder(h=z_bearing_clamp_length+.1, r=5, center=true);
+
 	// Z roller bearing (Loosly constrained end).
 
 	lb_h = linear_roller_bearing[bearing_length];
 	lb_r = linear_roller_bearing[bearing_body_diameter]/2;
 
-	x1 = (lb_h+1)/2;
-	x2 = x1+3;
-	x3 = x2+m3_nut_thickness;
-	x4 = 15;
-
-	x_1 = -x1;
-	x_2 = -x2;
-	x_3 = -15;
-
-	echo(x_3, x_2, x_1, x1, x2, x3, x4);
-
-	translate(z_bearing_clamp_center)
-	{
-		for(i=[-1, 1])
-			translate([0, i*(actual_smooth_rod_diameter/2+lb_r), 0])
-			{
-				rotate([0, -90, 0])
-				{
-					translate([0, 0, (x_3+x_2)/2])
-					cylinder(h=x_2-x_3, r=m3_bolt_head_diameter/2, center=true);
-
-					translate([0, 0, (x_2+x_1)/2+layer_height])
-					cylinder(h=x_1-x_2, r=m3_diameter/2, $fn=12, center=true);
-
-					translate([0, 0, (x_1+x1)/2])
-					cylinder(h=x1-x_1, r=lb_r+.5, center=true);
-
-					translate([0, 0, (x1+x2)/2+layer_height])
-					cylinder(h=x2-x1, r=m3_diameter/2, $fn=12, center=true);
-
-					translate([0, 0, (x2+x3)/2])
-					{
-						rotate([0, 0, 90])
-						cylinder(h=m3_nut_thickness, r=m3_nut_diameter/2, $fn=6, center=true);
-
-						translate([0, i*5, 0])
-						cube([m3_nut_diameter*cos(30), 10, m3_nut_thickness], center=true);
-					}
-
-					translate([0, 0, (x3+x4)/2+layer_height])
-					cylinder(h=x4-x3, r=m3_diameter/2, $fn=12, center=true);
-				}
-
-				translate([0, i*5, 0])
-				cube([lb_h+1, 10, (lb_r+.5)*2], center=true);
-			}
-	}
-
-	// X clamp flex cuts
-
-	c1 = 1.5;
-	c2 = 0.1;
-
-	intersection()
+	lb_x1 = -15;
+	lb_x2 = lb_h/2+1;
+  
+	for(i=[-1, 1]) scale([1, i, 1])
+		translate([z_bearing_clamp_center[x], z_bearing_clamp_center[y]+ (actual_smooth_rod_diameter/2+lb_r), z_screw_clamp_center[z]])
 	{
 		difference()
 		{
-			z_extrusion(clearance_r=1, clearance_z=.1);
-			z_extrusion(clearance_z=.2);
+			union()
+			{
+				translate([(lb_x1+lb_x2)/2, 0, 0])
+				rotate([0, 90, 0])
+				cylinder(h=lb_x2-lb_x1, r=lb_r+.5, $fn=24, center=true);
+
+				translate([(lb_x1+lb_x2)/2, 5, 0])
+				cube([lb_x2-lb_x1, 10, lb_r*2+1], center=true);
+
+				translate([lb_x1, 0, 0])
+				rotate([0, -90, 0])
+				octasphere(lb_r+.5, $fn=24);
+			}
+
+			translate([lb_x2-.5+.05, 0, 0])
+			rotate([0, 90, 0])
+			cylinder(h=1+.1, r1=2.5, r2=3.5, $fn=24, center=true);
 		}
 
-		cube([30, 30, 21], center=true);
-	}
+		translate([lb_x2+4, 0, 0])
+		rotate([0, 90, 0])
+		rotate([0, 0, 90])
+		cylinder(h=10, r=m3_nut_diameter/2, $fn=6, center=false);
 
+		translate([lb_x2+4-layer_height, 0, 0])
+		rotate([0, 90, 0])
+		rotate([180, 0, 0])
+		cylinder(h=10, r=m3_diameter/2, $fn=12, center=false);
+	}
 }
+
+akimbo_z_endstop_flag(print_orientation = print_orientation);
+
+module akimbo_z_endstop_flag(print_orientation)
+{
+	p1=(print_orientation == true) ? 1 : 0;
+	p2=(print_orientation == false) ? 1 : 0;
+
+	translate(p1*[-36, 18, 14+8.5])
+	rotate(p1*[180, 0, 0])
+	translate(p2*[z_motor_center[x]+z_linear_to_screw_separation/2, 0, x_axis_height])
+	translate(p2*(z_bearing_clamp_center+[0, linear_bearing_radius+7, -(z_bearing_clamp_length/2-5)]))
+	rotate(p2*[0, 0, 90])
+	rotate(p2*[0, 90, 0])
+	difference()
+	{
+		akimbo_z_endstop_flag_solid();
+		akimbo_z_endstop_flag_void();
+	}
+}	
+
+module akimbo_z_endstop_flag_solid()
+{
+	flag_min = [0, -1.5/2, 14];
+	flag_max = [26, 1.5/2, 14+8.5];
+	flag_center = centerof(flag_min, flag_max);
+	flag_size = sizeof(flag_min, flag_max);
+
+	translate([0, 0, flag_max[z]/2])
+	cylinder(h=flag_max[z], r=5, center=true);
+
+	translate(flag_center)
+	cube(flag_size, center=true);
+
+	translate([flag_center[x], flag_center[y], flag_max[z]-1.5/2])
+	cube([flag_size[x], 10, 1.5], center=true);
+}
+
+module akimbo_z_endstop_flag_void()
+{
+	translate([0, 0, -.05])
+	cylinder(h=13.5-layer_height+.1, r=m3_diameter/2, $fn=12, center=false);
+
+	translate([0, 0, 13.5])
+	cylinder(h=10, r=m3_bolt_head_diameter/2, $fn=12, center=false);
+}
+
 
 module x_annotations()
 {

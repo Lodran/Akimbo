@@ -17,11 +17,6 @@ include <dimensions.scad>
 include <functions.scad>
 use <motor.scad>
 
-release_quality=false;
-
-$fa = 1;
-$fs = (release_quality == true) ? 1 : 2;
-
 frame_horizontal_upper_rod_separation = 100;
 
 frame_triangle_edge_length = j1 + vertex_depth + frame_triangle_rod_offset*2;

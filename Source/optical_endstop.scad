@@ -6,7 +6,7 @@ function endstop_bolt_spacing() = 19;
 bolt_spacing = endstop_bolt_spacing();
 
 
-circuit_size = [16, 45, 1.5];
+circuit_size = [16, 30, 1.5];
 endstop_size = [6, 24, 13];
 endstop_void_size = [6, 3.5, 7.5];
 

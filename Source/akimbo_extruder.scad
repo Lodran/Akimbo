@@ -17,7 +17,7 @@ include <drive_wheels.scad>
 use <teardrops.scad>
 use <extruder_fan_shroud.scad>
 
-print_orientation = true;
+print_orientation = false;
 mirrored = true;
 
 use <barbell.scad>
@@ -37,7 +37,7 @@ bushing_radius = 8;
 carriage_length = 40;
 
 filament_radius = 1.5;
-filament_compression = 0.25;
+filament_compression = 0.5;
 
 filament_offset = [(drive_wheel[drive_wheel_hob_radius]-filament_compression/2+filament_radius),
 -(drive_wheel[drive_wheel_length]/2-drive_wheel[drive_wheel_hob_center]),
@@ -151,7 +151,7 @@ module akimbo_extruder(print_orientation=true, mirrored=false)
 	}
 }
 
-module akimbo_extruder_annotations(print_orientation=true)
+module akimbo_extruder_annotations(print_orientation=true, mirrored=false)
 {
 	t1=(print_orientation==true) ? 1 : 0;
 	t2=(print_orientation==false) ? 1 : 0;

@@ -55,8 +55,8 @@ x_axis_offset = 0;    // Offset the x axis 5mm in y
 
 x_linear_rod_offset = 25; // How far to offset the X linear rods from the center of the X.
 
-linear_clamp_radius = 10;
-bearing_clamp_radius = 12;
+linear_clamp_radius = 7;
+bearing_clamp_radius = 11;
 
 z_bearing_clamp_length = 60;
 z_screw_clamp_length = 45;
@@ -70,3 +70,8 @@ belt_offset_z = -17;
 belt_width = 6;
 belt_height = 1.5;
 belt_tooth_height = 1.5;
+
+release_quality = false;
+
+$fa = 1;
+$fs = (release_quality == true) ? 1 : 2;

@@ -66,6 +66,7 @@
 		05E9D40A15D8B5CD00A8B259 /* top_vertex.scad */ = {isa = PBXFileReference; lastKnownFileType = text; path = top_vertex.scad; sourceTree = "<group>"; };
 		05E9D40B15D8B5CD00A8B259 /* z_bottom_frame_clamp.scad */ = {isa = PBXFileReference; lastKnownFileType = text; path = z_bottom_frame_clamp.scad; sourceTree = "<group>"; };
 		05EE288715EC631E00EF4E9B /* akimbo_extruder.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = akimbo_extruder.scad; sourceTree = "<group>"; };
+		05F2C04C15FC7BF0006E5198 /* vitamin.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vitamin.scad; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -140,6 +141,7 @@
 				05979FB915F5E9AD00B16693 /* x_axis_plate.scad */,
 				05E9D40B15D8B5CD00A8B259 /* z_bottom_frame_clamp.scad */,
 				05E1A56515DB28CE0032B4DB /* z_linear_rod_clamp.scad */,
+				05F2C04C15FC7BF0006E5198 /* vitamin.scad */,
 			);
 			path = Source;
 			sourceTree = "<group>";

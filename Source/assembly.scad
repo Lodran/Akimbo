@@ -30,14 +30,16 @@ use <akimbo_extruder.scad>
 use <akimbo_carriage.scad>
 use <akimbo_x_end.scad>
 
+carriage_offset = 110;
+
 assembly();
 
-module assembly()
+module rp_assembly()
 {
-	color([.75, .75, .75]) frame_annotations();
-	color([.75, .75, .75]) x_annotations();
+	// Frame
 
-	*for(i=[-1, 1]) scale([i, 1, 1])
+	render(convexity=8)
+	for(i=[-1, 1]) scale([i, 1, 1])
 	{
 		for(j=[-1, 1]) scale([1, j, 1])
 			bottom_vertex(print_orientation=false);
@@ -56,37 +58,89 @@ module assembly()
       
 	}
 
+	// Z axis (X ends)
+
 	for(i=[0, 1]) rotate([0, 0, i*180])
 	{
+		render(convexity=8)
 		akimbo_x_end(print_orientation=false, constrained=(i==0), motor_bracket=true, idler_bracket=true);
-
-		color([.75, .75, .75]) x_end_annotations(print_orientation=false);
 	}
 
-	*translate([115, extruder_offset, x_axis_height])
+	// X axis (Carriages, Extruders)
+
+	translate([carriage_offset, extruder_offset, x_axis_height])
 	{
+		render(convexity=8)
 		akimbo_carriage(print_orientation=false);
+
+		akimbo_x_endstop_flag(print_orientation=false);
+
 		translate([0, 0, linear_clamp_radius+8])
 		{
-			akimbo_extruder(print_orientation=false);
-			akimbo_extruder_idler(print_orientation=false);
-
-			akimbo_extruder_annotations(print_orientation=false);
+			render(convexity=8)
+			{
+				akimbo_extruder(print_orientation=false);
+				akimbo_extruder_idler(print_orientation=false);
+			}
 		}
 	}
 
-	*translate([115-21, extruder_offset, x_axis_height])
+	translate([carriage_offset-21, extruder_offset, x_axis_height])
 	{
+		render(convexity=8)
 		rotate([0, 0, 180])
 		akimbo_carriage(print_orientation=false);
 
 		scale([-1, 1, 1])
 		translate([0, 0, linear_clamp_radius+8])
 		{
-			akimbo_extruder(print_orientation=false);
-			akimbo_extruder_idler(print_orientation=false);
-
-			akimbo_extruder_annotations(print_orientation=false);
+			render(convexity=8)
+			{
+				akimbo_extruder(print_orientation=false);
+				akimbo_extruder_idler(print_orientation=false);
+			}
 		}
 	}
+}
+
+module vitamin_assembly()
+{
+	// Frame
+
+	render(convexity=8) frame_annotations();
+	render(convexity=8) x_annotations();
+
+	// Z axis (X ends)
+
+	for(i=[0, 1]) rotate([0, 0, i*180])
+	{
+		render(convexity=8) x_end_annotations(print_orientation=false);
+	}
+
+	// X axis (Carriages, Extruders)
+
+	translate([carriage_offset, extruder_offset, x_axis_height])
+	{
+		translate([0, 0, linear_clamp_radius+8])
+		{
+			render(convexity=8) akimbo_extruder_annotations(print_orientation=false, mirrored=false);
+		}
+	}
+
+	translate([carriage_offset-21, extruder_offset, x_axis_height])
+	{
+		scale([-1, 1, 1])
+		translate([0, 0, linear_clamp_radius+8])
+		{
+			render(convexity=8) akimbo_extruder_annotations(print_orientation=false, mirrored=false);
+		}
+	}
+
+}
+
+
+module assembly()
+{
+	rp_assembly();
+	color([.75, .75, .75]) vitamin_assembly();
 }

@@ -82,7 +82,7 @@ bearing_rod_diameter = 4;
 128_bearing_clearance = [0.4, 0.4, 0.4, 4];
 
 lm8uu = [24, 15, 15, 0, 8];
-lm8uu_clearance = [0.7, 0.7, 0.7, 0, 0];
+lm8uu_clearance = [0.4, 0.4, 0.4, 0, 0];
 
 igus = [10, 10, 15, 1, 8];
 igus_clearance = [0.4, 0.4, 0.4, 0.4, 0];

@@ -4,7 +4,10 @@ use <teardrops.scad>
 use <functions.scad>
 use <optical_endstop.scad>
 
-print_orientation = false;
+$fa=1;
+$fs=1;
+
+print_orientation = true;
 
 // Tweakable parameters.
 
@@ -52,9 +55,7 @@ module akimbo_z_endstop_glide(print_orientation)
 	p1 = (print_orientation == true) ? 1 : 0;
 	p2 = (print_orientation == false) ? 1 : 0;
 
-	translate(p1*[-15, -30, 0])
-	rotate(p1*[0, 0, 180])
-
+	translate(p1*[-18, 18, 0])
 	translate(p2*[0, 0, 20])
 
 	difference()
