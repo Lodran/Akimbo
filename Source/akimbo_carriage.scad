@@ -24,7 +24,7 @@ use <motor.scad>
 use <akimbo_extruder.scad>
 use <akimbo_x_end.scad>
 
-print_orientation = false;
+print_orientation = true;
 
 carriage_length = 60;
 
@@ -326,7 +326,7 @@ module akimbo_x_endstop_flag(print_orientation)
 	p2=(print_orientation == false) ? 1 : 0;
 
 	rotate([0, 0, 180])
-	translate(p1*[0, 0, 8.5])
+	translate(p1*[-6, 0, 9])
 	rotate(p1*[180, 0, 0])
 	translate(p2*[-(45+.05), x_linear_rod_offset, connector_max[z]+.05])
 	rotate(p2*[0, 0, 180])

@@ -15,7 +15,7 @@ use <akimbo_x_end.scad>
 use <akimbo_extruder.scad>
 use <akimbo_carriage.scad>
 
-plate=1;
+plate=2;
 
 if (plate==1)
   x_ends();
@@ -50,7 +50,7 @@ module extruders()
 			render(convexity=8)
 			akimbo_extruder(print_orientation=true);
 
-			translate([-12, 35, 0])
+			translate([33, 35, 0])
 			render(convexity=8)
 			akimbo_extruder_idler(print_orientation=true);
 		}

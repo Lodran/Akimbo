@@ -1,10 +1,8 @@
-Add Y axis parts.
-  Add classic clamps.
-  Design roller bearing clamp.
-  Alter Linear bearing clamps to match height of roller bearing clamp.
-  Alter Linear bearing clamps to allow extra Y travel. 
-  
-Add Z endstop mount to constrained X end.
-Add Z endstop flag.
-Add Z endstop hardware.
+    Fix x_axis_plate_1.stl (roller bearing void position).
 
+    Fix akimbo_x_end_right_@_1.stl (remove endstop magnet mount).
+
+    Change extruder to use 3x7x3 roller bearing.
+    Swap nut trap with bolt head recess on extruder idler clamp.
+    Change dogbone on z_bottom_frame_clamp to match top_vertex.
+    Add Y axis belt clamp
