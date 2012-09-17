@@ -55,11 +55,10 @@ x_axis_offset = 0;    // Offset the x axis 5mm in y
 
 x_linear_rod_offset = 25; // How far to offset the X linear rods from the center of the X.
 
+y_linear_rod_offset = [80, 0, 12]; // Relative to center of the printer (x and y) and underside of the build platform (z).
+
 linear_clamp_radius = 7;
 bearing_clamp_radius = 11;
-
-z_bearing_clamp_length = 60;
-z_screw_clamp_length = 45;
 
 linear_roller_bearing = 683_bearing;
 linear_roller_bearing_clearance = 683_bearing_clearance;

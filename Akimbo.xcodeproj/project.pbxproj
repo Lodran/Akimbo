@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXFileReference section */
+		055E6F9B15FF090A002A3741 /* y_pillow_block.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = y_pillow_block.scad; sourceTree = "<group>"; };
 		0570A39415F8531000D3ADBF /* akimbo_z_endstop_holder.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = akimbo_z_endstop_holder.scad; sourceTree = "<group>"; };
 		0570A39615F8874000D3ADBF /* akimbo_carriage_@_2.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "akimbo_carriage_@_2.stl"; sourceTree = "<group>"; };
 		0570A39715F8874000D3ADBF /* akimbo_extruder_@_1.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "akimbo_extruder_@_1.stl"; sourceTree = "<group>"; };
@@ -67,6 +68,7 @@
 		05E9D40B15D8B5CD00A8B259 /* z_bottom_frame_clamp.scad */ = {isa = PBXFileReference; lastKnownFileType = text; path = z_bottom_frame_clamp.scad; sourceTree = "<group>"; };
 		05EE288715EC631E00EF4E9B /* akimbo_extruder.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = akimbo_extruder.scad; sourceTree = "<group>"; };
 		05F2C04C15FC7BF0006E5198 /* vitamin.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vitamin.scad; sourceTree = "<group>"; };
+		05F2C04D15FDC99B006E5198 /* x_axis_plate_1.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = x_axis_plate_1.stl; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -93,6 +95,7 @@
 			children = (
 				05BF88C515D8E77C005EA20C /* frame_plate_1.stl */,
 				05BF88C915D8E819005EA20C /* frame_plate_2.stl */,
+				05F2C04D15FDC99B006E5198 /* x_axis_plate_1.stl */,
 			);
 			path = Plates;
 			sourceTree = "<group>";
@@ -139,6 +142,7 @@
 				05E9D40915D8B5CD00A8B259 /* teardrops.scad */,
 				05E9D40A15D8B5CD00A8B259 /* top_vertex.scad */,
 				05979FB915F5E9AD00B16693 /* x_axis_plate.scad */,
+				055E6F9B15FF090A002A3741 /* y_pillow_block.scad */,
 				05E9D40B15D8B5CD00A8B259 /* z_bottom_frame_clamp.scad */,
 				05E1A56515DB28CE0032B4DB /* z_linear_rod_clamp.scad */,
 				05F2C04C15FC7BF0006E5198 /* vitamin.scad */,

@@ -15,7 +15,7 @@ use <akimbo_x_end.scad>
 use <akimbo_extruder.scad>
 use <akimbo_carriage.scad>
 
-plate=2;
+plate=1;
 
 if (plate==1)
   x_ends();
@@ -28,9 +28,13 @@ module x_ends()
 	for(i=[-1, 1])
 	{
 		rotate([0, 0, i*90+90])
-		translate([46, 15, 0])
+		translate([47, 7, 0])
 		akimbo_x_end(print_orientation=true, constrained=(i==1), motor_bracket=true, idler_bracket=true);
 	}
+  
+	rotate([0, 0, 180])
+	translate([47, 7, 0])
+  	akimbo_z_magnet_clamp(print_orientation=true);
 
 	%cube([150, 150, 1], center=true);
 }
@@ -59,7 +63,7 @@ module extruders()
 		translate([9+i*6, 31, 0])
 		rotate([0, 0, 90])
 		render(convexity=8)
-		akimbo_x_endstop_flag();
+		akimbo_x_endstop_flag(print_orientation=true);
 	}
 
 	%cube([150, 150, 1], center=true);

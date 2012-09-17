@@ -24,7 +24,7 @@ use <motor.scad>
 use <akimbo_extruder.scad>
 use <akimbo_x_end.scad>
 
-print_orientation = true;
+print_orientation = false;
 
 carriage_length = 60;
 
@@ -57,7 +57,7 @@ carriage_center = centerof(carriage_min, carriage_max);
 carriage_size = sizeof(carriage_min, carriage_max);
 
 connector_min = [carriage_min[x], -x_linear_rod_offset-3, carriage_max[z]-5];
-connector_max = [carriage_max[x], x_linear_rod_offset+3, carriage_max[z]+3];
+connector_max = [carriage_max[x], x_linear_rod_offset+3, linear_bearing_radius+7];
 connector_center = centerof(connector_min, connector_max);
 connector_size = sizeof(connector_min, connector_max);
 
@@ -137,17 +137,26 @@ module akimbo_carriage_solid()
 
 		linear_extrude(height=100, center=true, convexity=4)
 		{
-			barbell([connector_max[x]-bearing_clamp_radius, 25], [connector_max[x]-bearing_clamp_radius, -25], bearing_clamp_radius, bearing_clamp_radius, 14.5, 2000);
+			difference()
+			{
+				union()
+				{
+					barbell([connector_max[x]-bearing_clamp_radius, 25], [connector_max[x]-bearing_clamp_radius, -25], bearing_clamp_radius, bearing_clamp_radius, 14.5, 2000);
 
-			polygon([[connector_max[x]-21, x_linear_rod_offset],
-			          [connector_max[x], x_linear_rod_offset],
-			          [carriage_max[x], carriage_max[y]],
-			          [carriage_min[x], carriage_max[y]],
-			          [carriage_min[x], carriage_min[y]],
-			          [carriage_max[x], carriage_min[y]],
-			          [connector_max[x], -x_linear_rod_offset],
-			          [connector_max[x]-21, -x_linear_rod_offset],
-			          [connector_max[x]-21, 0]]);
+					polygon([[connector_max[x]-21, x_linear_rod_offset],
+				          [connector_max[x], x_linear_rod_offset],
+				          [carriage_max[x], carriage_max[y]],
+				          [carriage_min[x], carriage_max[y]],
+				          [carriage_min[x], carriage_min[y]],
+				          [carriage_max[x], carriage_min[y]],
+				          [connector_max[x], -x_linear_rod_offset],
+				          [connector_max[x]-21, -x_linear_rod_offset],
+				          [connector_max[x]-21, 0]]);
+				}
+				translate([0, 0])
+				scale([1.5, 1, 1])
+				circle(r=13.8);
+			}
 		}
 	}
 
@@ -158,7 +167,6 @@ module akimbo_carriage_solid()
 	translate([0, 0, n])
 	rotate([90, 0, 0])
 	cylinder(h=20, r=5+n, center=true);
-
 }
 
 module akimbo_carriage_void()
@@ -302,10 +310,11 @@ module akimbo_carriage_void()
 
 	// Endstop mount.
 
-	translate([-40, x_linear_rod_offset, connector_max[z]-3])
+	translate([-45, x_linear_rod_offset, connector_max[z]-3])
 	{
 		cylinder(h=6.1, r=m3_diameter/2, $fn=12, center=true);
 		rotate([180, 0, 0])
+		rotate([0, 0, 90])
 		cylinder(h=8, r=m3_nut_diameter/2, $fn=6, center=false);
 	}
 	
@@ -317,13 +326,14 @@ module akimbo_x_endstop_flag(print_orientation)
 	p2=(print_orientation == false) ? 1 : 0;
 
 	rotate([0, 0, 180])
-	translate(p1*[0, 0, 10.5])
+	translate(p1*[0, 0, 8.5])
 	rotate(p1*[180, 0, 0])
-	translate(p2*[-40, x_linear_rod_offset, connector_max[z]])
+	translate(p2*[-(45+.05), x_linear_rod_offset, connector_max[z]+.05])
+	rotate(p2*[0, 0, 180])
 	difference()
 	{
-		akimbo_x_endstop_flag_solid();
-		akimbo_x_endstop_flag_void();
+		akimbo_x_magnet_solid();
+		akimbo_x_magnet_void();
 	}
 }
 
@@ -351,4 +361,45 @@ module akimbo_x_endstop_flag_void()
 
 	translate([0, 0, 5])
 	cylinder(h=10, r=m3_bolt_head_diameter/2, $fn=12, center=false);
+}
+
+magnet_radius = 3.2/2+.05;
+magnet_thickness = 1.6*2+.1;
+
+magnet_clamp_min = [5, -3, -4.5];
+magnet_clamp_max = [magnet_clamp_min[x]+magnet_thickness+.5, 3, 9];
+magnet_clamp_center = centerof(magnet_clamp_min, magnet_clamp_max);
+magnet_clamp_size = sizeof(magnet_clamp_min, magnet_clamp_max);
+
+module akimbo_x_magnet_solid()
+{
+	hull()
+	{
+		translate([0, 0, magnet_clamp_max[z]/2])
+		cylinder(h=magnet_clamp_max[z], r=5, center=true);
+
+		translate([magnet_clamp_center[x], magnet_clamp_center[y], magnet_clamp_max[z]/2])
+		cube([magnet_clamp_size[x], magnet_clamp_size[y], magnet_clamp_max[z]], center=true);
+	}
+
+	translate(magnet_clamp_center)
+	cube(magnet_clamp_size, center=true);
+}
+
+module akimbo_x_magnet_void()
+{
+	bolt_length = 12;
+	bolt_offset = 6.5;
+
+	translate([0, 0, -.05])
+	rotate([0, 0, 90])
+	octylinder(h=bolt_length-bolt_offset+.1, r=m3_diameter/2, $fn=12, center=false);
+
+	translate([0, 0, (bolt_length-bolt_offset)])
+	rotate([0, 0, 90])
+	octylinder(h=10, r=m3_bolt_head_diameter/2, $fn=12, center=false);
+
+	#translate([magnet_clamp_min[x]+magnet_thickness/2-.05, magnet_clamp_center[y], magnet_clamp_min[z]+magnet_radius+1.5])
+	rotate([0, 90, 0])
+	cylinder(h=magnet_thickness+.1, r=magnet_radius, $fn=12, center=true);
 }

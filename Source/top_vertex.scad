@@ -25,6 +25,8 @@ use <barbell.scad>
 use <teardrops.scad>
 use <motor.scad>
 
+short_bracket = true;
+
 print_orientation = false;
 
 *frame_annotations();
@@ -47,7 +49,11 @@ motor_bracket_center_radius = 6;
 
 motor_bolt_hole_spacing = 1.2*25.4;
 
-motor_bracket_min = [j2/2, -upper_vertex_p2[y], upper_vertex_p2[z]-motor_bracket_end_radius];
+j2b = (short_bracket) ? z_motor_center[x]*2-motor_clearance : j2;
+
+echo(str("j2b = ", j2b));
+
+motor_bracket_min = [j2b/2, -upper_vertex_p2[y], upper_vertex_p2[z]-motor_bracket_end_radius];
 motor_bracket_max = [top_vertex_max[x], upper_vertex_p2[y], upper_vertex_p2[z]+motor_bracket_end_radius];
 motor_bracket_center = centerof(motor_bracket_min, motor_bracket_max);
 motor_bracket_size = sizeof(motor_bracket_min, motor_bracket_max);
@@ -224,15 +230,39 @@ module frame_void()
 
 module bone(h, r1, r2)
 {
+	rotate_extrude(convexity=16)
+	{
+		intersection()
+		{
+			union()
+			{
+				barbell([0, -(h/2-4)], [0, (h/2-4)], r1, r1, 50, 50);
+				for(i=[-1, 1])
+					translate([0, i*(h/2-2)])
+					square([r1*2, 4], center=true);
+			}
+
+			translate([r1/2, 0])
+			square([r1, h], center=true);
+		}
+	}
+}
+
+/*
+module bone(h, r1, r2)
+{
 	cylinder(h=h-.1, r=r2, center=true, $fn=32);
 
 	for(i=[-1, 1]) scale([1, 1, i])
 	{
-		translate([0, 0, h/2-4])
-		cylinder(h=8, r=r1, center=true, $fn=32);
+		hull()
+		{
+			translate([0, 0, h/2-4])
+			cylinder(h=8, r=r1, center=true, $fn=32);
 
-		translate([0, 0, 12])
-		cylinder(h=h-40, r1=0, r2=r1, center=true, $fn=32);
+			translate([0, 0, h/8])
+			cylinder(h=1, r=r2, center=true, $fn=32);
+		}
 	}
-	
 }
+*/

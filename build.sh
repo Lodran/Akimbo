@@ -33,6 +33,8 @@ cd Source
 
 /Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -D mirrored=true -o ../Parts/akimbo_extruder_mirrored_@_1.stl akimbo_extruder.scad
 
+/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -o ../Parts/y_pillow_block.stl y_pillow_block.scad
+
 # Create .stl files for plates.
 
 /Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D plate=1 -o ../Plates/frame_plate_1.stl frame_plate.scad
@@ -40,6 +42,8 @@ cd Source
 /Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D plate=2 -o ../Plates/frame_plate_2.stl frame_plate.scad
 
 /Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D plate=1 -o ../Plates/x_axis_plate_1.stl x_axis_plate.scad
+
+/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D plate=2 -o ../Plates/x_axis_plate_2.stl x_axis_plate.scad
 
 # Create .stl file for assembly.
 

@@ -19,8 +19,8 @@ module optical_endstop_solid()
 	translate(circuit_center)
 	cube(circuit_size, center=true);
 
-	translate(endstop_center)
-	cube(endstop_size, center=true);
+	translate(endstop_center+[0, 0, -.05])
+	cube(endstop_size+[0, 0, .1], center=true);
 }
 
 module optical_endstop_void()

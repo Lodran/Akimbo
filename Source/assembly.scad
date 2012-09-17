@@ -87,8 +87,8 @@ module rp_assembly()
 
 	translate([carriage_offset-21, extruder_offset, x_axis_height])
 	{
-		render(convexity=8)
 		rotate([0, 0, 180])
+		render(convexity=8)
 		akimbo_carriage(print_orientation=false);
 
 		scale([-1, 1, 1])

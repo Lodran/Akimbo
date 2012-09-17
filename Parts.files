@@ -1,9 +1,11 @@
 .
-./bottom_vertex_@_2.stl
-./bottom_vertex_mirrored_@_2.stl
-./top_vertex_@_2.stl
-./z_bottom_frame_clamp_@_1.stl
-./z_bottom_frame_clamp_mirrored_@_1.stl
-./z_linear_rod_clamp@_4.stl
+./akimbo_carriage_@_2.stl
 ./akimbo_extruder_@_1.stl
 ./akimbo_extruder_mirrored_@_1.stl
+./akimbo_x_end_left_@_1.stl
+./akimbo_x_end_right_@_1.stl
+./bottom_vertex_@_2.stl
+./bottom_vertex_mirrored_@_2.stl
+./z_bottom_frame_clamp_@_1.stl
+./z_bottom_frame_clamp_mirrored_@_1.stl
+./z_linear_rod_clamp_@_4.stl

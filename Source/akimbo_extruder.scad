@@ -17,8 +17,10 @@ include <drive_wheels.scad>
 use <teardrops.scad>
 use <extruder_fan_shroud.scad>
 
-print_orientation = false;
-mirrored = true;
+$fs=1;
+
+print_orientation = true;
+mirrored = false;
 
 use <barbell.scad>
 
@@ -37,7 +39,7 @@ bushing_radius = 8;
 carriage_length = 40;
 
 filament_radius = 1.5;
-filament_compression = 0.5;
+filament_compression = 0.75;
 
 filament_offset = [(drive_wheel[drive_wheel_hob_radius]-filament_compression/2+filament_radius),
 -(drive_wheel[drive_wheel_length]/2-drive_wheel[drive_wheel_hob_center]),
@@ -48,6 +50,8 @@ drive_wheel_center = [0, 0, 0];
 motor_center = drive_wheel_center-[0, 5+(drive_wheel[drive_wheel_length]+1)/2, 0];
 
 idler_center = filament_center+[(filament_radius+idler_bearing_radius-filament_compression/2), 0, 0];
+
+idler_clamp_clearance = 1.5;
 
 motor_mount_hole_spacing = 42;
 motor_bolt_offset = motor_mount_hole_spacing/2;		// offset from center of motor to bolt hole.
@@ -128,7 +132,7 @@ akimbo_extruder(print_orientation=print_orientation, mirrored=mirrored);
 
 akimbo_extruder_idler(print_orientation=print_orientation, mirrored=mirrored);
 
-%akimbo_extruder_annotations(print_orientation=print_orientation, mirrored=mirrored);
+*%akimbo_extruder_annotations(print_orientation=print_orientation, mirrored=mirrored);
 
 module akimbo_extruder(print_orientation=true, mirrored=false)
 {
@@ -261,7 +265,7 @@ module drive_bracket_void()
 
 	translate(motor_center+[0, 5/2, 0])
 	rotate([90, 0, 0])
-	octylinder(h=5.1, r=11/2, center=true); 
+	octylinder(h=5.1, r=10.5/2, center=true); 
 	
 	translate(drive_wheel_clearance_center)
 	{
@@ -361,12 +365,14 @@ idler_bracket_size_y = 17;
 
 idler_clamp_angle = 54;
 
+idler_bearing_fudge_factor = 0.25;	// Allows for adjustment of the idler bearing without modification to the extruder.
+
 module akimbo_extruder_idler(print_orientation=true)
 {
 	t1=(print_orientation == true) ? 1 : 0;
 	t2=(print_orientation == false) ? 1 : 0;
 
-	display_angle = 10;
+	display_angle = 0;
 
 	scale(mirrored ? [-1, 1, 1] : [1, 1, 1])
 	rotate(t2*[0, 0, 90])
@@ -470,43 +476,18 @@ module idler_bracket_solid()
 
 module idler_bracket_void()
 {
-	*translate(drive_bracket_center)
-	{
-		rotate([90, 0, 0])
-		linear_extrude(height=drive_bracket_size_y, center=true, convexity=4)
-		{
-			difference()
-			{
-				drive_bracket_profile(clearance=1);
-				
-				rotate(45)
-				translate([10, 0])
-				square([20, drive_wheel_clearance_radius*2], center=true);
-
-				translate(idler_void_center)
-				square([idler_void_size[x], idler_void_size[y]], center=true);
-
-				translate(idler_void_2_center)
-				square([idler_void_2_size[x]-2, idler_void_2_size[y]], center=true);
-
-				translate([idler_hinge_center[x], idler_hinge_center[z]])
-				circle(idler_hinge_radius+1);
-			}
-		}
-	}
-
 	translate(motor_brace_center)
 	{
 		rotate([90, 0, 0])
 		linear_extrude(height=motor_brace_size_y+1, center=true, convexity=4)
-		drive_bracket_profile(clearance=1);
+		drive_bracket_profile(clearance=idler_clamp_clearance);
 	}
 
 	translate([0, drive_bracket_max[y]-2.5/2, 0])
 	{
 		rotate([90, 0, 0])
 		linear_extrude(height=2.5, center=true, convexity=4)
-		drive_bracket_profile(clearance=1);
+		drive_bracket_profile(clearance=idler_clamp_clearance);
 	}
 
 	translate([0, drive_bearing_min_y+2, 0])
@@ -515,7 +496,7 @@ module idler_bracket_void()
 		linear_extrude(height=5, center=true, convexity=4)
 			difference()
 			{
-				drive_bracket_profile(clearance=1);
+				drive_bracket_profile(clearance=idler_clamp_clearance);
 				
 				*rotate(45)
 				translate([10, 0])
@@ -537,12 +518,12 @@ module idler_bracket_void()
 	rotate([0, 0, idler_clamp_angle+90])
 	octylinder(h=drive_bracket_size[y]+.1, r=m3_diameter/2, $fn=16, center=true);
 
-	translate([idler_center[x], drive_bracket_center[y], idler_center[z]])
+	translate([idler_center[x]-idler_bearing_fudge_factor, drive_bracket_center[y], idler_center[z]])
 	rotate([90, 0, 0])
 	rotate([0, 0, idler_clamp_angle+90])
 		octylinder(h=drive_bracket_size[y]+.1, r=m4_diameter/2, $fn=16, center=true);
 
-	translate(idler_center)
+	translate(idler_center+[-idler_bearing_fudge_factor, 0, 0])
 	rotate([90, 0, 0])
 	{
 		difference()
@@ -572,20 +553,12 @@ module idler_bracket_void()
 		{
 			hull()
 			{
-				cylinder(h=idler_bolt_length, r=(m3_diameter+.5)/2, center=true);
-				translate([-5, 0, 0])
-				cylinder(h=idler_bolt_length, r=(m3_diameter+.5)/2, center=true);
+				translate([1, 0, 0])
+				cylinder(h=idler_bolt_length, r=(m3_diameter+.5)/2, $fn=12, center=true);
+
+				translate([-1, 0, 0])
+				cylinder(h=idler_bolt_length, r=(m3_diameter+.5)/2, $fn=12, center=true);
 			}
-			*hull()
-			{
-				translate([0, 0, 12.5])
-				cylinder(h=5, r=m3_washer_diameter/2, center=false);
-
-				translate([-5, 0, 12.5])
-				cylinder(h=5, r=m3_washer_diameter/2, center=false);
-			}
-
-
 		}
 
 	hull()

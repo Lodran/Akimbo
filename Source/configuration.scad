@@ -59,7 +59,7 @@ m4_diameter = _m4_diameters[variant];
 m4_nut_diameter = _m4_nut_diameters[variant];
 
 m5_diameter = 5+bolt_slop;
-m5_nut_diameter = 7.85/cos(30)+nut_slop;
+m5_nut_diameter = _actual_m5_nut_diameter;
 m5_bolt_head_height = 4;
 
 m6_diameter = 6+bolt_slop;
