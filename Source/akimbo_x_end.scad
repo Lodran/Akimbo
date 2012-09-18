@@ -31,7 +31,7 @@ use <barbell.scad>
 use <teardrops.scad>
 use <motor.scad>
 use <pill.scad>
-use <akimbo_z_endstop_mount.scad>
+use <akimbo_endstop_mount.scad>
 use <optical_endstop.scad>
 
 part_name = (constrained) ? "akimbo_x_end_left" : "akimbo_x_end_right";
@@ -773,8 +773,8 @@ module x_end_annotations(print_orientation)
   {
 	render(convexity=8)
 	{
-		*akimbo_z_endstop_mount(print_orientation);
-		akimbo_z_endstop_annotations(print_orientation);
+		*akimbo_endstop_mount(print_orientation);
+		akimbo_endstop_annotations(print_orientation);
 	}
   }
 
