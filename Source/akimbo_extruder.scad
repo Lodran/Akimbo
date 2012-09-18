@@ -19,7 +19,7 @@ use <extruder_fan_shroud.scad>
 
 $fs=1;
 
-print_orientation = true;
+print_orientation = false;
 mirrored = false;
 
 use <barbell.scad>
@@ -33,6 +33,9 @@ drive_bearing_clearance = 115_bearing_clearance;
 
 idler_bearing_length = 624_bearing[bearing_length];
 idler_bearing_radius = 624_bearing[bearing_body_diameter]/2;
+
+idler_bearing_length = 683_bearing[bearing_length];
+idler_bearing_radius = 683_bearing[bearing_body_diameter]/2;
 
 bushing_clamp_radius = 11;
 bushing_radius = 8;
@@ -51,6 +54,7 @@ motor_center = drive_wheel_center-[0, 5+(drive_wheel[drive_wheel_length]+1)/2, 0
 
 idler_center = filament_center+[(filament_radius+idler_bearing_radius-filament_compression/2), 0, 0];
 
+idler_mount_radius = idler_bearing_radius+0.75;
 idler_clamp_clearance = 1.5;
 
 motor_mount_hole_spacing = 42;
@@ -114,7 +118,7 @@ carriage_bracket_center = centerof(carriage_bracket_min, carriage_bracket_max);
 carriage_bracket_size = sizeof(carriage_bracket_min, carriage_bracket_max);
 
 idler_void_min = [idler_center[x]-4, idler_hinge_center[z], 0];
-idler_void_max = [drive_bracket_max[x], drive_bracket_max[z], 0];
+idler_void_max = [drive_bracket_max[x], idler_center[z], 0];
 idler_void_center = centerof(idler_void_min, idler_void_max);
 idler_void_size = sizeof(idler_void_min, idler_void_max);
 
@@ -146,10 +150,8 @@ module akimbo_extruder(print_orientation=true, mirrored=false)
 	{
 	difference()
 	{
-		render(convexity=4)
 		drive_bracket_solid();
 
-		render(convexity=4)
 		drive_bracket_void();
 	}
 	}
@@ -209,7 +211,10 @@ module drive_bracket_profile(clearance=0)
 		}
 
 		translate([idler_center[x], idler_center[z]])
-		octircle(idler_bearing_radius+1.02-clearance, center=true);
+		if (clearance != 0)
+			circle(idler_mount_radius+.2);
+		else
+			circle(idler_mount_radius+1.02, center=true);
 	}		
 }
 
@@ -229,7 +234,6 @@ module drive_bracket_solid()
 
 	idler_hinge_length = 13;
 
-	render(convexity=2)
 	difference()
 	{
 		translate(carriage_bracket_center)
@@ -363,7 +367,7 @@ module drive_bracket_void()
 
 idler_bracket_size_y = 17;
 
-idler_clamp_angle = 54;
+idler_clamp_angle = 43;
 
 idler_bearing_fudge_factor = 0.25;	// Allows for adjustment of the idler bearing without modification to the extruder.
 
@@ -372,7 +376,7 @@ module akimbo_extruder_idler(print_orientation=true)
 	t1=(print_orientation == true) ? 1 : 0;
 	t2=(print_orientation == false) ? 1 : 0;
 
-	display_angle = 0;
+	display_angle = 30;
 
 	scale(mirrored ? [-1, 1, 1] : [1, 1, 1])
 	rotate(t2*[0, 0, 90])
@@ -398,7 +402,7 @@ module idler_bracket_profile()
 	r1 = idler_hinge_radius;
 
 	p2 = [idler_center[x], idler_center[z]];
-	r2 = idler_bearing_radius;
+	r2 = idler_mount_radius;
 
 	r3 = 3.5;
 	p3 = p2+rotate_vec([r2-r3, 0], idler_clamp_angle);
@@ -521,7 +525,7 @@ module idler_bracket_void()
 	translate([idler_center[x]-idler_bearing_fudge_factor, drive_bracket_center[y], idler_center[z]])
 	rotate([90, 0, 0])
 	rotate([0, 0, idler_clamp_angle+90])
-		octylinder(h=drive_bracket_size[y]+.1, r=m4_diameter/2, $fn=16, center=true);
+		octylinder(h=drive_bracket_size[y]+.1, r=m3_diameter/2, $fn=16, center=true);
 
 	translate(idler_center+[-idler_bearing_fudge_factor, 0, 0])
 	rotate([90, 0, 0])
@@ -529,19 +533,19 @@ module idler_bracket_void()
 		difference()
 		{
 			rotate([0, 0, idler_clamp_angle-90])
-			octylinder(h=idler_bearing_length+1, r=idler_bearing_radius+.5, center=true);
+			octylinder(h=idler_bearing_length+1, r=idler_mount_radius+.5, center=true);
 			for(i=[-1, 1])
 				scale([1, 1, i])
 				translate([0, 0, idler_bearing_length/2])
-				cylinder(h=1.1, r1=4, r2=5.1, center=false);
+				cylinder(h=1.1, r1=2.5, r2=3.5+.1, center=false);
 		}
 
-		translate([0, 0, idler_bracket_size_y/2-2+.05])
-		cylinder(h=4+.1, r=m4_bolt_head_diameter/2, center=true);
+		translate([0, 0, -((idler_bracket_size_y-3)/2+.05)])
+		cylinder(h=3+.1, r=m3_bolt_head_diameter/2, center=true);
 
-		translate([0, 0, -(idler_bracket_size_y/2-2+.05)])
+		translate([0, 0, ((idler_bracket_size_y-3)/2+.05)])
 		rotate([0, 0, idler_clamp_angle+90])
-		cylinder(h=4+.1, r=m4_nut_diameter/2, $fn=6, center=true);
+		cylinder(h=3+.1, r=m3_nut_diameter/2, $fn=6, center=true);
 	}
 
 
@@ -575,7 +579,6 @@ module minebea_motor(clearance=0)
 	motor_length = 45;
 	motor_radius = 35/2;
 	
-	render(convexity=4)
 	difference()
 	{
 		union()
@@ -623,7 +626,6 @@ module minebea_motor(clearance=0)
 
 module drive_wheel()
 {
-	render(convexity=4)
 	translate([0, 0, -drive_wheel[drive_wheel_length]/2])
 	difference()
 	{

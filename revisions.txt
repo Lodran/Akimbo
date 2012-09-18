@@ -33,3 +33,16 @@ Version 0.3
 
   Plates.zip
     Added frame_plate_1.stl
+
+Version 0.4
+
+  Added X and Y axis parts.
+  
+    top_vertex.scad
+      Eliminated the inside section, which was only there to make jigging the frame easier.
+      Improved the dogbone profile of the horizontal rod clamps.
+    
+    z_bottom_frame_clamp.scad
+      Improved the dogbone profile of the horizontal rod clamps.
+
+      

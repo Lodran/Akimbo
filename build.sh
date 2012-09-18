@@ -33,7 +33,7 @@ cd Source
 
 /Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -D mirrored=true -o ../Parts/akimbo_extruder_mirrored_@_1.stl akimbo_extruder.scad
 
-/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -o ../Parts/y_pillow_block.stl y_pillow_block.scad
+/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -o ../Parts/y_pillow_block_@_1.stl y_pillow_block.scad
 
 # Create .stl files for plates.
 

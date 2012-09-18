@@ -20,7 +20,7 @@
 
 
 print_orientation = true;
-constrained = true;
+constrained = false;
 
 include <more_configuration.scad>
 include <frame_computations.scad>
@@ -584,9 +584,9 @@ module lm8uu_void()
 
 module roller_void()
 {
-	translate(z_bearing_clamp_center(constrained))
+	translate(z_bearing_clamp_center(false))
 	rotate([0, 0, 90])
-	octylinder(h=z_bearing_clamp_length(constrained)+.1, r=5, center=true);
+	octylinder(h=z_bearing_clamp_length(false)+.1, r=5, center=true);
 
 	// Z roller bearing (Loosly constrained end).
 
@@ -632,7 +632,8 @@ module roller_void()
 	}
 }
 
-akimbo_z_magnet_clamp(print_orientation = print_orientation);
+if (constrained)
+  akimbo_z_magnet_clamp(print_orientation = print_orientation);
 
 module akimbo_z_magnet_clamp(print_orientation)
 {

@@ -45,9 +45,9 @@ module barbell (x1,x2,r1,r2,r3,r4)
 		}
 		
 		translate(x3)
-		circle(r=r3,$fa=5);
+		circle(r=r3);
 		translate(x4)
-		circle(r=r4,$fa=5);
+		circle(r=r4);
 	}
 }
 
@@ -57,7 +57,7 @@ module barbell_void_1 (x1,x2,r1,r2,r3,r4)
 	x4=triangulate (x2,x1,r2+r4,r1+r4);
 
 		translate(x3)
-		circle(r=r3,$fa=5);
+		circle(r=r3);
 }
 
 module rounded_triangle(x1, x2, x3, r1, r2, r3, r4, r5, r6)

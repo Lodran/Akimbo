@@ -1,8 +1,2 @@
-    Fix x_axis_plate_1.stl (roller bearing void position).
-
-    Fix akimbo_x_end_right_@_1.stl (remove endstop magnet mount).
-
-    Change extruder to use 3x7x3 roller bearing.
-    Swap nut trap with bolt head recess on extruder idler clamp.
-    Change dogbone on z_bottom_frame_clamp to match top_vertex.
-    Add Y axis belt clamp
+    Add Y axis belt clamps.
+    Add Y axis linear rod clamps.

@@ -35,12 +35,12 @@
 		05B2F61A16071C04006AE370 /* bottom_vertex_@_2.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "bottom_vertex_@_2.stl"; sourceTree = "<group>"; };
 		05B2F61B16071C04006AE370 /* bottom_vertex_mirrored_@_2.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "bottom_vertex_mirrored_@_2.stl"; sourceTree = "<group>"; };
 		05B2F61C16071C04006AE370 /* top_vertex_@_2.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "top_vertex_@_2.stl"; sourceTree = "<group>"; };
-		05B2F61D16071C04006AE370 /* y_pillow_block.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = y_pillow_block.stl; sourceTree = "<group>"; };
 		05B2F61E16071C04006AE370 /* z_bottom_frame_clamp_@_1.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "z_bottom_frame_clamp_@_1.stl"; sourceTree = "<group>"; };
 		05B2F61F16071C04006AE370 /* z_bottom_frame_clamp_mirrored_@_1.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "z_bottom_frame_clamp_mirrored_@_1.stl"; sourceTree = "<group>"; };
 		05B2F62016071C04006AE370 /* z_linear_rod_clamp_@_4.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "z_linear_rod_clamp_@_4.stl"; sourceTree = "<group>"; };
 		05B2F62116071F2C006AE370 /* x_axis_plate_2.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = x_axis_plate_2.stl; sourceTree = "<group>"; };
-		05BF88AC15D8C192005EA20C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		05B2F63116084109006AE370 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		05B2F632160848BD006AE370 /* y_pillow_block_@_1.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "y_pillow_block_@_1.stl"; sourceTree = "<group>"; };
 		05BF88B215D8CA3B005EA20C /* build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
 		05BF88BC15D8E2F0005EA20C /* Parts.files */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Parts.files; sourceTree = "<group>"; };
 		05BF88BD15D8E42E005EA20C /* Plates.files */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Plates.files; sourceTree = "<group>"; };
@@ -85,7 +85,7 @@
 				05B2F61A16071C04006AE370 /* bottom_vertex_@_2.stl */,
 				05B2F61B16071C04006AE370 /* bottom_vertex_mirrored_@_2.stl */,
 				05B2F61C16071C04006AE370 /* top_vertex_@_2.stl */,
-				05B2F61D16071C04006AE370 /* y_pillow_block.stl */,
+				05B2F632160848BD006AE370 /* y_pillow_block_@_1.stl */,
 				05B2F61E16071C04006AE370 /* z_bottom_frame_clamp_@_1.stl */,
 				05B2F61F16071C04006AE370 /* z_bottom_frame_clamp_mirrored_@_1.stl */,
 				05B2F62016071C04006AE370 /* z_linear_rod_clamp_@_4.stl */,
@@ -107,6 +107,7 @@
 		05E9D3F015D8B57300A8B259 = {
 			isa = PBXGroup;
 			children = (
+				05B2F63116084109006AE370 /* README.md */,
 				05BF88CE15D8EB07005EA20C /* revisions.txt */,
 				05BF88CD15D8EAF6005EA20C /* to_do.txt */,
 				05E9D3FC15D8B5CD00A8B259 /* Source */,
@@ -118,7 +119,6 @@
 				05BF88BD15D8E42E005EA20C /* Plates.files */,
 				05BF88BC15D8E2F0005EA20C /* Parts.files */,
 				05BF88B215D8CA3B005EA20C /* build.sh */,
-				05BF88AC15D8C192005EA20C /* README.md */,
 			);
 			sourceTree = "<group>";
 		};

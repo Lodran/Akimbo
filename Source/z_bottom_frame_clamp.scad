@@ -160,15 +160,25 @@ module frame_void()
 
 module bone(h, r1, r2)
 {
-	cylinder(h=h-.1, r=r2, center=true, $fn=32);
-
-	for(i=[-1, 1]) scale([1, 1, i])
+	rotate_extrude(convexity=16)
 	{
-		translate([0, 0, h/2-4])
-		cylinder(h=8, r=r1, center=true, $fn=32);
+		intersection()
+		{
+			union()
+			{
+				barbell([0, -(h/2-4)], [0, (h/2-4)], r1, r1, 175, 175);
+				for(i=[-1, 1])
+				{
+					translate([0, i*(h/2-2)])
+					square([r1*2, 4], center=true);
+				}
+			}
 
-		translate([0, 0, 12])
-		cylinder(h=h-40, r1=0, r2=r1, center=true, $fn=32);
+			translate([r1/2, 0])
+			square([r1, h], center=true);
+		}
 	}
-	
+
+	%cylinder(h=h, r=r2, center=true);
 }
+

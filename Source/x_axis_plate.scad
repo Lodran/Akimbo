@@ -15,7 +15,7 @@ use <akimbo_x_end.scad>
 use <akimbo_extruder.scad>
 use <akimbo_carriage.scad>
 
-plate=2;
+plate=1;
 
 if (plate==1)
   x_ends();
