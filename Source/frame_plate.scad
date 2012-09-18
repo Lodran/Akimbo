@@ -16,7 +16,7 @@ use <top_vertex.scad>
 use <z_bottom_frame_clamp.scad>
 use <z_linear_rod_clamp.scad>
 
-plate=2;
+plate=1;
 
 %translate([0, 0, 0.5])
 cube([150, 150, 1], center=true);
@@ -29,15 +29,18 @@ if (plate==2)
 
 module bottom_plate()
 {
-	translate([0, 37, 0])
-	for(i=[-1,1]) scale([i, 1, 1])
-	{
-		for(j=[-1,1])
-		{
-			translate([0, i*40+j*20, 0])
-			bottom_vertex(print_orientation=true);
-		}
-	}
+	translate([-10, -23])
+	bottom_vertex(print_orientation=true);
+
+	translate([10, 12])
+	bottom_vertex(print_orientation=true);
+
+
+	translate([0, 48])
+	bottom_vertex(print_orientation=true, mirrored=true);
+
+	translate([-20, 83])
+	bottom_vertex(print_orientation=true, mirrored=true);
 }
 
 module z_plate()
