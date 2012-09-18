@@ -22,7 +22,6 @@
 
 /* Begin PBXFileReference section */
 		055E6F9B15FF090A002A3741 /* y_pillow_block.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = y_pillow_block.scad; sourceTree = "<group>"; };
-		0570A39415F8531000D3ADBF /* akimbo_z_endstop_holder.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = akimbo_z_endstop_holder.scad; sourceTree = "<group>"; };
 		0570A3A315F88DAB00D3ADBF /* extruder_fan_shroud.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = extruder_fan_shroud.scad; sourceTree = "<group>"; };
 		05979FB715F5889600B16693 /* akimbo_x_end.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = akimbo_x_end.scad; sourceTree = "<group>"; };
 		05979FB815F5DD3300B16693 /* optical_endstop.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = optical_endstop.scad; sourceTree = "<group>"; };
@@ -41,6 +40,7 @@
 		05B2F62116071F2C006AE370 /* x_axis_plate_2.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = x_axis_plate_2.stl; sourceTree = "<group>"; };
 		05B2F63116084109006AE370 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		05B2F632160848BD006AE370 /* y_pillow_block_@_1.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "y_pillow_block_@_1.stl"; sourceTree = "<group>"; };
+		05B2F634160851B5006AE370 /* akimbo_endstop_mount.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = akimbo_endstop_mount.scad; sourceTree = "<group>"; };
 		05BF88B215D8CA3B005EA20C /* build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
 		05BF88BC15D8E2F0005EA20C /* Parts.files */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Parts.files; sourceTree = "<group>"; };
 		05BF88BD15D8E42E005EA20C /* Plates.files */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Plates.files; sourceTree = "<group>"; };
@@ -128,7 +128,7 @@
 				05979FB715F5889600B16693 /* akimbo_x_end.scad */,
 				05DA55EB15EFF8F400CE72ED /* akimbo_carriage.scad */,
 				05EE288715EC631E00EF4E9B /* akimbo_extruder.scad */,
-				0570A39415F8531000D3ADBF /* akimbo_z_endstop_holder.scad */,
+				05B2F634160851B5006AE370 /* akimbo_endstop_mount.scad */,
 				05E9D3FD15D8B5CD00A8B259 /* assembly.scad */,
 				05E9D3FE15D8B5CD00A8B259 /* barbell.scad */,
 				05E9D3FF15D8B5CD00A8B259 /* bottom_vertex.scad */,

@@ -14,8 +14,9 @@ cd Source
 
 /Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -D constrained=false -o ../Parts/akimbo_x_end_right_@_1.stl akimbo_x_end.scad
 
-
 /Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -o ../Parts/akimbo_carriage_@_2.stl akimbo_carriage.scad
+
+/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -o ../Parts/akimbo_endstop_mount_@_2.stl akimbo_endstop_mount.scad
 
 /Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -o ../Parts/top_vertex_@_2.stl top_vertex.scad
 
