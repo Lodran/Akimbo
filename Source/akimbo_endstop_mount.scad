@@ -4,9 +4,6 @@ use <teardrops.scad>
 use <functions.scad>
 use <optical_endstop.scad>
 
-$fa=1;
-$fs=1;
-
 print_orientation = false;
 
 smooth_rod_clamp_radius = 4;
@@ -19,23 +16,23 @@ clamp_body_radius = 8;
 clamp_body_size = [endstop_bolt_spacing, clamp_body_radius*2, 12];
 clamp_body_center = [0, 0, clamp_body_size[z]/2];
 
-akimbo_z_endstop_mount(print_orientation = print_orientation);
+akimbo_endstop_mount(print_orientation = print_orientation);
 
-%akimbo_z_endstop_annotations(print_orientation = print_orientation);
+%akimbo_endstop_annotations(print_orientation = print_orientation);
 
-module akimbo_z_endstop_mount(print_orientation)
+module akimbo_endstop_mount(print_orientation)
 {
 	p1 = (print_orientation == true) ? 1 : 0;
 	p2 = (print_orientation == false) ? 1 : 0;
 
 	difference()
 	{
-		akimbo_z_endstop_mount_solid();
-		akimbo_z_endstop_mount_void();
+		akimbo_endstop_mount_solid();
+		akimbo_endstop_mount_void();
 	}
 }
 
-module akimbo_z_endstop_mount_solid()
+module akimbo_endstop_mount_solid()
 {
 	translate(clamp_body_center)
 	cube(clamp_body_size, center=true);
@@ -69,7 +66,7 @@ module akimbo_z_endstop_mount_solid()
 		}
 }
 
-module akimbo_z_endstop_mount_void()
+module akimbo_endstop_mount_void()
 {
 	translate(clamp_body_center)
 	{
@@ -88,7 +85,7 @@ module akimbo_z_endstop_mount_void()
 	}
 }
 
-module akimbo_z_endstop_annotations(print_orientation)
+module akimbo_endstop_annotations(print_orientation)
 {
 	if (print_orientation == false)
 	{
