@@ -18,6 +18,9 @@ use <z_linear_rod_clamp.scad>
 
 plate=2;
 
+%translate([0, 0, 0.5])
+cube([150, 150, 1], center=true);
+
 if (plate==1)
   bottom_plate();
   
@@ -41,15 +44,20 @@ module z_plate()
 {
 	for(i=[-1, 1])
 	{
-		translate([i*35+3, 0, 0])
+		translate([i*40+5, 0, 0])
 		top_vertex(print_orientation=true);
 
-		translate([9, i*-55, 0])
+		translate([9, i*-45, 0])
 		scale([1, i, 1])
 		z_clamp(print_orientation=true);
 	}
 
-	for(i=[-1, 1]) for(j=[-1, 1]) translate([i*9, j*18, 0])
-	z_linear_clamp();
+	for(i=[-1, 1])
+	{
+		translate([i*9, 0, 0])
+		z_linear_clamp();
 
+		translate([i*60+1, 0, 0])
+		z_linear_clamp();
+	}
 }
