@@ -66,6 +66,7 @@ module y_pillow_block(print_orientation=print_orientation)
 	p1=(print_orientation == true) ? 1 : 0;
 	p2=(print_orientation == false) ? 1 : 0;
 
+  translate(p1*[0, 0, -y_pillow_block_body_min[y]])
 	rotate(p1*[90, 0, 0])
 
 	difference()
@@ -144,6 +145,7 @@ module y_roller_bearing_block()
 	p1=(print_orientation == true) ? 1 : 0;
 	p2=(print_orientation == false) ? 1 : 0;
 
+  translate(p1*[0, 0, -y_pillow_block_body_min[y]])
 	rotate(p1*[90, 0, 0])
 	difference()
 	{
