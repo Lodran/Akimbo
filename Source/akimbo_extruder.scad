@@ -400,7 +400,7 @@ module akimbo_extruder_idler(print_orientation=true)
 	translate(t2*idler_hinge_center)
 	rotate(t2*[0, display_angle, 0])
 	translate(t2*-idler_hinge_center)
-	translate(t1*[-20, -20, idler_mount_radius])
+	translate(t1*[-20, -20, idler_mount_radius+1])
 	rotate(t1*[0, 0, 90])
 	translate(t1*idler_center)
 	rotate(t1*[0, idler_clamp_angle+90, 0])
@@ -436,21 +436,27 @@ module idler_bracket_profile()
 
 			translate([(p3[x]+p4[x])/2, (p3[y]+p4[y])/2])
 			rotate(idler_clamp_angle)
-			translate([r3/2, 0])
+			translate([r3/2+1, 0])
 			square([r3, l4], center=true);
 
 			translate(p2)
 			rotate(idler_clamp_angle-90)
 			octircle(r2);
 
-			*translate(p4)
-			rotate(idler_clamp_angle-90)
-			octircle(r4);
+			translate(p4)
+			rotate(idler_clamp_angle-90-45)
+			translate([0, 5])
+			square([r4*2, 10], center=true);
+
+			translate(p1)
+			rotate(idler_clamp_angle-90+45)
+			translate([0, 10])
+			square([r1*2, 20], center=true);
 		}
 
 		translate(p2)
 		rotate(idler_clamp_angle)
-		translate([-12+r2, 8])
+		translate([-12+r2+1, 8])
 		square([24, 55], center=true);
 	}
 }
@@ -583,11 +589,11 @@ module idler_bracket_void()
 			}
 		}
 
-	hull()
+	#hull()
 	{
 		for(i=[-1, 1])
-			translate(filament_center+[i, 0, 0])
-			cylinder(h=100, r=filament_radius+.5, center=true);
+			translate(filament_center+[i, 0, 2])
+			cylinder(h=25, r=filament_radius+.5, $fn=12, center=false);
 	}
 }
 
