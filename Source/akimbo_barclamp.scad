@@ -1,8 +1,6 @@
 include <more_configuration.scad>
 
-x = 0;
-y = 1;
-z = 2;
+print_orientation = true;
 
 h_slop = .25;
 
@@ -93,7 +91,7 @@ module barclamp_top()
 	}
 }
 
-module barclamp()
+module barclamp(print_orientation=print_orientation)
 {
 	difference()
 	{
@@ -110,6 +108,4 @@ module barclamp()
 	}
 }
 
-for (i=[-1, 1]) for (j=[-1, 1])
-	translate([i*30, j*15, 0])
-	barclamp();
+barclamp();
