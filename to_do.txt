@@ -1,2 +1,7 @@
     Add Y axis belt clamps.
-    Add Y axis linear rod clamps.
+    Add Y axis motor mount.
+    
+    Add Y axis parts and annotations to assembly.scad
+    
+    Remove the extra Z endstop from assembly.scad.
+    Move the Z endstop on assembly.scad down to the bottom of the Z linear rod.
