@@ -82,7 +82,7 @@ idler_hinge_radius = 5;
 
 idler_bolt_offset = [-12, 4, 0];
 idler_bolt_length = 40;
-idler_bolt_angle = -43;
+idler_bolt_angle = motor_angle;
 
 idler_hinge_center = drive_bracket_center+[idler_hinge_offset[x], 0, idler_hinge_offset[y]];
 motor_mount_center = drive_bracket_center+[-idler_hinge_offset[x], 0, -idler_hinge_offset[y]];
@@ -135,6 +135,9 @@ akimbo_extruder(print_orientation=print_orientation, mirrored=mirrored);
 akimbo_extruder_idler(print_orientation=print_orientation, mirrored=mirrored);
 
 %akimbo_extruder_annotations(print_orientation=print_orientation, mirrored=mirrored);
+
+%translate([0, 0, .5])
+cube([100, 100, 1], center=true);
 
 module akimbo_extruder(print_orientation=true, mirrored=false)
 {
@@ -385,7 +388,7 @@ module akimbo_extruder_idler(print_orientation=true)
 	translate(t2*idler_hinge_center)
 	rotate(t2*[0, display_angle, 0])
 	translate(t2*-idler_hinge_center)
-	translate(t1*[-20, -20, idler_bearing_radius])
+	translate(t1*[-20, -20, idler_mount_radius])
 	rotate(t1*[0, 0, 90])
 	translate(t1*idler_center)
 	rotate(t1*[0, idler_clamp_angle+90, 0])
@@ -466,7 +469,7 @@ module idler_bracket_solid()
 		scale([1, i, 1])
 		translate(idler_bolt_offset)
 		{
-			hull()
+			*hull()
 			{
 				translate([0, 0, 13-4])
 				cylinder(h=4, r=m3_washer_diameter/2-.1, center=false);
@@ -535,7 +538,7 @@ module idler_bracket_void()
 		{
 			rotate([0, 0, idler_clamp_angle/2])
 			//octylinder(h=idler_bearing_length+1, r=idler_mount_radius+.5, center=true);
-      cube([idler_mount_radius*2+2, idler_mount_radius*2+1, idler_bearing_length+1], center=true);
+			cube([idler_mount_radius*2+2, idler_mount_radius*2+1, idler_bearing_length+1], center=true);
       
 			for(i=[-1, 1])
 				scale([1, 1, i])
