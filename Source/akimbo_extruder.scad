@@ -17,9 +17,7 @@ include <drive_wheels.scad>
 use <teardrops.scad>
 use <extruder_fan_shroud.scad>
 
-$fs=1;
-
-print_orientation = false;
+print_orientation = true;
 mirrored = false;
 
 use <barbell.scad>
@@ -84,7 +82,7 @@ idler_hinge_radius = 5;
 
 idler_bolt_offset = [-12, 4, 0];
 idler_bolt_length = 40;
-idler_bolt_angle = motor_angle;
+idler_bolt_angle = -43;
 
 idler_hinge_center = drive_bracket_center+[idler_hinge_offset[x], 0, idler_hinge_offset[y]];
 motor_mount_center = drive_bracket_center+[-idler_hinge_offset[x], 0, -idler_hinge_offset[y]];
@@ -312,7 +310,7 @@ module drive_bracket_void()
 
 	translate(idler_hinge_center)
 	rotate([90, 0, 0])
-	octylinder(h=drive_bracket_size[y]+.1, r=m3_diameter/2, $fn=16, center=true);
+	octylinder(h=drive_bracket_size[y]+.1, r=m3_diameter/2, $fn=12, center=true);
 
 	translate([idler_hinge_center[x], motor_center[y]+5-m3_nut_thickness/2+.05, idler_hinge_center[z]])
 	rotate([90, 0, 0])
@@ -326,7 +324,7 @@ module drive_bracket_void()
 		rotate([90, 0, 0])
 		rotate([0, 0, (-motor_angle+i*180)])
 		{
-			octylinder(h=drive_bracket_size[y]+.1, r=m3_diameter/2, $fn=16, center=true);
+			octylinder(h=drive_bracket_size[y]+.1, r=m3_diameter/2, $fn=12, center=true);
 
 			translate([0, 0, -(drive_bracket_size[y]-3)/2-.05])
 			cylinder(h=3+.1, r=m3_nut_diameter/2, $fn=6, center=true);
@@ -345,7 +343,9 @@ module drive_bracket_void()
 			scale([1, i, 1])
 			translate(idler_bolt_offset)
 			{
-				cylinder(h=10, r=(m3_diameter)/2, center=false);
+        rotate([0, 0, 90])
+				octylinder(h=10, r=(m3_diameter)/2, $fn=12, center=false);
+        
 				translate([0, 0, -3])
 				cylinder(h=14, r=m3_nut_diameter/2, $fn=6, center=true);
 			}
@@ -416,7 +416,7 @@ module idler_bracket_profile()
 	{
 		union()
 		{
-			barbell(p1, p2, r1, r2, 5, 10);
+			barbell(p1, p2, r1, r2, 15, 15);
 			barbell(p2, p4, r2, r4, 17, 100);
 
 			translate([(p3[x]+p4[x])/2, (p3[y]+p4[y])/2])
@@ -428,7 +428,7 @@ module idler_bracket_profile()
 			rotate(idler_clamp_angle-90)
 			octircle(r2);
 
-			translate(p4)
+			*translate(p4)
 			rotate(idler_clamp_angle-90)
 			octircle(r4);
 		}
@@ -436,7 +436,7 @@ module idler_bracket_profile()
 		translate(p2)
 		rotate(idler_clamp_angle)
 		translate([-12+r2, 8])
-		square([24, 45], center=true);
+		square([24, 55], center=true);
 	}
 }
 
@@ -521,20 +521,22 @@ module idler_bracket_void()
 	translate(idler_hinge_center)
 	rotate([90, 0, 0])
 	rotate([0, 0, idler_clamp_angle+90])
-	octylinder(h=drive_bracket_size[y]+.1, r=m3_diameter/2, $fn=16, center=true);
+	octylinder(h=drive_bracket_size[y]+.1, r=m3_diameter/2, $fn=12, center=true);
 
 	translate([idler_center[x]-idler_bearing_fudge_factor, drive_bracket_center[y], idler_center[z]])
 	rotate([90, 0, 0])
 	rotate([0, 0, idler_clamp_angle+90])
-		octylinder(h=drive_bracket_size[y]+.1, r=m3_diameter/2, $fn=16, center=true);
+		octylinder(h=drive_bracket_size[y]+.1, r=m3_diameter/2, $fn=12, center=true);
 
 	translate(idler_center+[-idler_bearing_fudge_factor, 0, 0])
 	rotate([90, 0, 0])
 	{
 		difference()
 		{
-			rotate([0, 0, idler_clamp_angle-90])
-			octylinder(h=idler_bearing_length+1, r=idler_mount_radius+.5, center=true);
+			rotate([0, 0, idler_clamp_angle/2])
+			//octylinder(h=idler_bearing_length+1, r=idler_mount_radius+.5, center=true);
+      cube([idler_mount_radius*2+2, idler_mount_radius*2+1, idler_bearing_length+1], center=true);
+      
 			for(i=[-1, 1])
 				scale([1, 1, i])
 				translate([0, 0, idler_bearing_length/2])
@@ -591,7 +593,7 @@ module minebea_motor(clearance=0)
 			cylinder(h=4.75, r=5+clearance, center=true);
 	
 			translate([0, 0, 18/2])
-			cylinder(h=18, r=5/2, $fn=20, center=true);
+			cylinder(h=18, r=5/2, center=true);
 
 			translate([0, 0, -(mount_thickness+clearance)/2])
 			for(i=[-1, 1])
@@ -633,11 +635,10 @@ module drive_wheel()
 		translate([0, 0, drive_wheel[drive_wheel_length]/2])
 		cylinder(h=drive_wheel[drive_wheel_length],
 		         r=drive_wheel[drive_wheel_radius],
-		         $fn=30,
 		         center=true);
 
 		translate([0, 0, drive_wheel[drive_wheel_hob_center]])
-		rotate_extrude(convexity=4, $fn=30)
+		rotate_extrude(convexity=4)
 			translate([drive_wheel[drive_wheel_radius]+1, 0])
 			circle(r=drive_wheel[drive_wheel_radius]-drive_wheel[drive_wheel_hob_radius]+1, $fn=12);
 	}
