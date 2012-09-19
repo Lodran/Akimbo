@@ -154,6 +154,12 @@ module y_roller_bearing_block()
 	}
 }
 
+endstop_flag_mount_offset = [0, -5, -(linear_bearing_radius+7)];
+endstop_flag_mount_min = endstop_flag_mount_offset-[5, 5, 0];
+endstop_flag_mount_max = endstop_flag_mount_offset+[5, 5, 7];
+endstop_flag_mount_center = centerof(endstop_flag_mount_min, endstop_flag_mount_max);
+endstop_flag_mount_size = sizeof(endstop_flag_mount_min, endstop_flag_mount_max);
+
 module y_roller_bearing_block_solid()
 {
 	translate(y_roller_bearing_block_body_center)
@@ -170,6 +176,8 @@ module y_roller_bearing_block_solid()
 		rotate([0, 0, 180])
 		octylinder(h=y_roller_bearing_block_bolt_mount_size[z], r=y_roller_bearing_block_bolt_mount_size[y]/2, center=true);
 
+	hull()
+	{
 	translate(y_roller_bearing_block_clamp_center)
 	rotate([0, 90, 0])
 	{
@@ -182,8 +190,12 @@ module y_roller_bearing_block_solid()
 				translate([-10, 0, 0])
 				cube([20, y_roller_bearing_block_clamp_size[y], y_roller_bearing_block_clamp_size[x]], center=true);
 
-			cube([y_roller_bearing_block_clamp_size[z], y_roller_bearing_block_body_size[y], y_roller_bearing_block_clamp_size[x]], center=true);
+			cube([y_roller_bearing_block_clamp_size[z], y_roller_bearing_block_body_size[y]-8.5, y_roller_bearing_block_clamp_size[x]], center=true);
 		}
+	}
+  
+	translate([0, y_roller_bearing_block_body_size[y]/2, 0]+endstop_flag_mount_center)
+	cylinder(h=endstop_flag_mount_size[z], r=endstop_flag_mount_size[y]/2, center=true);
 	}
 }
 
@@ -229,4 +241,12 @@ module y_roller_bearing_block_void()
 			rotate([0, 90, 0])
 			cylinder(h=10, r=m3_nut_diameter/2, $fn=6, center=false);
 		}
+
+	translate([0, y_roller_bearing_block_body_size[y]/2, 0]+endstop_flag_mount_center)
+	octylinder(h=endstop_flag_mount_size[z]+.1, r=m3_diameter/2, $fn=12, center=true);
+
+	translate([0, y_roller_bearing_block_body_size[y]/2, 0]+endstop_flag_mount_offset+[0, 0, endstop_flag_mount_size[z]-4.5])
+	cylinder(h=10, r=m3_nut_diameter/2, $fn=6, center=false);
+
+
 }
