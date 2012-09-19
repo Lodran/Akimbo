@@ -12,9 +12,7 @@
 //
 
 include <more_configuration.scad>
-
-$fa=1;
-$fs=2;
+include <dimensions.scad>
 
 motor_angle = 90;
 
@@ -23,10 +21,15 @@ motor_length = 45;
 motor_radius = 35/2;
 motor_bolt_offset = 42/2;		// offset from center of motor to bolt hole.
 
-extruder_fan_shroud();
+extruder_fan_shroud(print_orientation=true);
 
-module extruder_fan_shroud()
+module extruder_fan_shroud(print_orientation)
 {
+	p1 = (print_orientation==true) ? 1 : 0;
+	p2 = (print_orientation==false) ? 0 : 1;
+  
+	rotate(p1*[0, 90, 0])
+	translate(-[21, 0, -40/2-5])
 	difference()
 	{
 		extruder_fan_shroud_solid();
