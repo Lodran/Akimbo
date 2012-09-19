@@ -520,7 +520,7 @@ module lm8uu_clamp_relief_profile()
 
 module lm8uu_clamp_solid()
 {
-	translate(z_bearing_clamp_center(constrained)+[-(linear_bearing_radius+4), 0, 3])
+	translate(z_bearing_clamp_center(true)+[-(linear_bearing_radius+4), 0, 3])
 	rotate([90, 0, 0])
 	{
 		rotate([0, 0, 90])
@@ -538,15 +538,15 @@ module lm8uu_void()
 {
 	// LM8UU linear bushing/bearing pockets (Tightly constrained end).
 
-	translate(z_bearing_clamp_center(constrained))
+	translate(z_bearing_clamp_center(true))
 	{
 		difference()
 		{
 			rotate([0, 0, 90])
-			octylinder(h=z_bearing_clamp_length(constrained)+.1, r=linear_bearing_radius, center=true);
+			octylinder(h=z_bearing_clamp_length(true)+.1, r=linear_bearing_radius, center=true);
 
 			translate([linear_bearing_radius, 0, 0])
-			cube([4, linear_bearing_radius*2, z_bearing_clamp_length(constrained)-(linear_bearing_length*2)], center=true);
+			cube([4, linear_bearing_radius*2, z_bearing_clamp_length(true)-(linear_bearing_length*2)], center=true);
 		}
 
 			translate([-(linear_bearing_radius+4), 0, 3])
@@ -565,21 +565,21 @@ module lm8uu_void()
 	}
 
 	x1=-12;
-	x2=z_bearing_clamp_center(constrained)[x]-linear_bearing_radius-layer_height;
+	x2=z_bearing_clamp_center(true)[x]-linear_bearing_radius-layer_height;
 
 	translate([0, 0, 0.5])
 	linear_extrude(height=x_end_max[z]*2+.1, convexity=4, center=true)
 	lm8uu_clamp_relief_profile();
 
-	translate(z_bearing_clamp_center(constrained)+[-(linear_bearing_radius+4), 0, 3])
+	translate(z_bearing_clamp_center(true)+[-(linear_bearing_radius+4), 0, 3])
 	cube([12+.1, 1.5, 15], center=true);
 
 	translate([0, 0, motor_center[z]+motor_brace_thickness/2])
 	linear_extrude(height=motor_brace_thickness+.1, convexity=4, center=true)
 	lm8uu_clamp_relief_profile();
 
-	#translate([motor_bracket_p4[x]-motor_bracket_r4/2, 0, z_bearing_clamp_center(constrained)[z]])
-	cube([motor_bracket_r4+1, 1.5, z_bearing_clamp_length(constrained)+.1], center=true);
+	#translate([motor_bracket_p4[x]-motor_bracket_r4/2, 0, z_bearing_clamp_center(true)[z]])
+	cube([motor_bracket_r4+1, 1.5, z_bearing_clamp_length(true)+.1], center=true);
 }
 
 module roller_void()
@@ -597,7 +597,7 @@ module roller_void()
 	lb_x2 = lb_h/2+1;
   
 	for(i=[-1, 1]) scale([1, i, 1])
-		translate(z_bearing_clamp_center(constrained)+[0, (actual_smooth_rod_diameter/2+lb_r), 0])
+		translate(z_bearing_clamp_center(false)+[0, (actual_smooth_rod_diameter/2+lb_r), 0])
 	{
 		difference()
 		{
