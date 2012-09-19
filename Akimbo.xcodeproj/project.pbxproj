@@ -26,21 +26,26 @@
 		05979FB715F5889600B16693 /* akimbo_x_end.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = akimbo_x_end.scad; sourceTree = "<group>"; };
 		05979FB815F5DD3300B16693 /* optical_endstop.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = optical_endstop.scad; sourceTree = "<group>"; };
 		05979FB915F5E9AD00B16693 /* x_axis_plate.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = x_axis_plate.scad; sourceTree = "<group>"; };
-		05B2F61416071C04006AE370 /* akimbo_carriage_@_2.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "akimbo_carriage_@_2.stl"; sourceTree = "<group>"; };
-		05B2F61516071C04006AE370 /* akimbo_extruder_@_1.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "akimbo_extruder_@_1.stl"; sourceTree = "<group>"; };
-		05B2F61616071C04006AE370 /* akimbo_extruder_mirrored_@_1.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "akimbo_extruder_mirrored_@_1.stl"; sourceTree = "<group>"; };
-		05B2F61716071C04006AE370 /* akimbo_x_end_left_@_1.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "akimbo_x_end_left_@_1.stl"; sourceTree = "<group>"; };
-		05B2F61816071C04006AE370 /* akimbo_x_end_right_@_1.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "akimbo_x_end_right_@_1.stl"; sourceTree = "<group>"; };
-		05B2F61A16071C04006AE370 /* bottom_vertex_@_2.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "bottom_vertex_@_2.stl"; sourceTree = "<group>"; };
-		05B2F61B16071C04006AE370 /* bottom_vertex_mirrored_@_2.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "bottom_vertex_mirrored_@_2.stl"; sourceTree = "<group>"; };
-		05B2F61C16071C04006AE370 /* top_vertex_@_2.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "top_vertex_@_2.stl"; sourceTree = "<group>"; };
-		05B2F61E16071C04006AE370 /* z_bottom_frame_clamp_@_1.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "z_bottom_frame_clamp_@_1.stl"; sourceTree = "<group>"; };
-		05B2F61F16071C04006AE370 /* z_bottom_frame_clamp_mirrored_@_1.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "z_bottom_frame_clamp_mirrored_@_1.stl"; sourceTree = "<group>"; };
-		05B2F62016071C04006AE370 /* z_linear_rod_clamp_@_4.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "z_linear_rod_clamp_@_4.stl"; sourceTree = "<group>"; };
 		05B2F62116071F2C006AE370 /* x_axis_plate_2.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = x_axis_plate_2.stl; sourceTree = "<group>"; };
 		05B2F63116084109006AE370 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		05B2F632160848BD006AE370 /* y_pillow_block_@_1.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "y_pillow_block_@_1.stl"; sourceTree = "<group>"; };
 		05B2F634160851B5006AE370 /* akimbo_endstop_mount.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = akimbo_endstop_mount.scad; sourceTree = "<group>"; };
+		05B2F63516085386006AE370 /* akimbo_barclamp.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = akimbo_barclamp.scad; sourceTree = "<group>"; };
+		05B2F636160858CA006AE370 /* y_axis_plate.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = y_axis_plate.scad; sourceTree = "<group>"; };
+		05B2F6371608710D006AE370 /* akimbo_barclamp_@_4.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "akimbo_barclamp_@_4.stl"; sourceTree = "<group>"; };
+		05B2F6381608710D006AE370 /* akimbo_carriage_@_2.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "akimbo_carriage_@_2.stl"; sourceTree = "<group>"; };
+		05B2F6391608710D006AE370 /* akimbo_endstop_mount_@_2.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "akimbo_endstop_mount_@_2.stl"; sourceTree = "<group>"; };
+		05B2F63A1608710D006AE370 /* akimbo_extruder_@_1.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "akimbo_extruder_@_1.stl"; sourceTree = "<group>"; };
+		05B2F63B1608710D006AE370 /* akimbo_extruder_mirrored_@_1.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "akimbo_extruder_mirrored_@_1.stl"; sourceTree = "<group>"; };
+		05B2F63C1608710D006AE370 /* akimbo_x_end_left_@_1.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "akimbo_x_end_left_@_1.stl"; sourceTree = "<group>"; };
+		05B2F63D1608710D006AE370 /* akimbo_x_end_right_@_1.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "akimbo_x_end_right_@_1.stl"; sourceTree = "<group>"; };
+		05B2F63E1608710D006AE370 /* bottom_vertex_@_2.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "bottom_vertex_@_2.stl"; sourceTree = "<group>"; };
+		05B2F63F1608710D006AE370 /* bottom_vertex_mirrored_@_2.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "bottom_vertex_mirrored_@_2.stl"; sourceTree = "<group>"; };
+		05B2F6401608710D006AE370 /* top_vertex_@_2.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "top_vertex_@_2.stl"; sourceTree = "<group>"; };
+		05B2F6411608710D006AE370 /* y_pillow_block_@_1.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "y_pillow_block_@_1.stl"; sourceTree = "<group>"; };
+		05B2F6421608710D006AE370 /* z_bottom_frame_clamp_@_1.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "z_bottom_frame_clamp_@_1.stl"; sourceTree = "<group>"; };
+		05B2F6431608710D006AE370 /* z_bottom_frame_clamp_mirrored_@_1.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "z_bottom_frame_clamp_mirrored_@_1.stl"; sourceTree = "<group>"; };
+		05B2F6441608710D006AE370 /* z_linear_rod_clamp_@_4.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "z_linear_rod_clamp_@_4.stl"; sourceTree = "<group>"; };
+		05B2F64516087115006AE370 /* y_axis_plate.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = y_axis_plate.stl; sourceTree = "<group>"; };
 		05BF88B215D8CA3B005EA20C /* build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
 		05BF88BC15D8E2F0005EA20C /* Parts.files */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Parts.files; sourceTree = "<group>"; };
 		05BF88BD15D8E42E005EA20C /* Plates.files */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Plates.files; sourceTree = "<group>"; };
@@ -77,18 +82,20 @@
 		0570A39515F8874000D3ADBF /* Parts */ = {
 			isa = PBXGroup;
 			children = (
-				05B2F61416071C04006AE370 /* akimbo_carriage_@_2.stl */,
-				05B2F61516071C04006AE370 /* akimbo_extruder_@_1.stl */,
-				05B2F61616071C04006AE370 /* akimbo_extruder_mirrored_@_1.stl */,
-				05B2F61716071C04006AE370 /* akimbo_x_end_left_@_1.stl */,
-				05B2F61816071C04006AE370 /* akimbo_x_end_right_@_1.stl */,
-				05B2F61A16071C04006AE370 /* bottom_vertex_@_2.stl */,
-				05B2F61B16071C04006AE370 /* bottom_vertex_mirrored_@_2.stl */,
-				05B2F61C16071C04006AE370 /* top_vertex_@_2.stl */,
-				05B2F632160848BD006AE370 /* y_pillow_block_@_1.stl */,
-				05B2F61E16071C04006AE370 /* z_bottom_frame_clamp_@_1.stl */,
-				05B2F61F16071C04006AE370 /* z_bottom_frame_clamp_mirrored_@_1.stl */,
-				05B2F62016071C04006AE370 /* z_linear_rod_clamp_@_4.stl */,
+				05B2F6371608710D006AE370 /* akimbo_barclamp_@_4.stl */,
+				05B2F6381608710D006AE370 /* akimbo_carriage_@_2.stl */,
+				05B2F6391608710D006AE370 /* akimbo_endstop_mount_@_2.stl */,
+				05B2F63A1608710D006AE370 /* akimbo_extruder_@_1.stl */,
+				05B2F63B1608710D006AE370 /* akimbo_extruder_mirrored_@_1.stl */,
+				05B2F63C1608710D006AE370 /* akimbo_x_end_left_@_1.stl */,
+				05B2F63D1608710D006AE370 /* akimbo_x_end_right_@_1.stl */,
+				05B2F63E1608710D006AE370 /* bottom_vertex_@_2.stl */,
+				05B2F63F1608710D006AE370 /* bottom_vertex_mirrored_@_2.stl */,
+				05B2F6401608710D006AE370 /* top_vertex_@_2.stl */,
+				05B2F6411608710D006AE370 /* y_pillow_block_@_1.stl */,
+				05B2F6421608710D006AE370 /* z_bottom_frame_clamp_@_1.stl */,
+				05B2F6431608710D006AE370 /* z_bottom_frame_clamp_mirrored_@_1.stl */,
+				05B2F6441608710D006AE370 /* z_linear_rod_clamp_@_4.stl */,
 			);
 			path = Parts;
 			sourceTree = "<group>";
@@ -100,6 +107,7 @@
 				05BF88C915D8E819005EA20C /* frame_plate_2.stl */,
 				05F2C04D15FDC99B006E5198 /* x_axis_plate_1.stl */,
 				05B2F62116071F2C006AE370 /* x_axis_plate_2.stl */,
+				05B2F64516087115006AE370 /* y_axis_plate.stl */,
 			);
 			path = Plates;
 			sourceTree = "<group>";
@@ -129,6 +137,7 @@
 				05DA55EB15EFF8F400CE72ED /* akimbo_carriage.scad */,
 				05EE288715EC631E00EF4E9B /* akimbo_extruder.scad */,
 				05B2F634160851B5006AE370 /* akimbo_endstop_mount.scad */,
+				05B2F63516085386006AE370 /* akimbo_barclamp.scad */,
 				05E9D3FD15D8B5CD00A8B259 /* assembly.scad */,
 				05E9D3FE15D8B5CD00A8B259 /* barbell.scad */,
 				05E9D3FF15D8B5CD00A8B259 /* bottom_vertex.scad */,
@@ -146,6 +155,7 @@
 				05E9D40915D8B5CD00A8B259 /* teardrops.scad */,
 				05E9D40A15D8B5CD00A8B259 /* top_vertex.scad */,
 				05979FB915F5E9AD00B16693 /* x_axis_plate.scad */,
+				05B2F636160858CA006AE370 /* y_axis_plate.scad */,
 				055E6F9B15FF090A002A3741 /* y_pillow_block.scad */,
 				05E9D40B15D8B5CD00A8B259 /* z_bottom_frame_clamp.scad */,
 				05E1A56515DB28CE0032B4DB /* z_linear_rod_clamp.scad */,
