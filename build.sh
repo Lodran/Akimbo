@@ -18,6 +18,8 @@ cd Source
 
 /Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -o ../Parts/akimbo_endstop_mount_@_2.stl akimbo_endstop_mount.scad
 
+/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -o ../Parts/akimbo_barclamp_@_4.stl akimbo_barclamp.scad
+
 /Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -o ../Parts/top_vertex_@_2.stl top_vertex.scad
 
 /Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -o ../Parts/bottom_vertex_@_2.stl bottom_vertex.scad
@@ -36,6 +38,8 @@ cd Source
 
 /Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -o ../Parts/y_pillow_block_@_1.stl y_pillow_block.scad
 
+/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -o ../Parts/extruder_fan_shroud_@_2.stl extruder_fan_shroud.scad
+
 # Create .stl files for plates.
 
 /Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D plate=1 -o ../Plates/frame_plate_1.stl frame_plate.scad
@@ -45,6 +49,8 @@ cd Source
 /Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D plate=1 -o ../Plates/x_axis_plate_1.stl x_axis_plate.scad
 
 /Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D plate=2 -o ../Plates/x_axis_plate_2.stl x_axis_plate.scad
+
+/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -o ../Plates/y_axis_plate.stl y_axis_plate.scad
 
 # Create .stl file for assembly.
 
