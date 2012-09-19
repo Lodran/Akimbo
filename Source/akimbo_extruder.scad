@@ -134,9 +134,9 @@ akimbo_extruder(print_orientation=print_orientation, mirrored=mirrored);
 
 akimbo_extruder_idler(print_orientation=print_orientation, mirrored=mirrored);
 
-%akimbo_extruder_annotations(print_orientation=print_orientation, mirrored=mirrored);
+*%akimbo_extruder_annotations(print_orientation=print_orientation, mirrored=mirrored);
 
-%translate([0, 0, .5])
+*%translate([0, 0, .5])
 cube([100, 100, 1], center=true);
 
 module akimbo_extruder(print_orientation=true, mirrored=false)
@@ -149,12 +149,14 @@ module akimbo_extruder(print_orientation=true, mirrored=false)
 	translate(t1*[0, 0, -carriage_bracket_min[z]])
 	translate(t2*[-filament_center[x], -filament_center[y], -carriage_bracket_min[z]])
 	{
-	difference()
-	{
-		drive_bracket_solid();
+		difference()
+		{
+			drive_bracket_solid();
 
-		drive_bracket_void();
-	}
+			drive_bracket_void();
+		}
+
+		drive_bracket_patch();
 	}
 }
 
@@ -252,6 +254,16 @@ module drive_bracket_solid()
 	}
 }
 
+module drive_bracket_patch()
+{
+	// Fudge the wall between the motor and the pinch wheel, so slic3r can make a dual extrusion.
+
+	// I'd consider a similar patch on the other side, but it would push the bearing out of alignment,
+	//	and doesn't seem to be necessary.
+
+	translate(motor_center+[5.55, drive_wheel_clearance_min_y/2, 0])
+	cube([1, drive_wheel_clearance_min_y, 5], center=true);
+}
 
 module drive_bracket_void()
 {
