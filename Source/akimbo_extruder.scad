@@ -136,7 +136,7 @@ akimbo_extruder(print_orientation=print_orientation, mirrored=mirrored);
 
 akimbo_extruder_idler(print_orientation=print_orientation, mirrored=mirrored);
 
-*%akimbo_extruder_annotations(print_orientation=print_orientation, mirrored=mirrored);
+%akimbo_extruder_annotations(print_orientation=print_orientation, mirrored=mirrored);
 
 module akimbo_extruder(print_orientation=true, mirrored=false)
 {
@@ -186,6 +186,7 @@ module akimbo_extruder_annotations(print_orientation=true, mirrored=false)
     translate(motor_center)
     rotate([-90, 0, 0])
 	rotate([0, 0, -90])
+	rotate([0, 0, -motor_angle])
 	extruder_fan_shroud();
   }
 }
