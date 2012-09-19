@@ -14,6 +14,7 @@
 use <akimbo_x_end.scad>
 use <akimbo_extruder.scad>
 use <akimbo_carriage.scad>
+use <akimbo_endstop_mount.scad>
 
 plate=1;
 
@@ -35,6 +36,9 @@ module x_ends()
 	rotate([0, 0, 180])
 	translate([47, 7, 0])
   	akimbo_z_magnet_clamp(print_orientation=true);
+
+	translate([-10, -42, 0])
+	akimbo_endstop_mount(print_orientation=true);
 
 	%cube([150, 150, 1], center=true);
 }
