@@ -14,6 +14,9 @@
 //  http://www.thingiverse.com/thing:8252
 //
 
+include <more_configuration.scad> // Make sure $fs and $fa are set.
+include <dimensions.scad> // Make sure $fs and $fa are set.
+
 function triangulate (point1, point2, length1, length2) = 
 point1 + 
 length1*rotated(
@@ -75,8 +78,8 @@ module rounded_triangle(x1, x2, x3, r1, r2, r3, r4, r5, r6)
 			polygon(points = [x1, x4, x2, x5, x3, x6]);
 		}
 
-		translate(x4) circle(r=r4, $fa=5);
-		translate(x5) circle(r=r5, $fa=5);
-		translate(x6) circle(r=r6, $fa=5);
+		translate(x4) circle(r=r4);
+		translate(x5) circle(r=r5);
+		translate(x6) circle(r=r6);
 	}
 }
