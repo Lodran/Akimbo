@@ -20,7 +20,7 @@ frame_top_rod_length = 440;		// connectors for the top vertices.
 
 // Threaded rods (z screws)
 
-z_screw_length = 210;
+z_screw_length = 260;
 
 // Linear rods
 
