@@ -16,15 +16,12 @@ include <more_configuration.scad>
 $fa=1;
 $fs=2;
 
-motor_angle = 310;
+motor_angle = 90;
 
 mount_thickness = 5;
 motor_length = 45;
 motor_radius = 35/2;
 motor_bolt_offset = 42/2;		// offset from center of motor to bolt hole.
-
-*rotate([0, 0, motor_angle])
-%minebea_motor();
 
 extruder_fan_shroud();
 
@@ -53,7 +50,7 @@ module extruder_fan_shroud_solid()
 		for(i=[0:1])
 			rotate([0, 0, motor_angle+i*180])
 			translate([motor_bolt_offset, 0, -40/2-5])
-			cylinder(h=40, r=m3_washer_diameter/2+2, center=true);
+			cylinder(h=40, r=m3_washer_diameter/2+1, center=true);
 	}
 }
 
@@ -88,12 +85,16 @@ module extruder_fan_shroud_void()
 		rotate([0, 90, 0])
 		cylinder(h=10.1, r=m3_diameter/2, $fn=12, center=true);
 
-	translate([22-5-3.5, 0, -40/2-5])
+	translate([22-3.5, 0, -40/2-5])
 	for(i=[-1, 1]) for(j=[-1, 1])
 		translate([0, i*(20-4), j*(20-4)])
-		rotate([0, 90, 0])
+		rotate([0, -90, 0])
 		rotate([0, 0, 90])
-		cylinder(h=10, r=m3_nut_diameter/2, $fn=6, center=true);
+		{
+			cylinder(h=8.1, r=m3_nut_diameter/2, $fn=6, center=false);
+			translate([0, 0, 8])
+			cylinder(h=3, r1=m3_nut_diameter/2, r2=m3_nut_diameter/2-2, $fn=6, center=false);
+		}
 
 
 	for(i=[0:1])
@@ -104,9 +105,13 @@ module extruder_fan_shroud_void()
 			cylinder(h=40.1, r=m3_diameter/2, $fn=12, center=true);
 		}
 
-	translate([-(35/2)-4, 0, -40/2-5])
-	rotate([0, 0, 45])
-	cube([25, 25, 40.1], center=true);
+	for(i=[-1, 1])
+		rotate([0, 0, i*30])
+		translate([-(35/2)-4, i*2, -40/2-5])
+		cube([35, 24, 40.1], center=true);
+
+	translate([-12, 0, -50/2])
+	cube([2, 50, 45], center=true);
 
 }
 
