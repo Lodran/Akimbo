@@ -56,7 +56,7 @@ y_roller_bearing_block_clamp_size = [15, 12, 12];
 
 for(i=[-1, 1])
 	translate([0, i*16, 0])
-y_pillow_block();
+	y_pillow_block();
 
 translate([0, 48, 0])
 y_roller_bearing_block();
