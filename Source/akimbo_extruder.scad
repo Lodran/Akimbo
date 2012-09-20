@@ -115,7 +115,7 @@ carriage_bracket_min = [filament_center[x]-carriage_bracket_length/2, drive_brac
 carriage_bracket_center = centerof(carriage_bracket_min, carriage_bracket_max);
 carriage_bracket_size = sizeof(carriage_bracket_min, carriage_bracket_max);
 
-idler_void_min = [idler_center[x]-4, idler_hinge_center[z], 0];
+idler_void_min = [idler_hinge_center[x]-idler_hinge_radius-1, idler_hinge_center[z], 0];
 idler_void_max = [drive_bracket_max[x], idler_center[z], 0];
 idler_void_center = centerof(idler_void_min, idler_void_max);
 idler_void_size = sizeof(idler_void_min, idler_void_max);
@@ -307,7 +307,7 @@ module drive_bracket_void()
 		rotate([90, 0, 0])
 		linear_extrude(height=drive_bracket_size_y-7, center=true, convexity=4)
 		{
-				translate(idler_void_center)
+				#translate(idler_void_center)
 				square([idler_void_size[x], idler_void_size[y]], center=true);
 
 				translate([idler_hinge_center[x], idler_hinge_center[z]])
