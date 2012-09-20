@@ -307,7 +307,7 @@ module drive_bracket_void()
 		rotate([90, 0, 0])
 		linear_extrude(height=drive_bracket_size_y-7, center=true, convexity=4)
 		{
-				#translate(idler_void_center)
+				translate(idler_void_center)
 				square([idler_void_size[x], idler_void_size[y]], center=true);
 
 				translate([idler_hinge_center[x], idler_hinge_center[z]])
@@ -556,7 +556,7 @@ module idler_bracket_void()
 		{
 			rotate([0, 0, idler_clamp_angle/2])
 			//octylinder(h=idler_bearing_length+1, r=idler_mount_radius+.5, center=true);
-			cube([idler_mount_radius*2+2, idler_mount_radius*2+1, idler_bearing_length+1], center=true);
+			cube([idler_mount_radius*2+10, idler_mount_radius*2+1, idler_bearing_length+1], center=true);
       
 			for(i=[-1, 1])
 				scale([1, 1, i])
@@ -589,7 +589,7 @@ module idler_bracket_void()
 			}
 		}
 
-	#hull()
+	hull()
 	{
 		for(i=[-1, 1])
 			translate(filament_center+[i, 0, 2])
