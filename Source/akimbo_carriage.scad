@@ -24,6 +24,11 @@ use <motor.scad>
 use <akimbo_extruder.scad>
 use <akimbo_x_end.scad>
 
+include <vitamin.scad>
+
+part_name = "akimbo_carriage";
+part_count = 2;
+
 print_orientation = true;
 
 carriage_length = 60;
@@ -182,6 +187,8 @@ module akimbo_carriage_void()
 
 		translate(carriage_center+[0, x_linear_rod_offset, linear_bearing_radius-1])
 		cube([carriage_size[x]-linear_bearing_length*2, linear_bearing_radius*2, 2], center=true);
+    
+		vitamin(part_name, part_count, 2, "Linear Bushing", "LM8UU", "Linear Bushings");
 	}
 
 	// Back linear rod
@@ -253,6 +260,11 @@ module akimbo_carriage_void()
 		}
 	}
 
+  vitamin(part_name, part_count, 2, "683zz Bearing", comment="Linear Roller Bearings");
+  vitamin(part_name, part_count, 2, M3x12, M3x20, comment="Linear Roller Bearing mounts");
+  vitamin(part_name, part_count, 1, M3_nylock, M3_nut, comment="Linear Roller Bearing mount");
+  vitamin(part_name, part_count, 1, M3_nut, M3_nut, comment="Linear Roller Bearing mount");
+
 	// Belt and linear bearing clamps
 
 	translate([carriage_center[x], belt_clamp_center[y], belt_clamp_center[z]-layer_height])
@@ -298,6 +310,9 @@ module akimbo_carriage_void()
 			
 	}
 
+	vitamin(part_name, part_count, 2, M3x20, M3x20, comment="Belt clamps");
+	vitamin(part_name, part_count, 2, M3_nylock, M3_nut, comment="Belt Clamps");
+
 	// Extruder bolts.
 
 	for(i=[-1, 1])
@@ -307,6 +322,8 @@ module akimbo_carriage_void()
 			rotate([180, 0, 0])
 			cylinder(h=8, r=m3_nut_diameter/2, $fn=6, center=false);
 		}
+
+	vitamin(part_name, part_count, 2, M3_nylock, M3_nut, comment="Extruder Mounts");
 
 	// Endstop mount.
 
@@ -318,6 +335,8 @@ module akimbo_carriage_void()
 		cylinder(h=8, r=m3_nut_diameter/2, $fn=6, center=false);
 	}
 	
+	vitamin(part_name, part_count, 1, M3_nylock, M3_nut, comment="Endstop Flag mount");
+	vitamin(part_name, part_count, 1, M3x20, M3x20, comment="Endstop Flag (!!! Verify Length)");
 }
 
 module akimbo_x_endstop_flag(print_orientation)
