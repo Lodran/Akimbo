@@ -14,8 +14,8 @@
 //  http://www.thingiverse.com/thing:8252
 //
 
-include <more_configuration.scad> // Make sure $fs and $fa are set.
-include <dimensions.scad> // Make sure $fs and $fa are set.
+$fa=1;
+$fs=1;
 
 function triangulate (point1, point2, length1, length2) = 
 point1 + 
