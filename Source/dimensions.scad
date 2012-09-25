@@ -25,8 +25,8 @@ z_screw_length = 260;
 // Linear rods
 
 z_axis_linear_rod_length = 360;
-x_axis_linear_rod_length = 400;
-y_axis_linear_rod_length = 400;
+x_axis_linear_rod_length = 405;
+y_axis_linear_rod_length = 405;
 
 j1 = 290;						// vertex separation along edge of triangles.
 j2 = 234;						// vertex separation along bottom connectors.
