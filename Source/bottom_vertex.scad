@@ -27,6 +27,11 @@ use <functions.scad>
 use <barbell.scad>
 use <teardrops.scad>
 
+include <vitamin.scad>
+
+part_name = "bottom_vertex";
+part_count = 4;
+
 print_orientation = true;
 mirrored = false;
 
@@ -169,6 +174,11 @@ module bottom_vertex_void()
 			cube([10, foot_nut_diameter*cos(30), foot_nut_thickness], center=true);
 		}
 	}
+  
+  vitamin(part_name, part_count, 4, M8_nut);
+  vitamin(part_name, part_count, 4, M8_washer);
+  vitamin(part_name, part_count, 1, optional, "Rubber Foot", comment="Sorbothane Male Bumper - #8-32");
+  vitamin(part_name, part_count, 1, optional, "#8-32 Nut", comment="For mounting Sorbothane Bumper");
 }
 
 module frame_void()
