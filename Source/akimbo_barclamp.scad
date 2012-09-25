@@ -1,6 +1,11 @@
 include <more_configuration.scad>
 
-print_orientation = true;
+include <vitamin.scad>
+
+part_name = "akimbo_barclamp";
+part_count = 4;
+
+print_orientation = false;
 
 h_slop = .25;
 
@@ -57,6 +62,9 @@ module barclamp_solid()
 			cylinder(h=screw_head_depth+.1, r=8/2, $fn=12, center=true);
 		}
 	}
+  
+  vitamin(part_name, part_count, 4, M3x20);
+  vitamin(part_name, part_count, 4, M3_nylock, M3_nut);
 }
 
 module barclamp_void()
@@ -93,18 +101,38 @@ module barclamp_top()
 
 module barclamp(print_orientation=print_orientation)
 {
-	difference()
+	if (print_orientation == true)
 	{
-		barclamp_solid();
-		barclamp_void();
-	}
+		difference()
+		{
+			barclamp_solid();
+			barclamp_void();
+		}
 
-	translate([30, 0, clamp_size[z]])
-	rotate([180, 0, 0])
-	intersection()
+		translate([30, 0, clamp_size[z]])
+		rotate([180, 0, 0])
+		intersection()
+		{
+			barclamp_solid();
+			barclamp_top();
+		}
+	}
+	else
 	{
-		barclamp_solid();
-		barclamp_top();
+		translate(-bar1_center)
+		{
+			difference()
+			{
+				barclamp_solid();
+				barclamp_void();
+			}
+		
+			intersection()
+			{
+				barclamp_solid();
+				barclamp_top();
+			}
+		}
 	}
 }
 
