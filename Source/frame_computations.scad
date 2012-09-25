@@ -43,7 +43,11 @@ frame_horizontal_upper_rod_offset = [0, frame_horizontal_upper_rod_separation/2,
 top_left = [front_left[x]+top_vertex_offset, (frame_horizontal_upper_rod_separation-frame_horizontal_lower_rod_separation)/2, frame_height];
 
 lower_vertex_p1 = front_left+[frame_triangle_angle_offset, 0, 0]+vector_rotate([0, 0, frame_triangle_rod_offset], -frame_triangle_angle);
+lower_vertex_p2 = front_left+vector_rotate([frame_horizontal_lower_rod_offset[x], frame_horizontal_lower_rod_offset[y], -frame_horizontal_lower_rod_offset[z]], [60, 0, 0]);
 upper_vertex_p1 = front_left+[frame_triangle_angle_offset, 0, 0]+vector_rotate([0, 0, frame_triangle_rod_offset+j1+vertex_depth], -frame_triangle_angle);
+
+y_barclamp_center = [y_linear_rod_offset[x], lower_vertex_p2[y], lower_vertex_p2[z]+9.2];
+y_pillowblock_center = [y_barclamp_center[x], 70, y_barclamp_center[z]];
 
 upper_vertex_p2 = [top_left[x], 0, top_left[z]]+frame_horizontal_upper_rod_offset;
 
