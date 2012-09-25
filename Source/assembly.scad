@@ -29,6 +29,10 @@ use <z_linear_rod_clamp.scad>
 use <akimbo_extruder.scad>
 use <akimbo_carriage.scad>
 use <akimbo_x_end.scad>
+use <akimbo_barclamp.scad>
+use <y_pillow_block.scad>
+use <y_axis_belt_clamp.scad>
+use <z_motor_coupler.scad>
 
 carriage_offset = 110;
 
@@ -101,6 +105,34 @@ module rp_assembly()
 			}
 		}
 	}
+
+	// Y axis
+	
+	for(i=[-1, 1]) for(j=[-1, 1]) scale([i, j, 1])
+	translate(y_barclamp_center)
+		barclamp(print_orientation=false);
+
+	for(i=[-1, 1]) scale([1, i, 1])
+		translate(y_pillowblock_center)
+		scale([1, -1, 1])
+		y_pillow_block(print_orientation=false);
+
+	scale([-1, 1, 1])
+		translate(y_pillowblock_center)
+		scale([1, -1, 1])
+		y_roller_bearing_block(print_orientation=false);
+
+	translate([0, y_pillowblock_center[y], y_pillowblock_center[z]+y_linear_rod_offset[z]])
+	{
+		y_axis_belt_spacer(print_orientation=false);
+		y_axis_belt_tensioner(print_orientation=false);
+		y_axis_belt_clamp(print_orientation=false);
+	}
+
+	// Z axis
+	
+	for(i=[-1, 1]) for(j=[0, 1]) scale([i, 1, 1]) translate(z_motor_center+[0, 0, -(15+j*12)])
+		z_motor_coupler(print_orientation=false);
 }
 
 module vitamin_assembly()
@@ -108,6 +140,7 @@ module vitamin_assembly()
 	// Frame
 
 	render(convexity=8) frame_annotations();
+
 	render(convexity=8) x_annotations();
 
 	// Z axis (X ends)
@@ -136,6 +169,29 @@ module vitamin_assembly()
 		}
 	}
 
+	for(i=[-1, 1]) scale([i, 1, 1])
+		translate([y_barclamp_center[x], 0, y_barclamp_center[z]])
+		rotate([90, 0, 0])
+		cylinder(h=y_axis_linear_rod_length, r=4, center=true);
+		
+	for(i=[-1, 1]) scale([1, i, 1])
+		translate([0, lower_vertex_p2[y], lower_vertex_p2[z]])
+		rotate([0, 90, 0])
+		cylinder(h=608_bearing[bearing_length]*2, r=608_bearing[bearing_body_diameter]/2, center=true);
+		
+	translate([0, 0, lower_vertex_p2[z]+(608_bearing[bearing_body_diameter]+3)/2])
+		cube([6, lower_vertex_p2[y]*2, 3], center=true);
+
+	translate([0, 0, y_barclamp_center[z]+y_linear_rod_offset[z]])
+	{
+		translate([0, 0, 3/2])
+		cube([210, 210, 3], center=true);
+
+		translate([0, 0, 3+1/4*25.4+1.5/2])
+		cube([210, 210, 1.5], center=true);
+	}
+	
+	
 }
 
 
