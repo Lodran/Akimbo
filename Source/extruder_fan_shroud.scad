@@ -14,6 +14,11 @@
 include <more_configuration.scad>
 include <dimensions.scad>
 
+include <vitamin.scad>
+
+part_name = "extruder_fan_shroud";
+part_count = 2;
+
 motor_angle = 90;
 
 mount_thickness = 5;
@@ -95,7 +100,7 @@ module extruder_fan_shroud_void()
 	for(i=[-1, 1]) for(j=[-1, 1])
 		translate([0, i*(20-4), j*(20-4)])
 		rotate([0, -90, 0])
-		rotate([0, 0, 90])
+		//rotate([0, 0, 90])
 		{
 			cylinder(h=8.1, r=m3_nut_diameter/2, $fn=6, center=false);
 			translate([0, 0, 8])
@@ -119,6 +124,9 @@ module extruder_fan_shroud_void()
 	translate([-12, 0, -50/2])
 	cube([2, 50, 45], center=true);
 
+  vitamin(part_name, part_count, 4, M3x16, M3x20, comment="Fan mount");
+  vitamin(part_name, part_count, 4, M3_nylock, M3_nut, comment="Fan mount");
+  vitamin(part_name, part_count, 1, "40mm fan");
 }
 
 	
