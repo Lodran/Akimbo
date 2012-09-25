@@ -33,9 +33,9 @@ z_motor_coupler_thickness = 6;
 z_motor_coupler_width = 10;
 z_motor_clamp_bolt_separation = 11;
 
-*z_motor_coupler(print_orientation=true);
+z_motor_coupler(print_orientation=true);
 
-z_motor_coupler_plate(print_orientation=true);
+*z_motor_coupler_plate(print_orientation=true);
 
 
 module z_motor_coupler_plate(print_orientation)
