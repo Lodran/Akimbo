@@ -25,6 +25,11 @@ use <barbell.scad>
 use <teardrops.scad>
 use <motor.scad>
 
+include <vitamin.scad>
+
+part_name = "top_vertex";
+part_count = 2;
+
 short_bracket = true;
 
 print_orientation = false;
@@ -200,6 +205,14 @@ module top_vertex_void()
 
 
 	frame_void();
+
+  vitamin(part_name, part_count, 4, M8_nut);
+  vitamin(part_name, part_count, 4, M8_washer);
+  
+  vitamin(part_name, part_count, 1, nema_17, comment="Z axis motor");
+  vitamin(part_name, part_count, 4, M3x12, comment="Motor mounts");
+  vitamin(part_name, part_count, 4, M3_washer, comment="Motor mounts");
+  vitamin(part_name, part_count, 2, M3_nylock, M3_nut, comment="Z Linear Rod Mount");
 }
 
 module frame_void()
