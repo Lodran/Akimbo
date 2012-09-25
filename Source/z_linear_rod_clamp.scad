@@ -21,6 +21,11 @@ include <frame_computations.scad>
 use <teardrops.scad>
 use <pill.scad>
 
+include <vitamin.scad>
+
+part_name = "z_linear_rod_clamp";
+part_count = 4;
+
 z_linear_clamp_thickness = 8;
 z_linear_clamp_width = 15;
 
@@ -68,4 +73,7 @@ module z_linear_clamp_void()
 	rotate([0, 90, 0])
 	rotate([0, 0, 90])
 	octylinder(h=z_linear_clamp_width+.1, r=smooth_rod_diameter/2, center=true);
+  
+  vitamin(part_name, part_count, 2, M3x20);
+  vitamin(part_name, part_count, 2, M3_washer);
 }

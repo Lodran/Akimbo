@@ -26,6 +26,11 @@ use <teardrops.scad>
 use <motor.scad>
 use <pill.scad>
 
+include <vitamin.scad>
+
+part_name = "z_linear_rod_clamp";
+part_count = 4;
+
 print_orientation = false;
 mirrored = false;
 
@@ -139,7 +144,11 @@ module z_clamp_void()
 	translate(frame_horizontal_bracket_center+[-(frame_horizontal_bracket_length+4)/2, 0, 0])
 	rotate([0, 90, 0])
 	cylinder(h=4, r=frame_bracket_end_radius, center=true);
+  
+  vitamin(part_name, part_count, 4, M8_nut);
+  vitamin(part_name, part_count, 4, M8_washer);
 
+  vitamin(part_name, part_count, 2, M3_nylock, M3_nut, comment="Z Linear Rod Mount");
 }
 
 module frame_void()
