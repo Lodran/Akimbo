@@ -21,10 +21,17 @@ M3x30 = "M3x30 Bolt";
 M3_nut = "M3 nut";
 M3_nylock = "M3 nylock nut";
 
+M3_washer = "M3 washer";
+
 M5_nut = "M5 nut";
 
 M8x30 = "M8x30 Bolt";
 M8_nut = "M8 nut";
+M8_washer = "M8 Washer";
+
+nema_17 = "Nema 17 Stepper Motor";
+
+optional = "Optional";
 
 module vitamin(part, part_count, count, name, substitute=false, comment=false)
 {
