@@ -20,7 +20,6 @@
 
 
 print_orientation = true;
-constrained = false;
 
 include <more_configuration.scad>
 include <frame_computations.scad>
@@ -34,7 +33,7 @@ use <pill.scad>
 use <akimbo_endstop_mount.scad>
 use <optical_endstop.scad>
 
-part_name = (constrained) ? "akimbo_x_end_left" : "akimbo_x_end_right";
+function part_name(constrained) = (constrained) ? "akimbo_x_end_left" : "akimbo_x_end_right";
 part_count = 1;
 
 belt_idler_bearing = 608_bearing;
@@ -64,7 +63,7 @@ z_bearing_clamp_radius = bearing_clamp_radius;
 z_screw_clamp_radius = z_screw_nut_radius+2;
 
 
-x_end_min = [-(z_linear_to_screw_separation/2+z_screw_clamp_radius), -(x_linear_rod_offset+linear_clamp_radius), -(z_bearing_clamp_length(constrained)-linear_clamp_radius)];
+x_end_min = [-(z_linear_to_screw_separation/2+z_screw_clamp_radius), -(x_linear_rod_offset+linear_clamp_radius), -(z_bearing_clamp_length(true)-linear_clamp_radius)];
 x_end_max = [z_linear_to_screw_separation/2+z_bearing_clamp_radius, x_linear_rod_offset+linear_clamp_radius, linear_clamp_radius];
 x_end_center = centerof(x_end_min, x_end_max);
 x_end_size = sizeof(x_end_min, x_end_max);
@@ -117,20 +116,14 @@ motor_brace_poly_2 = [motor_brace_p0,
 
 x_endstop_center = [x_end_min[x]+4, -x_linear_rod_offset, x_end_max[z]];
 
-/*
-for(i=[-1, 1])
-	rotate([0, 0, i*90+90])
-	translate([33, -13, 0])
-	akimbo_x_end(print_orientation=true, constrained=(i==1), motor_bracket=true, idler_bracket=true);
-*/
+akimbo_x_end(print_orientation=print_orientation, constrained=true, motor_bracket=true, idler_bracket=true);
 
-akimbo_x_end(print_orientation=print_orientation, constrained=constrained, motor_bracket=true, idler_bracket=true);
+akimbo_z_magnet_clamp(print_orientation = print_orientation);
+
 *%x_end_annotations(print_orientation=print_orientation);
 
-module akimbo_x_end(print_orientation=true, constrained=false, motor_bracket=true, idler_bracket=true)
+module akimbo_x_end(print_orientation=true, constrained, motor_bracket=true, idler_bracket=true)
 {
-	echo(z_bearing_clamp_center(constrained), z_bearing_clamp_length(constrained));
-
 	p1=(print_orientation == true) ? 1 : 0;
 	p2=(print_orientation == false) ? 1 : 0;
   
@@ -144,7 +137,7 @@ module akimbo_x_end(print_orientation=true, constrained=false, motor_bracket=tru
 	}
 }
 
-module z_extrusion_profile(clearance_r = 0)
+module z_extrusion_profile(clearance_r = 0, constrained)
 {
 	p1=[z_bearing_clamp_center(constrained)[x], z_bearing_clamp_center(constrained)[y]];
 	p2=[-z_bearing_clamp_center(constrained)[x], z_bearing_clamp_center(constrained)[y]];
@@ -165,7 +158,8 @@ module z_extrusion(clearance_r = 0, clearance_z = 0)
   	z_extrusion_profile(clearance_r);
 }
 
-module z_extrusion_profile_plus(clearance_r = 0, clearance_z = 0)
+/*
+module z_extrusion_profile_plus(clearance_r = 0, clearance_z = 0, constrained)
 {
 	p1=[z_bearing_clamp_center(constrained)[x], z_bearing_clamp_center(constrained)[y]];
 	p2=[-z_bearing_clamp_center(constrained)[x], z_bearing_clamp_center(constrained)[y]];
@@ -181,6 +175,7 @@ module z_extrusion_profile_plus(clearance_r = 0, clearance_z = 0)
 	barbell(p2, p3, r2, r3, r4, r4, $fn=40);
 	barbell(p3, p1, r3, r1, r4, r4, $fn=40);
 }
+*/
 
 
 module akimbo_x_end_solid(constrained, motor_bracket, idler_bracket)
@@ -337,8 +332,8 @@ module akimbo_x_end_void(constrained, motor_bracket, idler_bracket)
 		}
 	}
 
-	vitamin(part_name, part_count, 2, M3x16, M3x20, "X Linear rod clamps");
-	vitamin(part_name, part_count, 2, M3_nylock, M3_nut, "X Linear rod clamps");
+	vitamin(part_name(constrained), part_count, 2, M3x16, M3x20, "X Linear rod clamps");
+	vitamin(part_name(constrained), part_count, 2, M3_nylock, M3_nut, "X Linear rod clamps");
 
 	if (constrained == true)
 	{
@@ -353,18 +348,18 @@ module akimbo_x_end_void(constrained, motor_bracket, idler_bracket)
 		rotate([90, 0, 0])
 		cylinder(h=4.5+2, r=m3_nut_diameter/2, $fn=6, center=true);
     
-		vitamin(part_name, part_count, 2, "Linear Bushing", "LM8UU", "Linear Bushings");
-		vitamin(part_name, part_count, 2, M3x16, M3x20, "Linear bushing clamps");
-		vitamin(part_name, part_count, 2, M3_nylock, M3_nut, "Linear bushing clamps");
-		vitamin(part_name, part_count, 1, M3x20, comment="Z endstop flag mount");
+		vitamin(part_name(constrained), part_count, 2, "Linear Bushing", "LM8UU", "Linear Bushings");
+		vitamin(part_name(constrained), part_count, 2, M3x16, M3x20, "Linear bushing clamps");
+		vitamin(part_name(constrained), part_count, 2, M3_nylock, M3_nut, "Linear bushing clamps");
+		vitamin(part_name(constrained), part_count, 1, M3x20, comment="Z endstop flag mount");
 	}
 	else
 	{
 		roller_void();
 
-		vitamin(part_name, part_count, 2, "683zz Bearing", comment="Linear Roller Bearings");
-		vitamin(part_name, part_count, 2, M3x12, M3x20, comment="Linear Roller Bearing mounts");
-		vitamin(part_name, part_count, 2, M3_nylock, M3_nut, comment="Linear Roller Bearing mounts");
+		vitamin(part_name(constrained), part_count, 2, "683zz Bearing", comment="Linear Roller Bearings");
+		vitamin(part_name(constrained), part_count, 2, M3x12, M3x20, comment="Linear Roller Bearing mounts");
+		vitamin(part_name(constrained), part_count, 2, M3_nylock, M3_nut, comment="Linear Roller Bearing mounts");
 	}
 
 	// Z screw.
@@ -384,15 +379,13 @@ module akimbo_x_end_void(constrained, motor_bracket, idler_bracket)
 		octylinder(h=z3-z2+.1, r=z_screw_radius+.5, center=true);
 	}
 
-	vitamin(part_name, part_count, 1, M5_nut, comment="Z Axis drive nut (bottom)");
-	vitamin(part_name, part_count, 1, M5_nut, "Optional", comment="Z Axis anti-backlash nut (top)");
-	vitamin(part_name, part_count, 1, "Spring", "Optional", comment="Z Axis anti-backlash spring");
+	vitamin(part_name(constrained), part_count, 1, M5_nut, comment="Z Axis leadscrew drive nut");
 
 	if (motor_bracket == true)
-		motor_bracket_void();
+		motor_bracket_void(constrained);
 
 	if (idler_bracket == true)
-		idler_bracket_void();
+		idler_bracket_void(constrained);
 
 	// X endstop mount (s)
 
@@ -411,8 +404,8 @@ module akimbo_x_end_void(constrained, motor_bracket, idler_bracket)
 			}
 	}
   
-	vitamin(part_name, part_count, 2, M3x25, comment="X Endstop Mount");
-	vitamin(part_name, part_count, 2, M3_nylock, M3_nut, comment="X Endstop Mount");
+	vitamin(part_name(constrained), part_count, 2, M3x25, comment="X Endstop Mount");
+	vitamin(part_name(constrained), part_count, 2, M3_nylock, M3_nut, comment="X Endstop Mount");
 }
 
 module motor_bracket_solid(constrained)
@@ -445,7 +438,7 @@ module motor_bracket_solid(constrained)
 	cube(motor_bracket_fill_1_size, center=true);
 }
 
-module motor_bracket_void()
+module motor_bracket_void(constrained)
 {
 	render(convexity = 8)
 	for(i=[-1:1])
@@ -457,8 +450,8 @@ module motor_bracket_void()
 		hexypill(length=5, h=motor_brace_thickness+.1, r=m3_diameter/2, $fn=12, center=true);
 	}
 
-	vitamin(part_name, part_count, 1, "Nema 17", comment="X Axis Motor");
-	vitamin(part_name, part_count, 3, M3x12, comment="X Axis Motor mount");
+	vitamin(part_name(constrained), part_count, 1, nema_17, comment="X Axis Motor");
+	vitamin(part_name(constrained), part_count, 3, M3x12, comment="X Axis Motor mount");
 }
 
 module idler_bracket_solid()
@@ -479,7 +472,7 @@ module idler_bracket_solid()
 	cylinder(h=1, r1=belt_idler_bearing_radius-3, r2=belt_idler_bearing_radius-2, center=false);
 }
 
-module idler_bracket_void()
+module idler_bracket_void(constrained)
 {
 	// Idler Mount
 
@@ -494,9 +487,9 @@ module idler_bracket_void()
 	cylinder(h=20, r=m8_nut_diameter/2, $fn=6, center=false);
 	}
   
-  vitamin(part_name, part_count, 2, "608zz Bearing", comment="X Axis belt idler");
-	vitamin(part_name, part_count, 1, M8x30, "M8x38 threaded rod + 1 M8 Nut", comment="X Axis belt idler");
-	vitamin(part_name, part_count, 1, M8_nut, comment="X Axis belt idler");
+  vitamin(part_name(constrained), part_count, 2, "608zz Bearing", comment="X Axis belt idler");
+	vitamin(part_name(constrained), part_count, 1, M8x30, "M8x38 threaded rod + 1 M8 Nut", comment="X Axis belt idler");
+	vitamin(part_name(constrained), part_count, 1, M8_nut, comment="X Axis belt idler");
 
 }
 
@@ -632,10 +625,7 @@ module roller_void()
 	}
 }
 
-if (constrained)
-  akimbo_z_magnet_clamp(print_orientation = print_orientation);
-
-module akimbo_z_magnet_clamp(print_orientation)
+module akimbo_z_magnet_clamp(print_orientation, constrained)
 {
 	p1=(print_orientation == true) ? 1 : 0;
 	p2=(print_orientation == false) ? 1 : 0;
@@ -702,7 +692,7 @@ flag_max = [16, 1.5/2, flag_min[z]+8.5];
 flag_center = centerof(flag_min, flag_max);
 flag_size = sizeof(flag_min, flag_max);
 
-module akimbo_z_endstop_flag(print_orientation)
+module akimbo_z_endstop_flag(print_orientation, constrained)
 {
 	p1=(print_orientation == true) ? 1 : 0;
 	p2=(print_orientation == false) ? 1 : 0;
