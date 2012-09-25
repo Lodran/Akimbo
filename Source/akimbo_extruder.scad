@@ -17,6 +17,11 @@ include <drive_wheels.scad>
 use <teardrops.scad>
 use <extruder_fan_shroud.scad>
 
+include <vitamin.scad>
+
+part_name = "akimbo_extruder";
+part_count = 2;
+
 print_orientation = true;
 mirrored = false;
 
@@ -186,11 +191,13 @@ module akimbo_extruder_annotations(print_orientation=true, mirrored=false)
     		minebea_motor();
 	}
 
+	/*
     translate(motor_center)
     rotate([-90, 0, 0])
 	rotate([0, 0, -90])
 	rotate([0, 0, -motor_angle])
 	extruder_fan_shroud();
+	*/
   }
 }
 
@@ -271,6 +278,8 @@ module drive_bracket_void()
 	rotate([0, 0, 180])
 	cylinder(h=nozzle_length+.1, r=nozzle_radius, center=true);
 
+  vitamin(part_name, part_count, 1, "Hot End", comment="Groove Mount - Tested against MakerGear and J-Head");
+
 	hull()
 	{
 		translate([nozzle_center[x], nozzle_center[y], nozzle_center[z]+nozzle_length/2+.5+layer_height])
@@ -285,6 +294,8 @@ module drive_bracket_void()
 	rotate([90, 0, 0])
 	octylinder(h=5.1, r=10.5/2, center=true); 
 	
+  vitamin(part_name, part_count, 1, "Geared stepper motor", comment="Minbea PG35L-D48");
+
 	translate(drive_wheel_clearance_center)
 	{
 		rotate([90, 0, 0])
@@ -302,6 +313,8 @@ module drive_bracket_void()
 		}
 	}
 
+  vitamin(part_name, part_count, 1, "Filament Drive Wheel", comment="MakerBot Mk7 drive gear, or blddk Hobbed drive wheel");
+
 	translate(drive_bracket_center+[0, (3/2), 0])
 	{
 		rotate([90, 0, 0])
@@ -318,7 +331,7 @@ module drive_bracket_void()
 	translate(motor_mount_center)
 	rotate([90, 0, 0])
 	octylinder(h=drive_bracket_size[y]+.1, r=m3_diameter/2, $fn=16, center=true);
-
+  
 	translate([motor_mount_center[x], drive_bracket_max[y]-4/2+.05, motor_mount_center[z]])
 	rotate([90, 0, 0])
 	cylinder(h=4+.1, r=m3_nut_diameter/2, $fn=6, center=true);
@@ -330,6 +343,10 @@ module drive_bracket_void()
 	translate([idler_hinge_center[x], motor_center[y]+5-m3_nut_thickness/2+.05, idler_hinge_center[z]])
 	rotate([90, 0, 0])
 	cylinder(h=m3_nut_thickness+.1, r=m3_nut_diameter/2, $fn=6, center=true);
+
+  vitamin(part_name, part_count, 2, M3x30, comment="Motor mounts (and idler hinge)");
+  vitamin(part_name, part_count, 1, M3_nut, comment="Idler Hinge");
+  vitamin(part_name, part_count, 1, M3_nylock, comment="Idler Hinge");
 
 	/*
 	for(i=[0, 1])
@@ -350,6 +367,8 @@ module drive_bracket_void()
 	rotate([90, 0, 0])
 	octylinder(h=drive_bearing[bearing_length], r=(drive_bearing[bearing_body_diameter]+drive_bearing_clearance[bearing_body_diameter])/2, center=true);
 
+  vitamin(part_name, part_count, 1, "115zz Bearing", comment="Drive Bearing (5mm x 11mm x 4mm roller)");
+
 	difference()
 	{
 		translate([drive_bracket_center[x], idler_center[y], drive_bracket_center[z]])
@@ -368,11 +387,17 @@ module drive_bracket_void()
 		translate(drive_bracket_center+[-5, 0, drive_wheel_clearance_radius-1 + layer_height/2])
 		cube([20, 20, layer_height], center=true);
 	}
+  
+  vitamin(part_name, part_count, 2, M3_nylock, M3_nut, comment="Idler clamp");
+  vitamin(part_name, part_count, 2, M3x20, M3x16, comment="Idler clamp");
+  vitamin(part_name, part_count, 2, M3_washer, comment="Idler clamp");
 
 	translate([nozzle_center[x], nozzle_center[y], carriage_bracket_center[z]])
 	for(i=[-1, 1])
 		translate([i*25, 0, 0])
 		cylinder(h=carriage_bracket_size[z]+.1, r=m3_diameter/2, $fn=12, center=true);
+
+  vitamin(part_name, part_count, 2, M3x20, comment="Carriage Mount");
 
 	*translate([nozzle_center[x], nozzle_center[y], carriage_bracket_max[z]-2+.05])
 	for(i=[-1, 1])
@@ -385,7 +410,7 @@ idler_bracket_size_y = 17;
 
 idler_clamp_angle = 43;
 
-idler_bearing_fudge_factor = 0.25;	// Allows for adjustment of the idler bearing without modification to the extruder.
+idler_bearing_fudge_factor = 0.125;	// Allows for adjustment of the idler bearing without modification to the extruder.
 
 module akimbo_extruder_idler(print_orientation=true)
 {
