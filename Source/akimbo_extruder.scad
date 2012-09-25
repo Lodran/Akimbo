@@ -37,15 +37,12 @@ drive_bearing_clearance = 115_bearing_clearance;
 idler_bearing_length = 624_bearing[bearing_length];
 idler_bearing_radius = 624_bearing[bearing_body_diameter]/2;
 
-idler_bearing_length = 683_bearing[bearing_length];
-idler_bearing_radius = 683_bearing[bearing_body_diameter]/2;
-
 bushing_clamp_radius = 11;
 bushing_radius = 8;
 carriage_length = 40;
 
 filament_radius = 1.5;
-filament_compression = 0.75;
+filament_compression = 1;
 
 filament_offset = [(drive_wheel[drive_wheel_hob_radius]-filament_compression/2+filament_radius),
 -(drive_wheel[drive_wheel_length]/2-drive_wheel[drive_wheel_hob_center]),
@@ -57,7 +54,6 @@ motor_center = drive_wheel_center-[0, 5+(drive_wheel[drive_wheel_length]+1)/2, 0
 
 idler_center = filament_center+[(filament_radius+idler_bearing_radius-filament_compression/2), 0, 0];
 
-idler_mount_radius = idler_bearing_radius+0.75;
 idler_clamp_clearance = 1.5;
 
 motor_mount_hole_spacing = 42;
@@ -120,8 +116,8 @@ carriage_bracket_min = [filament_center[x]-carriage_bracket_length/2, drive_brac
 carriage_bracket_center = centerof(carriage_bracket_min, carriage_bracket_max);
 carriage_bracket_size = sizeof(carriage_bracket_min, carriage_bracket_max);
 
-idler_void_min = [idler_hinge_center[x]-idler_hinge_radius-1, idler_hinge_center[z], 0];
-idler_void_max = [drive_bracket_max[x], idler_center[z], 0];
+idler_void_min = [idler_center[x]-4, idler_hinge_center[z], 0];
+idler_void_max = [drive_bracket_max[x], drive_bracket_max[z], 0];
 idler_void_center = centerof(idler_void_min, idler_void_max);
 idler_void_size = sizeof(idler_void_min, idler_void_max);
 
@@ -160,8 +156,6 @@ module akimbo_extruder(print_orientation=true, mirrored=false)
 
 			drive_bracket_void();
 		}
-
-		drive_bracket_patch();
 	}
 }
 
@@ -222,10 +216,7 @@ module drive_bracket_profile(clearance=0)
 		}
 
 		translate([idler_center[x], idler_center[z]])
-		if (clearance != 0)
-			circle(idler_mount_radius+.2);
-		else
-			circle(idler_mount_radius+1.02, center=true);
+		octircle(idler_bearing_radius+1.02-clearance, center=true);
 	}		
 }
 
@@ -245,6 +236,7 @@ module drive_bracket_solid()
 
 	idler_hinge_length = 13;
 
+	render(convexity=2)
 	difference()
 	{
 		translate(carriage_bracket_center)
@@ -261,16 +253,6 @@ module drive_bracket_solid()
 	}
 }
 
-module drive_bracket_patch()
-{
-	// Fudge the wall between the motor and the pinch wheel, so slic3r can make a dual extrusion.
-
-	// I'd consider a similar patch on the other side, but it would push the bearing out of alignment,
-	//	and doesn't seem to be necessary.
-
-	translate(motor_center+[5.55, drive_wheel_clearance_min_y/2, 0])
-	cube([1, drive_wheel_clearance_min_y, 5], center=true);
-}
 
 module drive_bracket_void()
 {
@@ -313,7 +295,7 @@ module drive_bracket_void()
 		}
 	}
 
-  vitamin(part_name, part_count, 1, "Filament Drive Wheel", comment="MakerBot Mk7 drive gear, or blddk Hobbed drive wheel");
+  vitamin(part_name, part_count, 1, "Filament Drive Wheel", comment="MakerBot Mk7 drive gear or blddk Hobbed drive wheel");
 
 	translate(drive_bracket_center+[0, (3/2), 0])
 	{
@@ -344,10 +326,6 @@ module drive_bracket_void()
 	rotate([90, 0, 0])
 	cylinder(h=m3_nut_thickness+.1, r=m3_nut_diameter/2, $fn=6, center=true);
 
-  vitamin(part_name, part_count, 2, M3x30, comment="Motor mounts (and idler hinge)");
-  vitamin(part_name, part_count, 1, M3_nut, comment="Idler Hinge");
-  vitamin(part_name, part_count, 1, M3_nylock, comment="Idler Hinge");
-
 	/*
 	for(i=[0, 1])
 		translate(drive_bracket_center)
@@ -363,9 +341,9 @@ module drive_bracket_void()
 		}
 	*/
 
-	translate(drive_bearing_center)
+	translate(drive_bearing_center+[0, -.05, 0])
 	rotate([90, 0, 0])
-	octylinder(h=drive_bearing[bearing_length], r=(drive_bearing[bearing_body_diameter]+drive_bearing_clearance[bearing_body_diameter])/2, center=true);
+	octylinder(h=drive_bearing[bearing_length]+.1, r=(drive_bearing[bearing_body_diameter]+drive_bearing_clearance[bearing_body_diameter])/2, center=true);
 
   vitamin(part_name, part_count, 1, "115zz Bearing", comment="Drive Bearing (5mm x 11mm x 4mm roller)");
 
@@ -408,16 +386,16 @@ module drive_bracket_void()
 
 idler_bracket_size_y = 17;
 
-idler_clamp_angle = 43;
+idler_clamp_angle = 54;
 
-idler_bearing_fudge_factor = 0.125;	// Allows for adjustment of the idler bearing without modification to the extruder.
+idler_bearing_fudge_factor = 0;	// Allows for adjustment of the idler bearing without modification to the extruder.
 
 module akimbo_extruder_idler(print_orientation=true)
 {
 	t1=(print_orientation == true) ? 1 : 0;
 	t2=(print_orientation == false) ? 1 : 0;
 
-	display_angle = 30;
+	display_angle = 10;
 
 	scale(mirrored ? [-1, 1, 1] : [1, 1, 1])
 	rotate(t2*[0, 0, 90])
@@ -425,7 +403,7 @@ module akimbo_extruder_idler(print_orientation=true)
 	translate(t2*idler_hinge_center)
 	rotate(t2*[0, display_angle, 0])
 	translate(t2*-idler_hinge_center)
-	translate(t1*[-20, -20, idler_mount_radius+1])
+	translate(t1*[-20, -20, idler_bearing_radius])
 	rotate(t1*[0, 0, 90])
 	translate(t1*idler_center)
 	rotate(t1*[0, idler_clamp_angle+90, 0])
@@ -443,7 +421,7 @@ module idler_bracket_profile()
 	r1 = idler_hinge_radius;
 
 	p2 = [idler_center[x], idler_center[z]];
-	r2 = idler_mount_radius;
+	r2 = idler_bearing_radius;
 
 	r3 = 3.5;
 	p3 = p2+rotate_vec([r2-r3, 0], idler_clamp_angle);
@@ -456,12 +434,12 @@ module idler_bracket_profile()
 	{
 		union()
 		{
-			barbell(p1, p2, r1, r2, 15, 15);
+			barbell(p1, p2, r1, r2, 5, 10);
 			barbell(p2, p4, r2, r4, 17, 100);
 
 			translate([(p3[x]+p4[x])/2, (p3[y]+p4[y])/2])
 			rotate(idler_clamp_angle)
-			translate([r3/2+1, 0])
+			translate([r3/2, 0])
 			square([r3, l4], center=true);
 
 			translate(p2)
@@ -469,20 +447,14 @@ module idler_bracket_profile()
 			octircle(r2);
 
 			translate(p4)
-			rotate(idler_clamp_angle-90-45)
-			translate([0, 5])
-			square([r4*2, 10], center=true);
-
-			translate(p1)
-			rotate(idler_clamp_angle-90+45)
-			translate([0, 10])
-			square([r1*2, 20], center=true);
+			rotate(idler_clamp_angle-90)
+			octircle(r4);
 		}
 
 		translate(p2)
 		rotate(idler_clamp_angle)
-		translate([-12+r2+1, 8])
-		square([24, 55], center=true);
+		translate([-12+r2, 8])
+		square([24, 45], center=true);
 	}
 }
 
@@ -512,7 +484,7 @@ module idler_bracket_solid()
 		scale([1, i, 1])
 		translate(idler_bolt_offset)
 		{
-			*hull()
+			hull()
 			{
 				translate([0, 0, 13-4])
 				cylinder(h=4, r=m3_washer_diameter/2-.1, center=false);
@@ -572,29 +544,27 @@ module idler_bracket_void()
 	translate([idler_center[x]-idler_bearing_fudge_factor, drive_bracket_center[y], idler_center[z]])
 	rotate([90, 0, 0])
 	rotate([0, 0, idler_clamp_angle+90])
-		octylinder(h=drive_bracket_size[y]+.1, r=m3_diameter/2, $fn=12, center=true);
+		octylinder(h=drive_bracket_size[y]+.1, r=m4_diameter/2, $fn=12, center=true);
 
 	translate(idler_center+[-idler_bearing_fudge_factor, 0, 0])
 	rotate([90, 0, 0])
 	{
 		difference()
 		{
-			rotate([0, 0, idler_clamp_angle/2])
-			//octylinder(h=idler_bearing_length+1, r=idler_mount_radius+.5, center=true);
-			cube([idler_mount_radius*2+10, idler_mount_radius*2+1, idler_bearing_length+1], center=true);
-      
+			rotate([0, 0, idler_clamp_angle-90])
+			octylinder(h=idler_bearing_length+1, r=idler_bearing_radius+.5, center=true);
 			for(i=[-1, 1])
 				scale([1, 1, i])
 				translate([0, 0, idler_bearing_length/2])
-				cylinder(h=1.1, r1=2.5, r2=3.5+.1, center=false);
+				cylinder(h=1.1, r1=4, r2=5.1, center=false);
 		}
 
-		translate([0, 0, -((idler_bracket_size_y-3)/2+.05)])
-		cylinder(h=3+.1, r=m3_bolt_head_diameter/2, center=true);
+		translate([0, 0, idler_bracket_size_y/2-2+.05])
+		cylinder(h=4+.1, r=m4_bolt_head_diameter/2, center=true);
 
-		translate([0, 0, ((idler_bracket_size_y-3)/2+.05)])
+		translate([0, 0, -(idler_bracket_size_y/2-2+.05)])
 		rotate([0, 0, idler_clamp_angle+90])
-		cylinder(h=3+.1, r=m3_nut_diameter/2, $fn=6, center=true);
+		cylinder(h=4+.1, r=m4_nut_diameter/2, $fn=6, center=true);
 	}
 
 
@@ -617,8 +587,8 @@ module idler_bracket_void()
 	hull()
 	{
 		for(i=[-1, 1])
-			translate(filament_center+[i, 0, 2])
-			cylinder(h=25, r=filament_radius+.5, $fn=12, center=false);
+			translate(filament_center+[i, 0, 0])
+			cylinder(h=100, r=filament_radius+.5, $fn=12, center=true);
 	}
 }
 
@@ -628,6 +598,7 @@ module minebea_motor(clearance=0)
 	motor_length = 45;
 	motor_radius = 35/2;
 	
+	render(convexity=4)
 	difference()
 	{
 		union()
@@ -639,7 +610,7 @@ module minebea_motor(clearance=0)
 			cylinder(h=4.75, r=5+clearance, center=true);
 	
 			translate([0, 0, 18/2])
-			cylinder(h=18, r=5/2, center=true);
+			cylinder(h=18, r=5/2, $fn=20, center=true);
 
 			translate([0, 0, -(mount_thickness+clearance)/2])
 			for(i=[-1, 1])
@@ -675,16 +646,18 @@ module minebea_motor(clearance=0)
 
 module drive_wheel()
 {
+	render(convexity=4)
 	translate([0, 0, -drive_wheel[drive_wheel_length]/2])
 	difference()
 	{
 		translate([0, 0, drive_wheel[drive_wheel_length]/2])
 		cylinder(h=drive_wheel[drive_wheel_length],
 		         r=drive_wheel[drive_wheel_radius],
+		         $fn=30,
 		         center=true);
 
 		translate([0, 0, drive_wheel[drive_wheel_hob_center]])
-		rotate_extrude(convexity=4)
+		rotate_extrude(convexity=4, $fn=30)
 			translate([drive_wheel[drive_wheel_radius]+1, 0])
 			circle(r=drive_wheel[drive_wheel_radius]-drive_wheel[drive_wheel_hob_radius]+1, $fn=12);
 	}
