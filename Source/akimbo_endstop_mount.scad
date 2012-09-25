@@ -4,6 +4,11 @@ use <teardrops.scad>
 use <functions.scad>
 use <optical_endstop.scad>
 
+include <vitamin.scad>
+
+part_name = "akimbo_endstop_mount";
+part_count = 2;
+
 print_orientation = false;
 
 smooth_rod_clamp_radius = 4;
@@ -83,6 +88,11 @@ module akimbo_endstop_mount_void()
 				cylinder(h=10, r=m3_nut_diameter/2, $fn=6, center=false);
 			}
 	}
+  
+  vitamin(part_name, part_count, 1, "End Stop", comment="Optical, or Cheap-O - 19mm hole spacing");
+  vitamin(part_name, part_count, 1, M3x20);
+  vitamin(part_name, part_count, 1, M3_washer);
+  vitamin(part_name, part_count, 1, M3_nylock, M3_nut);
 }
 
 module akimbo_endstop_annotations(print_orientation)
