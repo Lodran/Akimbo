@@ -1,4 +1,5 @@
-    Add Y axis belt clamps.
+    Add belt tooth divots to the y axis belt spacers.
+		
     Add Y axis motor mount.
     
     Add Y axis parts and annotations to assembly.scad
