@@ -54,7 +54,7 @@ cd Source
 
 # Create .stl file for assembly.
 
-/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -o ../assembly.stl assembly.scad
+/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -o ../assembly.stl assembly.scad 2> assembly.log
 
 cd ..
 

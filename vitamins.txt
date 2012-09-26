@@ -1,0 +1,117 @@
+bottom_vertex	4	4	M8 nut	M8 nut		
+bottom_vertex	4	4	M8 Washer	M8 Washer	
+bottom_vertex	4	1	Optional	Rubber Foot	Sorbothane Male Bumper - #8-32
+bottom_vertex	4	1	Optional	#8-32 Nut	For mounting Sorbothane Bumper
+bottom_vertex	4	4	M8 nut	M8 nut	
+bottom_vertex	4	4	M8 Washer	M8 Washer	
+bottom_vertex	4	1	Optional	Rubber Foot	Sorbothane Male Bumper - #8-32
+bottom_vertex	4	1	Optional	#8-32 Nut	For mounting Sorbothane Bumper
+top_vertex	2	4	M8 nut	M8 nut	
+top_vertex	2	4	M8 Washer	M8 Washer	
+top_vertex	2	1	Nema 17 Stepper Motor	Nema 17 Stepper Motor	Z axis motor
+top_vertex	2	4	M3x12 Bolt	M3x12 Bolt	Motor mounts
+top_vertex	2	4	M3 washer	M3 washer	Motor mounts
+top_vertex	2	2	M3 nylock nut	M3 nut	Z Linear Rod Mount
+z_linear_rod_clamp	4	4	M8 nut	M8 nut	
+z_linear_rod_clamp	4	4	M8 Washer	M8 Washer	
+z_linear_rod_clamp	4	2	M3 nylock nut	M3 nut	Z Linear Rod Mount
+z_linear_rod_clamp	4	2	M3x20 Bolt	M3x20 Bolt	
+z_linear_rod_clamp	4	2	M3 washer	M3 washer	
+z_linear_rod_clamp	4	2	M3x20 Bolt	M3x20 Bolt	
+z_linear_rod_clamp	4	2	M3 washer	M3 washer	
+bottom_vertex	4	4	M8 nut	M8 nut	
+bottom_vertex	4	4	M8 Washer	M8 Washer	
+bottom_vertex	4	1	Optional	Rubber Foot	Sorbothane Male Bumper - #8-32
+bottom_vertex	4	1	Optional	#8-32 Nut	For mounting Sorbothane Bumper
+bottom_vertex	4	4	M8 nut	M8 nut	
+bottom_vertex	4	4	M8 Washer	M8 Washer	
+bottom_vertex	4	1	Optional	Rubber Foot	Sorbothane Male Bumper - #8-32
+bottom_vertex	4	1	Optional	#8-32 Nut	For mounting Sorbothane Bumper
+top_vertex	2	4	M8 nut	M8 nut	
+top_vertex	2	4	M8 Washer	M8 Washer	
+top_vertex	2	1	Nema 17 Stepper Motor	Nema 17 Stepper Motor	Z axis motor
+top_vertex	2	4	M3x12 Bolt	M3x12 Bolt	Motor mounts
+top_vertex	2	4	M3 washer	M3 washer	Motor mounts
+top_vertex	2	2	M3 nylock nut	M3 nut	Z Linear Rod Mount
+z_linear_rod_clamp	4	4	M8 nut	M8 nut	
+z_linear_rod_clamp	4	4	M8 Washer	M8 Washer	
+z_linear_rod_clamp	4	2	M3 nylock nut	M3 nut	Z Linear Rod Mount
+z_linear_rod_clamp	4	2	M3x20 Bolt	M3x20 Bolt	
+z_linear_rod_clamp	4	2	M3 washer	M3 washer	
+z_linear_rod_clamp	4	2	M3x20 Bolt	M3x20 Bolt	
+z_linear_rod_clamp	4	2	M3 washer	M3 washer	
+akimbo_x_end_left	1	2	M3x16 Bolt	M3x20 Bolt	X Linear rod clamps
+akimbo_x_end_left	1	2	M3 nylock nut	M3 nut	X Linear rod clamps
+akimbo_x_end_left	1	2	Linear Bushing	LM8UU	Linear Bushings
+akimbo_x_end_left	1	2	M3x16 Bolt	M3x20 Bolt	Linear bushing clamps
+akimbo_x_end_left	1	2	M3 nylock nut	M3 nut	Linear bushing clamps
+akimbo_x_end_left	1	1	M3x20 Bolt	M3x20 Bolt	Z endstop flag mount
+akimbo_x_end_left	1	1	M5 nut	M5 nut	Z Axis leadscrew drive nut
+akimbo_x_end_left	1	1	Nema 17 Stepper Motor	Nema 17 Stepper Motor	X Axis Motor
+akimbo_x_end_left	1	3	M3x12 Bolt	M3x12 Bolt	X Axis Motor mount
+akimbo_x_end_left	1	2	608zz Bearing	608zz Bearing	X Axis belt idler
+akimbo_x_end_left	1	1	M8x30 Bolt	M8x38 threaded rod + 1 M8 Nut	X Axis belt idler
+akimbo_x_end_left	1	1	M8 nut	M8 nut	X Axis belt idler
+akimbo_x_end_left	1	2	M3x25 Bolt	M3x25 Bolt	X Endstop Mount
+akimbo_x_end_left	1	2	M3 nylock nut	M3 nut	X Endstop Mount
+akimbo_x_end_right	1	2	M3x16 Bolt	M3x20 Bolt	X Linear rod clamps
+akimbo_x_end_right	1	2	M3 nylock nut	M3 nut	X Linear rod clamps
+akimbo_x_end_right	1	2	683zz Bearing	683zz Bearing	Linear Roller Bearings
+akimbo_x_end_right	1	2	M3x12 Bolt	M3x20 Bolt	Linear Roller Bearing mounts
+akimbo_x_end_right	1	2	M3 nylock nut	M3 nut	Linear Roller Bearing mounts
+akimbo_x_end_right	1	1	M5 nut	M5 nut	Z Axis leadscrew drive nut
+akimbo_x_end_right	1	1	Nema 17 Stepper Motor	Nema 17 Stepper Motor	X Axis Motor
+akimbo_x_end_right	1	3	M3x12 Bolt	M3x12 Bolt	X Axis Motor mount
+akimbo_x_end_right	1	2	608zz Bearing	608zz Bearing	X Axis belt idler
+akimbo_x_end_right	1	1	M8x30 Bolt	M8x38 threaded rod + 1 M8 Nut	X Axis belt idler
+akimbo_x_end_right	1	1	M8 nut	M8 nut	X Axis belt idler
+akimbo_x_end_right	1	2	M3x25 Bolt	M3x25 Bolt	X Endstop Mount
+akimbo_x_end_right	1	2	M3 nylock nut	M3 nut	X Endstop Mount
+akimbo_carriage	2	2	Linear Bushing	LM8UU	Linear Bushings
+akimbo_carriage	2	2	683zz Bearing	683zz Bearing	Linear Roller Bearings
+akimbo_carriage	2	2	M3x12 Bolt	M3x20 Bolt	Linear Roller Bearing mounts
+akimbo_carriage	2	1	M3 nylock nut	M3 nut	Linear Roller Bearing mount
+akimbo_carriage	2	1	M3 nut	M3 nut	Linear Roller Bearing mount
+akimbo_carriage	2	2	M3x20 Bolt	M3x20 Bolt	Belt clamps
+akimbo_carriage	2	2	M3 nylock nut	M3 nut	Belt Clamps
+akimbo_carriage	2	2	M3 nylock nut	M3 nut	Extruder Mounts
+akimbo_carriage	2	1	M3 nylock nut	M3 nut	Endstop Flag mount
+akimbo_carriage	2	1	M3x20 Bolt	M3x20 Bolt	Endstop Flag (!!! Verify Length)
+akimbo_extruder	2	1	Hot End	Hot End	Groove Mount - Tested against MakerGear and J-Head
+akimbo_extruder	2	1	Geared stepper motor	Geared stepper motor	Minbea PG35L-D48
+akimbo_extruder	2	1	Filament Drive Wheel	Filament Drive Wheel	MakerBot Mk7 drive gear or blddk Hobbed drive wheel
+akimbo_extruder	2	2	M3x30 Bolt	M3x30 Bolt	Motor mounts (and idler hinge)
+akimbo_extruder	2	1	M3 nut	M3 nut	Idler Hinge
+akimbo_extruder	2	1	M3 nylock nut	M3 nylock nut	Idler Hinge
+akimbo_extruder	2	1	115zz Bearing	115zz Bearing	Drive Bearing (5mm x 11mm x 4mm roller)
+akimbo_extruder	2	2	M3 nylock nut	M3 nut	Idler clamp
+akimbo_extruder	2	2	M3x20 Bolt	M3x16 Bolt	Idler clamp
+akimbo_extruder	2	2	M3 washer	M3 washer	Idler clamp
+akimbo_extruder	2	2	M3x20 Bolt	M3x20 Bolt	Carriage Mount
+akimbo_carriage	2	2	Linear Bushing	LM8UU	Linear Bushings
+akimbo_carriage	2	2	683zz Bearing	683zz Bearing	Linear Roller Bearings
+akimbo_carriage	2	2	M3x12 Bolt	M3x20 Bolt	Linear Roller Bearing mounts
+akimbo_carriage	2	1	M3 nylock nut	M3 nut	Linear Roller Bearing mount
+akimbo_carriage	2	1	M3 nut	M3 nut	Linear Roller Bearing mount
+akimbo_carriage	2	2	M3x20 Bolt	M3x20 Bolt	Belt clamps
+akimbo_carriage	2	2	M3 nylock nut	M3 nut	Belt Clamps
+akimbo_carriage	2	2	M3 nylock nut	M3 nut	Extruder Mounts
+akimbo_carriage	2	1	M3 nylock nut	M3 nut	Endstop Flag mount
+akimbo_carriage	2	1	M3x20 Bolt	M3x20 Bolt	Endstop Flag (!!! Verify Length)
+akimbo_extruder	2	1	Hot End	Hot End	Groove Mount - Tested against MakerGear and J-Head
+akimbo_extruder	2	1	Geared stepper motor	Geared stepper motor	Minbea PG35L-D48
+akimbo_extruder	2	1	Filament Drive Wheel	Filament Drive Wheel	MakerBot Mk7 drive gear or blddk Hobbed drive wheel
+akimbo_extruder	2	2	M3x30 Bolt	M3x30 Bolt	Motor mounts (and idler hinge)
+akimbo_extruder	2	1	M3 nut	M3 nut	Idler Hinge
+akimbo_extruder	2	1	M3 nylock nut	M3 nylock nut	Idler Hinge
+akimbo_extruder	2	1	115zz Bearing	115zz Bearing	Drive Bearing (5mm x 11mm x 4mm roller)
+akimbo_extruder	2	2	M3 nylock nut	M3 nut	Idler clamp
+akimbo_extruder	2	2	M3x20 Bolt	M3x16 Bolt	Idler clamp
+akimbo_extruder	2	2	M3 washer	M3 washer	Idler clamp
+akimbo_extruder	2	2	M3x20 Bolt	M3x20 Bolt	Carriage Mount
+extruder_fan_shroud	2	4	M3x16 Bolt	M3x20 Bolt	Fan mount
+extruder_fan_shroud	2	4	M3 nylock nut	M3 nut	Fan mount
+extruder_fan_shroud	2	1	40mm fan	40mm fan	
+extruder_fan_shroud	2	4	M3x16 Bolt	M3x20 Bolt	Fan mount
+extruder_fan_shroud	2	4	M3 nylock nut	M3 nut	Fan mount
+extruder_fan_shroud	2	1	40mm fan	40mm fan	

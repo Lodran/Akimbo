@@ -21,8 +21,11 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXFileReference section */
+		0537D302160D928200E6CF85 /* z_motor_coupler.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = z_motor_coupler.scad; sourceTree = "<group>"; };
+		0537D303160EE4D000E6CF85 /* y_axis_belt_clamp.scad */ = {isa = PBXFileReference; fileEncoding = 4; path = y_axis_belt_clamp.scad; sourceTree = "<group>"; };
 		055E6F9B15FF090A002A3741 /* y_pillow_block.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = y_pillow_block.scad; sourceTree = "<group>"; };
 		0570A3A315F88DAB00D3ADBF /* extruder_fan_shroud.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = extruder_fan_shroud.scad; sourceTree = "<group>"; };
+		05761B9D160D86A60073BE52 /* vitamins.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vitamins.txt; sourceTree = "<group>"; };
 		05979FB715F5889600B16693 /* akimbo_x_end.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = akimbo_x_end.scad; sourceTree = "<group>"; };
 		05979FB815F5DD3300B16693 /* optical_endstop.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = optical_endstop.scad; sourceTree = "<group>"; };
 		05979FB915F5E9AD00B16693 /* x_axis_plate.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = x_axis_plate.scad; sourceTree = "<group>"; };
@@ -115,6 +118,7 @@
 		05E9D3F015D8B57300A8B259 = {
 			isa = PBXGroup;
 			children = (
+				05761B9D160D86A60073BE52 /* vitamins.txt */,
 				05B2F63116084109006AE370 /* README.md */,
 				05BF88CE15D8EB07005EA20C /* revisions.txt */,
 				05BF88CD15D8EAF6005EA20C /* to_do.txt */,
@@ -159,7 +163,9 @@
 				055E6F9B15FF090A002A3741 /* y_pillow_block.scad */,
 				05E9D40B15D8B5CD00A8B259 /* z_bottom_frame_clamp.scad */,
 				05E1A56515DB28CE0032B4DB /* z_linear_rod_clamp.scad */,
+				0537D302160D928200E6CF85 /* z_motor_coupler.scad */,
 				05F2C04C15FC7BF0006E5198 /* vitamin.scad */,
+				0537D303160EE4D000E6CF85 /* y_axis_belt_clamp.scad */,
 			);
 			path = Source;
 			sourceTree = "<group>";
