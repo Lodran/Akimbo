@@ -131,6 +131,7 @@ module rp_assembly()
 		scale([1, -1, 1])
 		y_roller_bearing_block(print_orientation=false);
 
+	color([.5, .5, 1])
 	translate([0, y_pillowblock_center[y], y_pillowblock_center[z]+y_linear_rod_offset[z]])
 	{
 		y_axis_belt_spacer(print_orientation=false);
@@ -140,6 +141,7 @@ module rp_assembly()
 
 	// Z axis
 	
+	color([.5, .5, 1])
 	for(i=[-1, 1]) for(j=[0, 1]) scale([i, 1, 1]) translate(z_motor_center+[0, 0, -(15+j*12)])
 		z_motor_coupler(print_orientation=false);
 }

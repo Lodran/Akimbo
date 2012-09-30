@@ -38,19 +38,26 @@ cd Source
 
 /Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -o ../Parts/y_pillow_block_@_1.stl y_pillow_block.scad
 
-/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -o ../Parts/extruder_fan_shroud_@_2.stl extruder_fan_shroud.scad
+/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -o ../Parts/z_motor_coupler@_4.stl z_motor_coupler.scad
+
+/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -o ../Parts/y_axis_belt_clamp@_1.stl y_axis_belt_clamp.scad
+
+/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -o ../Parts/y_motor_bracket@_1.stl y_motor_bracket.scad
+
+#/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D print_orientation=true -o ../Parts/extruder_fan_shroud_@_2.stl extruder_fan_shroud.scad
 
 # Create .stl files for plates.
 
-/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D plate=1 -o ../Plates/frame_plate_1.stl frame_plate.scad
+/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D plate=1 -o ../Plates/plate_1.stl frame_plate.scad
 
-/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D plate=2 -o ../Plates/frame_plate_2.stl frame_plate.scad
+/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D plate=2 -o ../Plates/plate_2.stl frame_plate.scad
 
-/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D plate=1 -o ../Plates/x_axis_plate_1.stl x_axis_plate.scad
+/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D plate=3 -o ../Plates/plate_3.stl frame_plate.scad
 
-/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D plate=2 -o ../Plates/x_axis_plate_2.stl x_axis_plate.scad
+/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D plate=4 -o ../Plates/plate_4.stl frame_plate.scad
 
-/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -o ../Plates/y_axis_plate.stl y_axis_plate.scad
+/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -D release_quality=true -D plate=5 -o ../Plates/plate_5.stl frame_plate.scad
+
 
 # Create .stl file for assembly.
 
