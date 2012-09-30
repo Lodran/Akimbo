@@ -6,3 +6,9 @@ xcuserdata
 *.gcode
 DerivedData
 build
+
+Source/assembly.log
+
+Source/ramps_case.scad
+
+Source/akimbo_extruder.scad.zip
