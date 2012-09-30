@@ -21,15 +21,19 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXFileReference section */
+		0527AA4216190ECD006B485D /* plate_1.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = plate_1.stl; sourceTree = "<group>"; };
+		0527AA4316190ECD006B485D /* plate_2.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = plate_2.stl; sourceTree = "<group>"; };
+		0527AA4416190ECD006B485D /* plate_3.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = plate_3.stl; sourceTree = "<group>"; };
+		0527AA4516190ECD006B485D /* plate_4.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = plate_4.stl; sourceTree = "<group>"; };
+		0527AA4616190ECD006B485D /* plate_5.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = plate_5.stl; sourceTree = "<group>"; };
 		0537D302160D928200E6CF85 /* z_motor_coupler.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = z_motor_coupler.scad; sourceTree = "<group>"; };
-		0537D303160EE4D000E6CF85 /* y_axis_belt_clamp.scad */ = {isa = PBXFileReference; fileEncoding = 4; path = y_axis_belt_clamp.scad; sourceTree = "<group>"; };
+		0537D303160EE4D000E6CF85 /* y_axis_belt_clamp.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = y_axis_belt_clamp.scad; sourceTree = "<group>"; };
 		055E6F9B15FF090A002A3741 /* y_pillow_block.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = y_pillow_block.scad; sourceTree = "<group>"; };
 		0570A3A315F88DAB00D3ADBF /* extruder_fan_shroud.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = extruder_fan_shroud.scad; sourceTree = "<group>"; };
 		05761B9D160D86A60073BE52 /* vitamins.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vitamins.txt; sourceTree = "<group>"; };
 		05979FB715F5889600B16693 /* akimbo_x_end.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = akimbo_x_end.scad; sourceTree = "<group>"; };
 		05979FB815F5DD3300B16693 /* optical_endstop.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = optical_endstop.scad; sourceTree = "<group>"; };
 		05979FB915F5E9AD00B16693 /* x_axis_plate.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = x_axis_plate.scad; sourceTree = "<group>"; };
-		05B2F62116071F2C006AE370 /* x_axis_plate_2.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = x_axis_plate_2.stl; sourceTree = "<group>"; };
 		05B2F63116084109006AE370 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		05B2F634160851B5006AE370 /* akimbo_endstop_mount.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = akimbo_endstop_mount.scad; sourceTree = "<group>"; };
 		05B2F63516085386006AE370 /* akimbo_barclamp.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = akimbo_barclamp.scad; sourceTree = "<group>"; };
@@ -48,12 +52,9 @@
 		05B2F6421608710D006AE370 /* z_bottom_frame_clamp_@_1.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "z_bottom_frame_clamp_@_1.stl"; sourceTree = "<group>"; };
 		05B2F6431608710D006AE370 /* z_bottom_frame_clamp_mirrored_@_1.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "z_bottom_frame_clamp_mirrored_@_1.stl"; sourceTree = "<group>"; };
 		05B2F6441608710D006AE370 /* z_linear_rod_clamp_@_4.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "z_linear_rod_clamp_@_4.stl"; sourceTree = "<group>"; };
-		05B2F64516087115006AE370 /* y_axis_plate.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = y_axis_plate.stl; sourceTree = "<group>"; };
 		05BF88B215D8CA3B005EA20C /* build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
 		05BF88BC15D8E2F0005EA20C /* Parts.files */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Parts.files; sourceTree = "<group>"; };
 		05BF88BD15D8E42E005EA20C /* Plates.files */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Plates.files; sourceTree = "<group>"; };
-		05BF88C515D8E77C005EA20C /* frame_plate_1.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = frame_plate_1.stl; sourceTree = "<group>"; };
-		05BF88C915D8E819005EA20C /* frame_plate_2.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = frame_plate_2.stl; sourceTree = "<group>"; };
 		05BF88CA15D8E9AB005EA20C /* Parts.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = Parts.zip; sourceTree = "<group>"; };
 		05BF88CB15D8E9B8005EA20C /* Plates.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = Plates.zip; sourceTree = "<group>"; };
 		05BF88CC15D8EA79005EA20C /* assembly.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = assembly.stl; sourceTree = "<group>"; };
@@ -78,7 +79,6 @@
 		05E9D40B15D8B5CD00A8B259 /* z_bottom_frame_clamp.scad */ = {isa = PBXFileReference; lastKnownFileType = text; path = z_bottom_frame_clamp.scad; sourceTree = "<group>"; };
 		05EE288715EC631E00EF4E9B /* akimbo_extruder.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = akimbo_extruder.scad; sourceTree = "<group>"; };
 		05F2C04C15FC7BF0006E5198 /* vitamin.scad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vitamin.scad; sourceTree = "<group>"; };
-		05F2C04D15FDC99B006E5198 /* x_axis_plate_1.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = x_axis_plate_1.stl; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -106,11 +106,11 @@
 		05BF88C415D8E77C005EA20C /* Plates */ = {
 			isa = PBXGroup;
 			children = (
-				05BF88C515D8E77C005EA20C /* frame_plate_1.stl */,
-				05BF88C915D8E819005EA20C /* frame_plate_2.stl */,
-				05F2C04D15FDC99B006E5198 /* x_axis_plate_1.stl */,
-				05B2F62116071F2C006AE370 /* x_axis_plate_2.stl */,
-				05B2F64516087115006AE370 /* y_axis_plate.stl */,
+				0527AA4216190ECD006B485D /* plate_1.stl */,
+				0527AA4316190ECD006B485D /* plate_2.stl */,
+				0527AA4416190ECD006B485D /* plate_3.stl */,
+				0527AA4516190ECD006B485D /* plate_4.stl */,
+				0527AA4616190ECD006B485D /* plate_5.stl */,
 			);
 			path = Plates;
 			sourceTree = "<group>";
