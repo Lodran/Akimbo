@@ -2,7 +2,7 @@
 // RepRap Mendel Akimbo
 //
 // A Mendel variant, which improves the frame's clearance and stability
-//  by increasing it's triangulation.
+//  by increasing its triangulation.
 //
 // Copyright 2012 by Ron Aldrich.
 //
@@ -34,7 +34,7 @@ use <y_pillow_block.scad>
 use <y_axis_belt_clamp.scad>
 use <z_motor_coupler.scad>
 
-carriage_offset = 110;
+carriage_offset = 90;
 
 assembly();
 
@@ -42,6 +42,7 @@ module rp_assembly()
 {
 	// Frame
 
+	color([.5, .5, 1])
 	render(convexity=8)
 	for(i=[-1, 1]) scale([i, 1, 1])
 	{
@@ -64,6 +65,7 @@ module rp_assembly()
 
 	// Z axis (X ends)
 
+	color([.5, .5, 1])
 	for(i=[0, 1]) rotate([0, 0, i*180])
 	{
 		render(convexity=8)
@@ -72,6 +74,7 @@ module rp_assembly()
 
 	// X axis (Carriages, Extruders)
 
+	color([.5, .5, 1])
 	translate([carriage_offset, extruder_offset, x_axis_height])
 	{
 		render(convexity=8)
@@ -85,10 +88,12 @@ module rp_assembly()
 			{
 				akimbo_extruder(print_orientation=false);
 				akimbo_extruder_idler(print_orientation=false);
+				akimbo_extruder_fan_shroud(print_orientation=false);
 			}
 		}
 	}
 
+	color([.5, .5, 1])
 	translate([carriage_offset-21, extruder_offset, x_axis_height])
 	{
 		rotate([0, 0, 180])
@@ -102,21 +107,25 @@ module rp_assembly()
 			{
 				akimbo_extruder(print_orientation=false);
 				akimbo_extruder_idler(print_orientation=false);
+				akimbo_extruder_fan_shroud(print_orientation=false);
 			}
 		}
 	}
 
 	// Y axis
 	
+	color([.5, .5, 1])
 	for(i=[-1, 1]) for(j=[-1, 1]) scale([i, j, 1])
 	translate(y_barclamp_center)
 		barclamp(print_orientation=false);
 
+	color([.5, .5, 1])
 	for(i=[-1, 1]) scale([1, i, 1])
 		translate(y_pillowblock_center)
 		scale([1, -1, 1])
 		y_pillow_block(print_orientation=false);
 
+	color([.5, .5, 1])
 	scale([-1, 1, 1])
 		translate(y_pillowblock_center)
 		scale([1, -1, 1])

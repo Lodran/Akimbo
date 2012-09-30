@@ -2,7 +2,7 @@
 // RepRap Mendel Akimbo
 //
 // A Mendel variant, which improves the frame's clearance and stability
-//  by increasing it's triangulation.
+//  by increasing its triangulation.
 //
 // Copyright 2012 by Ron Aldrich.
 //
@@ -63,7 +63,7 @@ bearing_clamp_radius = 11;
 linear_roller_bearing = 683_bearing;
 linear_roller_bearing_clearance = 683_bearing_clearance;
 
-x_axis_height = 250;
+x_axis_height = 280;
 
 belt_offset_z = -17;
 belt_width = 6;

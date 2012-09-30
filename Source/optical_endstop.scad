@@ -1,3 +1,16 @@
+//
+// RepRap Mendel Akimbo
+//
+// A Mendel variant, which improves the frame's clearance and stability
+//  by increasing its triangulation.
+//
+// Copyright 2012 by Ron Aldrich.
+//
+// Licensed under GNU GPL v2
+//
+// optical_endstop.scad
+//
+
 X=0;
 Y=1;
 Z=2;

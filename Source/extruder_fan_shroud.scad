@@ -2,7 +2,7 @@
 // RepRap Mendel Akimbo
 //
 // A Mendel variant, which improves the frame's clearance and stability
-//  by increasing it's triangulation.
+//  by increasing its triangulation.
 //
 // Copyright 2012 by Ron Aldrich.
 //
@@ -26,7 +26,7 @@ motor_length = 45;
 motor_radius = 35/2;
 motor_bolt_offset = 42/2;		// offset from center of motor to bolt hole.
 
-extruder_fan_shroud(print_orientation=true);
+extruder_fan_shroud(print_orientation=false);
 
 %translate([0, 0, .5])
 cube([50, 50, 1], center=true);
@@ -34,10 +34,11 @@ cube([50, 50, 1], center=true);
 module extruder_fan_shroud(print_orientation)
 {
 	p1 = (print_orientation==true) ? 1 : 0;
-	p2 = (print_orientation==false) ? 0 : 1;
+	p2 = (print_orientation==false) ? 1 : 0;
   
 	rotate(p1*[0, 90, 0])
 	translate(p1*-[22, 0, -40/2-5])
+	rotate(p2*[0, 0, 90])
 	difference()
 	{
 		extruder_fan_shroud_solid();
